@@ -1,7 +1,18 @@
 {
-  "name": "amplify-js-app",
+  "name": "proserve-portfolio-project",
+  "projectname": "proserveportfolio",
   "version": "1.0.0",
-  "description": "Amplify JavaScript Example",
+  "description": "AWS Proserve Portfolio",
+  "keywords": [],
+  "homepage": "https://dpdegv5hknovo.cloudfront.net",
+  "bugs": {
+    "url": "https://TODO?"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/proserve-portfolio-project"
+  },
+  "main": "index.html",
   "dependencies": {
     "aws-amplify": "^1.1.29"
   },
@@ -14,5 +25,8 @@
   "scripts": {
     "start": "webpack && webpack-dev-server --mode development",
     "build": "webpack"
-  }
+  },
+  "contributors": ["Miffy Chen", "Edmund Chute", "Jeff Johansen"],
+  "email": "naomijoshi@amazon.com",
+  "url": "https://dpdegv5hknovo.cloudfront.net"
 }
