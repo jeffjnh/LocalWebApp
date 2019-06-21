@@ -1,0 +1,20 @@
+{
+    "appName": "proserveportfolio",
+    "roleName": "pinpointLambdaRole8eff6f37",
+    "cloudWatchPolicyName": "cloudWatchPolicy8eff6f37",
+    "pinpointPolicyName": "pinpointPolicy8eff6f37",
+    "authPolicyName": "pinpoint_amplify_8eff6f37",
+    "unauthPolicyName": "pinpoint_amplify_8eff6f37",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}
