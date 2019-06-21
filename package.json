@@ -1,0 +1,59 @@
+{
+  "name": "proserveportfolio",
+  "version": "0.1.0",
+  "description": "AWS Proserve Portfolio",
+  "keywords": [],
+  "private": true,
+  "homepage": "https://d1kwrbspoyxfwl.cloudfront.net/",
+  "bugs": {
+    "url": "https://TODO?"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/proserve-portfolio-project"
+  },
+  "main": "index.html",
+  "dependencies": {
+    "aws-amplify": "^1.1.29",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0",
+    "copy-webpack-plugin": "^4.5.2",
+    "webpack-dev-server": "^3.1.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "startlocal": "open index.html",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "webpack-start": "webpack && webpack-dev-server --mode development",
+    "webpack-build": "webpack"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "contributors": [
+    "Miffy Chen",
+    "Edmund Chute",
+    "Jeff Johansen"
+  ],
+  "email": "naomijoshi@amazon.com",
+  "url": "https://d1kwrbspoyxfwl.cloudfront.net/"
+}
