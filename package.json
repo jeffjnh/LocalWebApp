@@ -26,7 +26,11 @@
     "start": "webpack && webpack-dev-server --mode development",
     "build": "webpack"
   },
-  "contributors": ["Miffy Chen", "Edmund Chute", "Jeff Johansen"],
+  "contributors": [
+    "Miffy Chen",
+    "Edmund Chute",
+    "Jeff Johansen"
+  ],
   "email": "naomijoshi@amazon.com",
   "url": "https://dpdegv5hknovo.cloudfront.net"
 }
