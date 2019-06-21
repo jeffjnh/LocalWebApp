@@ -1,14 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Amplify Framework :: Temp Index</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-        </style>
-    </head>
-    <body>
-        This is the test temp index page in the root directory. <br>
-        Webpack should be serving from the /dist folder index.html and not here.
-    </body>
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- favicons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="files/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="files/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="files/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="files/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="files/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="files/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="files/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="files/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="files/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="files/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="files/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="files/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="files/favicon/favicon-16x16.png">
+    <link rel="manifest" href="files/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <title>Professional Services Portfolio</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/fontface.css">
+
+    <style>
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            /* image position/size repeat */
+            background: url("files/img/BG-Pattern_Levels_Squid-Ink.png") center/cover no-repeat;
+            font-family: AmazonEmber_Rg;
+            color: #FFFFFF;
+        }
+
+        .login_card {
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            width: 350px;
+            height: 400px;
+            background-color: rgb(35, 47, 62);
+            border: 1px solid rgb(97, 97, 97);
+            box-sizing: border-box;
+            border-radius: 10px;
+            transform: translate(-50%, -50%);
+        }
+
+        .logo_container {
+            position: relative;
+            top: 23%;
+        }
+
+        .logo {
+            position: absolute;
+            padding-top: 3%;
+            width: 25%;
+            top: 80%;
+            left: 30%;
+            transform-origin: 50% 50%;
+            transform: translate(-50%, -50%);
+        }
+        .title_proserve {
+            position: absolute;
+            top: 24%;
+            left: 67%;
+            /* size/line-height family */
+            font: 24px/1.2em AmazonEmber_Th;
+            transform: translate(-50%, -50%);
+        }
+
+        .email {
+            margin-top: 68px;
+            padding-top: 120px;
+            font: 17px AmazonEmber_Th;
+            text-align: center;
+        }
+
+        input[type=text] {
+            width: 85px;
+            margin-right: 8px;
+            padding: 3px 10px;
+            /* width style color */
+            border: 1px solid rgba(140, 140, 140, 1);
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0);
+            font: 16px AmazonEmber_Th;
+            color: white;
+        }
+        input[type=text]::placeholder {
+            color: rgb(180, 180, 180);
+        }
+
+        .password {
+            margin-top: 15px;
+            text-align: center;
+        }
+        input[type=password] {
+            width: 207px;
+            padding: 3px 10px;
+            /* width style color */
+            border: 1px solid rgba(140, 140, 140, 1);
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0);
+            font: 16px AmazonEmber_Th;
+            color: white;
+        }
+        input[type=password]::placeholder {
+            color: rgb(180, 180, 180);
+        }
+
+        .button_login {
+            margin-top: 42px;
+            margin-left: 17%;
+            padding: 4px 14px;
+            width: 230px;
+            background-color: rgb(255, 153, 0);
+            border-color: rgb(255, 153, 0);
+            border-radius: 5px;
+            font-size: 16px;
+            color: rgb(35, 47, 62);
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="login_card">
+    <div class="logo_container">
+        <img class="logo" src="files/img/AWS-Logo/AWS_logo_RGB_REV.svg" />
+        <div class="title_proserve">
+            Professional <br>
+            Services <br>
+            Portfolio
+        </div>
+    </div>
+    <div class="email"><input type="text" name="email" placeholder="alias" autofocus="autofocus"> @amazon.com<br></div>
+    <div class="password"><input type="password" name="password" placeholder="password"><br></div>  
+    <button class="button_login" type="button">Login</button>
+</div>
+
+</body>
+
 </html>
