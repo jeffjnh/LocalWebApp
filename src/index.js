@@ -1,21 +1,27 @@
 import React from "react";
 import ReactDOM from "react-dom";
 // import { Route, Link, BrowserRouter as Router } from "react-router-dom";
-import { Route, BrowserRouter as Router } from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import * as serviceWorker from "./serviceWorker";
 import "./index.css";
 import App from "./js/components/app/App";
 import Testing from "./js/components/testing/Testing";
 import Login from "./js/components/login/Login";
+import Signup from "./js/components/signup/Signup";
+import Notfound from "./js/components/notfound/Notfound";
 
 const routing = (
   <Router>
     {/* <Link to="/"> Home </Link>|
     <Link to="/login"> Login </Link>|
     <Link to="/testing"> Testing </Link>| */}
-    <Route exact path="/" component={App} />
-    <Route path="/login" component={Login} />
-    <Route path="/testing" component={Testing} />
+    <Switch>
+      <Route exact path="/" component={App} />
+      <Route path="/login" component={Login} />
+      <Route path="/testing" component={Testing} />
+      <Route path="/signup" component={Signup} />
+      <Route component={Notfound} />
+    </Switch>
   </Router>
 );
 
