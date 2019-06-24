@@ -1,16 +1,17 @@
 // Global settings
-@import "global/variables";
-@import "global/typography";
-@import "global/theme";
-@import "global/global";
-@import "global/common";
+@import "global/colors.scss";
+@import "global/common.scss";
+@import "global/global.scss";
 @import "global/keyframes";
+@import "global/theme";
+@import "global/typography";
+@import "global/variables";
 
 // Mixins
-@import "mixin/shadow";
-@import "mixin/button";
-@import "mixin/page";
-@import "mixin/titlebar";
+// @import "mixin/shadow";
+// @import "mixin/button";
+// @import "mixin/page";
+// @import "mixin/titlebar";
 
 // Page specifices
 @import "ui/login.scss";
