@@ -1,7 +1,7 @@
 {
   "name": "proserve-portfolio-project",
   "projectname": "proserveportfolio",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "AWS Proserve Portfolio",
   "keywords": [],
   "private": true,
@@ -19,7 +19,10 @@
     "aws-amplify-react": "^2.3.9",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.0.1",
+    "react-styleguidist": "^9.1.10",
+    "source-map-explorer": "^2.0.1"
   },
   "devDependencies": {
     "webpack": "^4.17.1",
@@ -28,6 +31,8 @@
     "webpack-dev-server": "^3.1.5"
   },
   "scripts": {
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build",
     "start": "react-scripts start",
     "startlocal": "open index.html",
     "build": "react-scripts build",

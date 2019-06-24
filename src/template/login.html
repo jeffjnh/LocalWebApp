@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- meta info -->
+    <meta name="author" content="Miffy Chen, Edmund Chute, Jeff Johansen">
+    <meta name="description" content="AWS ProServe Portfolio">
+    <meta name="keywords" content="">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- meta http-equiv="refresh" content="30" (refresh every 30 seconds)-->
+    <!-- meta viewport behavior -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=5.0"> -->
+    <!-- apple full-screen mode -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- apple style of status bar -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- favicons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="../assets/img/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="../assets/img/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../assets/img/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../assets/img/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../assets/img/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="../assets/img/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../assets/img/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../assets/img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="../assets/img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../assets/img/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="../assets/img/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Title -->
+    <title>Professional Services Portfolio :: Login</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+    <style>
+        @font-face {
+            font-family: 'AmazonEmber_Rg';
+            src: url("AmazonEmber_Rg.ttf") format("truetype");
+            font-weight: 100;
+        }
+
+        @font-face {
+            font-family: 'AmazonEmber_Th';
+            src: url("AmazonEmber_Th.ttf") format("truetype");
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            /* image position/size repeat */
+            background: url("../assets/img/login/BG-Pattern_Levels_Squid-Ink.png") center/cover no-repeat;
+            font-family: "AmazonEmber_Rg";
+            color: #FFFFFF;
+        }
+
+        .login_card {
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            width: 350px;
+            height: 400px;
+            background-color: rgb(35, 47, 62);
+            border: 1px solid rgb(97, 97, 97);
+            box-sizing: border-box;
+            border-radius: 10px;
+            transform: translate(-50%, -50%);
+        }
+
+        .logo_container {
+            position: relative;
+            top: 23%;
+        }
+
+        .logo {
+            position: absolute;
+            padding-top: 3%;
+            width: 25%;
+            top: 80%;
+            left: 30%;
+            transform-origin: 50% 50%;
+            transform: translate(-50%, -50%);
+        }
+        .title_proserve {
+            position: absolute;
+            top: 24%;
+            left: 67%;
+            /* size/line-height family */
+            font: 24px/1.2em "AmazonEmber_Th";
+            transform: translate(-50%, -50%);
+        }
+
+        .email {
+            margin-top: 68px;
+            padding-top: 120px;
+            font: 17px "AmazonEmber_Th";
+            text-align: center;
+        }
+
+        input[type=text] {
+            width: 85px;
+            margin-right: 8px;
+            padding: 3px 10px;
+            /* width style color */
+            border: 1px solid rgba(140, 140, 140, 1);
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0);
+            font: 16px "AmazonEmber_Th";
+            color: white;
+        }
+        input[type=text]::placeholder {
+            color: rgb(180, 180, 180);
+        }
+
+        .password {
+            margin-top: 15px;
+            text-align: center;
+        }
+        input[type=password] {
+            width: 207px;
+            padding: 3px 10px;
+            /* width style color */
+            border: 1px solid rgba(140, 140, 140, 1);
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0);
+            font: 16px "AmazonEmber_Th";
+            color: white;
+        }
+        input[type=password]::placeholder {
+            color: rgb(180, 180, 180);
+        }
+
+        .button_login {
+            margin-top: 42px;
+            margin-left: 17%;
+            padding: 4px 14px;
+            width: 230px;
+            background-color: rgb(255, 153, 0);
+            border-color: rgb(255, 153, 0);
+            border-radius: 5px;
+            font-size: 16px;
+            color: rgb(35, 47, 62);
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="login_card">
+    <div class="logo_container">
+        <img class="logo" src="../assets/img/logo/AWS_logo_RGB_REV.svg" />
+        <div class="title_proserve">
+            Professional <br>
+            Services <br>
+            Portfolio
+        </div>
+    </div>
+    <div class="email"><input type="text" name="email" placeholder="alias" autofocus="autofocus"> @amazon.com<br></div>
+    <div class="password"><input type="password" name="password" placeholder="password"><br></div>  
+    <button class="button_login" type="button">Login</button>
+</div>
+
+</body>
+
+</html>
