@@ -4,7 +4,12 @@ const awsmobile = {
     "aws_project_region": "us-east-1",
     "aws_content_delivery_bucket": "proserveportfolio-host-dev",
     "aws_content_delivery_bucket_region": "us-east-1",
-    "aws_content_delivery_url": "https://d1kwrbspoyxfwl.cloudfront.net"
+    "aws_content_delivery_url": "https://d1kwrbspoyxfwl.cloudfront.net",
+    "aws_cognito_identity_pool_id": "us-east-1:8f66f1cc-754c-465f-be54-44753a4311c7",
+    "aws_cognito_region": "us-east-1",
+    "aws_user_pools_id": "us-east-1_C2qYsRuVd",
+    "aws_user_pools_web_client_id": "7cd6dranp9rd04iaalflkn0m42",
+    "oauth": {}
 };
 
 

@@ -19,7 +19,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/proserveportfolio-dev-20190621160201-deployment/amplify-cfn-templates/hosting/template.json",
 				"logicalId": "hostingS3AndCloudFront"
 			},
-			"lastPushTimeStamp": "2019-06-21T20:27:41.694Z",
+			"lastPushTimeStamp": "2019-06-24T14:28:14.503Z",
 			"output": {
 				"CloudFrontSecureURL": "https://d1kwrbspoyxfwl.cloudfront.net",
 				"S3BucketSecureURL": "https://proserveportfolio-host-dev.s3.amazonaws.com",
@@ -30,6 +30,27 @@
 				"CloudFrontDomainName": "d1kwrbspoyxfwl.cloudfront.net"
 			},
 			"lastPushDirHash": "aIZXII5dVj5muBOY0ivOF8X3x7s="
+		}
+	},
+	"auth": {
+		"proserveportfoliocf041255": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/proserveportfolio-dev-20190621160201-deployment/amplify-cfn-templates/auth/proserveportfoliocf041255-cloudformation-template.yml",
+				"logicalId": "authproserveportfoliocf041255"
+			},
+			"lastPushTimeStamp": "2019-06-24T14:28:14.511Z",
+			"output": {
+				"AppClientSecret": "lgiqa1csluulqf0l6gbu2uv2qjq36tdm8e8acvi6sht310lonqm",
+				"UserPoolId": "us-east-1_C2qYsRuVd",
+				"AppClientIDWeb": "7cd6dranp9rd04iaalflkn0m42",
+				"AppClientID": "7cqrr1qph54sgo17ruam08nsvb",
+				"IdentityPoolId": "us-east-1:8f66f1cc-754c-465f-be54-44753a4311c7",
+				"IdentityPoolName": "proserveportfoliocf041255_identitypool_cf041255__dev",
+				"UserPoolName": "proserveportfoliocf041255_userpool_cf041255"
+			},
+			"lastPushDirHash": "j31B5bs+aru/SH1v9koJfpCegBI="
 		}
 	}
 }

@@ -9,6 +9,11 @@
             "UnauthRoleName": "proserveportfolio-dev-20190621160201-unauthRole",
             "StackName": "proserveportfolio-dev-20190621160201",
             "StackId": "arn:aws:cloudformation:us-east-1:370837309407:stack/proserveportfolio-dev-20190621160201/6ef673c0-945f-11e9-85cc-126514929126"
+        },
+        "categories": {
+            "auth": {
+                "proserveportfoliocf041255": {}
+            }
         }
     }
 }
