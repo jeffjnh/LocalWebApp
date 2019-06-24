@@ -1,0 +1,111 @@
+@font-face {
+    font-family: 'AmazonEmber_Rg';
+    src: url("../../../assets/fonts/AmazonEmber_Rg.ttf") format("truetype");
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: 'AmazonEmber_Th';
+    src: url("../../../assets/fonts/AmazonEmber_Th.ttf") format("truetype");
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    /* image position/size repeat */
+    background: url("../../../assets/img/login/BG-Pattern_Levels_Squid-Ink.png") center/cover no-repeat;
+    font-family: "AmazonEmber_Rg";
+    color: #FFFFFF;
+}
+
+.login_card {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    width: 350px;
+    height: 400px;
+    background-color: rgb(35, 47, 62);
+    border: 1px solid rgb(97, 97, 97);
+    box-sizing: border-box;
+    border-radius: 10px;
+    transform: translate(-50%, -50%);
+}
+
+.logo_container {
+    position: relative;
+    top: 23%;
+}
+.logo2 {
+    background-image: url("../../../assets/img/logo/AWS_logo_RGB_REV.svg");
+}
+
+.logo {
+    position: absolute;
+    padding-top: 3%;
+    width: 25%;
+    top: 80%;
+    left: 30%;
+    transform-origin: 50% 50%;
+    transform: translate(-50%, -50%);
+}
+.title_proserve {
+    position: absolute;
+    top: 24%;
+    left: 67%;
+    /* size/line-height family */
+    font: 24px/1.2em "AmazonEmber_Th";
+    transform: translate(-50%, -50%);
+}
+
+.email {
+    margin-top: 68px;
+    padding-top: 120px;
+    font: 17px "AmazonEmber_Th";
+    text-align: center;
+}
+
+input[type=text] {
+    width: 85px;
+    margin-right: 8px;
+    padding: 3px 10px;
+    /* width style color */
+    border: 1px solid rgba(140, 140, 140, 1);
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0);
+    font: 16px "AmazonEmber_Th";
+    color: white;
+}
+input[type=text]::placeholder {
+    color: rgb(180, 180, 180);
+}
+
+.password {
+    margin-top: 15px;
+    text-align: center;
+}
+input[type=password] {
+    width: 207px;
+    padding: 3px 10px;
+    /* width style color */
+    border: 1px solid rgba(140, 140, 140, 1);
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0);
+    font: 16px "AmazonEmber_Th";
+    color: white;
+}
+input[type=password]::placeholder {
+    color: rgb(180, 180, 180);
+}
+
+.button_login {
+    margin-top: 42px;
+    margin-left: 17%;
+    padding: 4px 14px;
+    width: 230px;
+    background-color: rgb(255, 153, 0);
+    border-color: rgb(255, 153, 0);
+    border-radius: 5px;
+    font-size: 16px;
+    color: rgb(35, 47, 62);
+    text-align: center;
+}
