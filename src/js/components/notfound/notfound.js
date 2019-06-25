@@ -4,6 +4,15 @@ import pecisage_sad_tiny from '../../../assets/img/notfound/peciSage.sad.png';
 
 // modeled after: https://answers.amazon.com/
 
+const textArr = [
+  "Forbidden",
+  "Great Scott!",
+  "I'm afraid I can't do that",
+  "Uh oh!",
+  "You shall not pass!"
+];
+let rand = Math.floor(Math.random()*textArr.length);
+
 function Notfound() {
   return (
     <div id='content-container'>
@@ -13,7 +22,7 @@ function Notfound() {
             <img src={pecisage_sad_tiny} alt="Pecisage.sad.tiny" />
           </div>
           <div id='error-content'>
-            <h1>Great Scott!</h1>
+            <h1>{textArr[rand]}</h1>
             <h3>You do not have access to this site.</h3>
             <div id='error-footer'>
               <div id='custom_message'>
