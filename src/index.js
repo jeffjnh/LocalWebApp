@@ -8,6 +8,7 @@ import App from "./js/components/app/App";
 import Testing from "./js/components/testing/Testing";
 import Login from "./js/components/login/Login";
 import Signup from "./js/components/signup/Signup";
+import Offerings from "./js/components/offerings/Offerings";
 import Notfound from "./js/components/notfound/Notfound";
 
 const routing = (
@@ -20,6 +21,7 @@ const routing = (
       <Route path="/login" component={Login} />
       <Route path="/testing" component={Testing} />
       <Route path="/signup" component={Signup} />
+      <Route path="/offerings" component={Offerings} />
       <Route component={Notfound} />
     </Switch>
   </Router>

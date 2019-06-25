@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.2fbf2b60.chunk.css",
-    "main.js": "/static/js/main.3dcbdb35.chunk.js",
-    "main.js.map": "/static/js/main.3dcbdb35.chunk.js.map",
+    "main.css": "/static/css/main.f8f17f7e.chunk.css",
+    "main.js": "/static/js/main.dc3282bd.chunk.js",
+    "main.js.map": "/static/js/main.dc3282bd.chunk.js.map",
     "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
     "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-    "static/js/2.e5c565e7.chunk.js": "/static/js/2.e5c565e7.chunk.js",
-    "static/js/2.e5c565e7.chunk.js.map": "/static/js/2.e5c565e7.chunk.js.map",
+    "static/js/2.b6cf073e.chunk.js": "/static/js/2.b6cf073e.chunk.js",
+    "static/js/2.b6cf073e.chunk.js.map": "/static/js/2.b6cf073e.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.9cba93a5bf48bf7e99a9ad1702487bc4.js": "/precache-manifest.9cba93a5bf48bf7e99a9ad1702487bc4.js",
+    "precache-manifest.e62c003e6b73d7f47f00f8c4c6c9d6ef.js": "/precache-manifest.e62c003e6b73d7f47f00f8c4c6c9d6ef.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.2fbf2b60.chunk.css.map": "/static/css/main.2fbf2b60.chunk.css.map",
+    "static/css/main.f8f17f7e.chunk.css.map": "/static/css/main.f8f17f7e.chunk.css.map",
     "static/media/AWS_logo_RGB_REV.svg": "/static/media/AWS_logo_RGB_REV.0ef4572e.svg",
     "static/media/index.css": "/static/media/BG-Pattern_Levels_Squid-Ink.9c07e3e8.png",
     "static/media/peciSage.sad.png": "/static/media/peciSage.sad.07a98bd1.png"
