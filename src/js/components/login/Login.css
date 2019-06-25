@@ -1,23 +1,3 @@
-@font-face {
-    font-family: 'AmazonEmber_Rg';
-    src: url("../../../assets/fonts/AmazonEmber_Rg.ttf") format("truetype");
-    font-weight: 100;
-}
-
-@font-face {
-    font-family: 'AmazonEmber_Th';
-    src: url("../../../assets/fonts/AmazonEmber_Th.ttf") format("truetype");
-}
-
-html, body {
-    height: 100%;
-    width: 100%;
-    /* image position/size repeat */
-    background: url("../../../assets/img/login/BG-Pattern_Levels_Squid-Ink.png") center/cover no-repeat;
-    font-family: "AmazonEmber_Rg";
-    color: #FFFFFF;
-}
-
 .login_card {
     position: fixed;
     top: 40%;
@@ -35,11 +15,8 @@ html, body {
     position: relative;
     top: 23%;
 }
-.logo2 {
-    background-image: url("../../../assets/img/logo/AWS_logo_RGB_REV.svg");
-}
 
-.logo {
+.logo_container>.logo {
     position: absolute;
     padding-top: 3%;
     width: 25%;
@@ -48,7 +25,7 @@ html, body {
     transform-origin: 50% 50%;
     transform: translate(-50%, -50%);
 }
-.title_proserve {
+.logo_container>.title_proserve {
     position: absolute;
     top: 24%;
     left: 67%;

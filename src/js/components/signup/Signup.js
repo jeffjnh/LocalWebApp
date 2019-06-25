@@ -1,8 +1,8 @@
 import React from 'react'
-import './Login.css';
+import './Signup.css';
 import logo from '../../../assets/img/logo/AWS_logo_RGB_REV.svg';
 
-function Login() {
+function Signup() {
   return (
     <div className="login_card">
       <div className="logo_container">
@@ -21,4 +21,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Signup;

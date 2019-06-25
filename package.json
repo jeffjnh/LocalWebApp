@@ -13,7 +13,6 @@
     "type": "git",
     "url": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/proserve-portfolio-project"
   },
-  "main": "index.html",
   "dependencies": {
     "aws-amplify": "^1.1.29",
     "aws-amplify-react": "^2.3.9",

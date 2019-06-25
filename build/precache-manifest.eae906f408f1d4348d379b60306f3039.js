@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e94d94ada5b6a9c08f25d1de5d589b86",
+    "revision": "80b9bbd9babad4f6a12907907fec4ceb",
     "url": "/index.html"
   },
   {
-    "revision": "de85e88ff12685cba075",
-    "url": "/static/css/main.2806c299.chunk.css"
+    "revision": "d970bc7e25fb23361fed",
+    "url": "/static/css/main.f8f17f7e.chunk.css"
   },
   {
-    "revision": "f58f027d561714624fd4",
-    "url": "/static/js/2.6ea96c9c.chunk.js"
+    "revision": "f0836a0e3ddf886c40bb",
+    "url": "/static/js/2.b6cf073e.chunk.js"
   },
   {
-    "revision": "de85e88ff12685cba075",
-    "url": "/static/js/main.0c1152f0.chunk.js"
+    "revision": "d970bc7e25fb23361fed",
+    "url": "/static/js/main.3ae75808.chunk.js"
   },
   {
     "revision": "42ac5946195a7306e2a5",
@@ -36,7 +36,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/BG-Pattern_Levels_Squid-Ink.9c07e3e8.png"
   },
   {
-    "revision": "5d5d9eefa31e5e13a6610d9fa7a283bb",
-    "url": "/static/media/react_logo.5d5d9eef.svg"
+    "revision": "07a98bd1c4cef274d55757970de34896",
+    "url": "/static/media/peciSage.sad.07a98bd1.png"
   }
 ]);

@@ -5,10 +5,5 @@
 			"providerPlugin": "awscloudformation"
 		}
 	},
-	"auth": {
-		"proserveportfoliocf041255": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation"
-		}
-	}
+	"auth": {}
 }
