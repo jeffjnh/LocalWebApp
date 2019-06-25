@@ -19,7 +19,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/proserveportfolio-dev-20190621160201-deployment/amplify-cfn-templates/hosting/template.json",
 				"logicalId": "hostingS3AndCloudFront"
 			},
-			"lastPushTimeStamp": "2019-06-21T20:27:41.694Z",
+			"lastPushTimeStamp": "2019-06-25T00:09:30.910Z",
 			"output": {
 				"CloudFrontSecureURL": "https://d1kwrbspoyxfwl.cloudfront.net",
 				"S3BucketSecureURL": "https://proserveportfolio-host-dev.s3.amazonaws.com",
@@ -29,7 +29,7 @@
 				"HostingBucketName": "proserveportfolio-host-dev",
 				"CloudFrontDomainName": "d1kwrbspoyxfwl.cloudfront.net"
 			},
-			"lastPushDirHash": "aIZXII5dVj5muBOY0ivOF8X3x7s="
+			"lastPushDirHash": "ELwijxnTr5+a2uBaGlg4nMs6c5I="
 		}
 	},
 	"auth": {}
