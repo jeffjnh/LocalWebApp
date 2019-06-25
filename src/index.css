@@ -10,10 +10,9 @@
 
 html, body {
   margin: 0 auto;
-  height: 100%;
   width: 100%;
-  /* image position/size repeat */
-  background: url("./assets/img/login/BG-Pattern_Levels_Squid-Ink.png") center/cover no-repeat;
+  /* image position/size repeat attachment */
+  background: url("./assets/img/login/BG-Pattern_Levels_Squid-Ink.png") center/cover no-repeat fixed;
   font-family: "AmazonEmber_Rg";
   color: #FFFFFF;
   text-rendering: optimizeLegibility;
