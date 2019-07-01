@@ -23,9 +23,14 @@
     "source-map-explorer": "^2.0.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@storybook/addon-actions": "^5.1.9",
+    "@storybook/addon-links": "^5.1.9",
+    "@storybook/addons": "^5.1.9",
+    "@storybook/react": "^5.1.9",
+    "copy-webpack-plugin": "^4.5.2",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0",
-    "copy-webpack-plugin": "^4.5.2",
     "webpack-dev-server": "^3.1.5"
   },
   "scripts": {
@@ -37,7 +42,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "webpack-start": "webpack && webpack-dev-server --mode development",
-    "webpack-build": "webpack"
+    "webpack-build": "webpack",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "eslintConfig": {
     "extends": "react-app"

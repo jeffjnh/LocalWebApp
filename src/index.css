@@ -8,6 +8,12 @@
   src: url("./assets/fonts/AmazonEmber_Th.ttf") format("truetype");
 }
 
+/* use for code */
+@font-face {
+  font-family: 'AmazonEmberMono_Rg';
+  src: url("./assets/fonts/AmazonEmberMono_Rg.ttf") format("truetype");
+}
+
 html, body {
   margin: 0 auto;
   width: 100%;
@@ -19,5 +25,5 @@ html, body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: "AmazonEmberMono_Rg", source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }

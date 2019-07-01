@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../../assets/img/logo/AWS_logo_RGB_REV.svg';
+import logo from './assets/img/logo/AWS_logo_RGB_REV.svg';
 import './App.css';
 // import { Route } from 'react-router-dom';
 
