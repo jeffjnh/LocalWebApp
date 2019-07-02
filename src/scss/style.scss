@@ -1,8 +1,8 @@
 // Global settings
-@import "global/colors.scss";
-@import "global/common.scss";
-@import "global/global.scss";
-@import "global/keyframes";
+@import "global/colors";
+// @import "global/common";
+// @import "global/global";
+// @import "global/keyframes";
 @import "global/theme";
 @import "global/typography";
 @import "global/variables";
@@ -14,6 +14,7 @@
 // @import "mixin/titlebar";
 
 // Page specifices
-@import "ui/login.scss";
-@import "ui/signup.scss";
-@import "ui/offerings.scss"
+@import "ui/app";
+@import "ui/notfound";
+@import "ui/login";
+// @import "ui/offerings.scss"

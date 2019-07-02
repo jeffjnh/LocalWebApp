@@ -1,7 +1,7 @@
 {
   "name": "proserve-portfolio-project",
   "projectname": "proserveportfolio",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "AWS Proserve Portfolio",
   "keywords": [],
   "private": true,
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "aws-amplify": "^1.1.29",
+    "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
