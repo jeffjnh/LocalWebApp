@@ -3,13 +3,12 @@ import ReactDOM from "react-dom";
 // import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import * as serviceWorker from "./serviceWorker";
-import "./index.css";
-import App from "./js/components/app/App";
-import Testing from "./js/components/testing/Testing";
-import Login from "./js/components/login/Login";
-import Signup from "./js/components/signup/Signup";
+import './scss/style.scss';
+import App from "./App";
+import Login from "./js/components/Login";
+import Testing from "./js/components/Testing";
+import Notfound from "./js/components/Notfound";
 import Offerings from "./js/components/offerings/Offerings";
-import Notfound from "./js/components/notfound/Notfound";
 
 const routing = (
   <Router>
@@ -20,7 +19,6 @@ const routing = (
       <Route exact path="/" component={App} />
       <Route path="/login" component={Login} />
       <Route path="/testing" component={Testing} />
-      <Route path="/signup" component={Signup} />
       <Route path="/offerings" component={Offerings} />
       <Route component={Notfound} />
     </Switch>

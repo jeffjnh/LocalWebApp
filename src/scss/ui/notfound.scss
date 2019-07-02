@@ -1,0 +1,52 @@
+#error-wrapper {
+    margin: 5% 20%;
+    padding: 25px 35px;
+    background: #fafaf9;
+    border-radius: 10px;
+    color: #666;
+    font-size: 15px;
+    text-align: left;
+}
+
+.pull-left {
+    float: left;
+
+    #error-image {
+        padding: 0 40px 0 10px;
+        display: inline-block;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        vertical-align: middle;
+        border: 0;
+        margin-right: 50px;
+    }
+
+}
+
+#error-content {
+    margin-left: 50px;
+    vertical-align: top;
+    min-height: 225px;
+    
+    > h1 {
+        color: $smile_orange;
+        font-size: 45px;
+        font-weight: bold;
+    }
+}
+
+#error-footer {
+    #custom_message {
+        > p {
+            display: block;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
+    }
+}
+
