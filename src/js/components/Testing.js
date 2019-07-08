@@ -9,7 +9,7 @@ import logo_sales_kit from "../../assets/img/logo/proserve/sales_kit.svg";
 
 const Card = styled.div`
   margin: 1rem;
-  background-image: url("../../assets/img/logo/proserve/1_align_gray.png");
+  background-image: ${logo_1_align};
   background-color: white;
   box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
@@ -17,7 +17,8 @@ const Card = styled.div`
 
   overflow: hidden;
   height: 300px;
-  width: 453px; 
+  // width: 453px;
+  width: 10%;
 
   &:hover {
     // h-offset v-offset blur color
@@ -106,8 +107,7 @@ class Testing extends React.Component {
     };
   }
 
-  // invoked after the component is mounted/inserted into the DOM tree.
-  componentDidMount() {
+  componentWillMount() {
     const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query/?Table_Name=Offerings";
     // const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query/?Table_Name=Offerings&Index_Name=GSP-index&GSP_Vertical=AI";
     this.fetchAPI(url);
@@ -117,6 +117,7 @@ class Testing extends React.Component {
     fetch(url)
       // .then(response => response.json())
       .then(response => {
+        console.log('fisrt then');
         if (!response.ok) {
           this.setState({ err_api_fetch: true });
           throw response;
@@ -130,8 +131,9 @@ class Testing extends React.Component {
         console.log("storing response to state");
         this.setState({ data: response });
       })
-      .catch(err_api_fetch => {
+      .catch(err => {
         console.log("Error: API fetch error");
+        console.log(this.state.err_api_fetch);
       });
   };
 
@@ -210,27 +212,43 @@ class Testing extends React.Component {
 
 
   changeColor = () => {
-    var newColor = this.state.color == 'white' ? 'black' : 'white';
+    var newColor = this.state.color === 'white' ? 'black' : 'white';
     this.setState({ color: newColor });
 
   }
 
   render() {
-    return (
-      <React.Fragment>
-        {
-          this.state.err_api_fetch === true ?
 
-          <h1> error </h1>
-          :
-          <div id="testroot">
-            <div className="container">
-              {this.appendDataToCard()}
-            </div>
+
+    if (this.state.err_api_fetch === true) {
+      return (
+        <h1>error</h1>
+      );
+
+    } else {
+      return (
+        <div id="root-offerings">
+          <div className="offerings-card-container">
+                {this.appendDataToCard()}
           </div>
-        }
-      </React.Fragment>
-    );
+        </div>
+      );
+    }
+
+      // <React.Fragment>
+      //   {
+      //     this.state.err_api_fetch === true ?
+      //     <div id="root-offerings">
+      //       <h1>error</h1>
+      //     </div>
+      //     :
+      //     <div id="root-offerings">
+      //       <div className="offerings-card-container">
+      //         {this.appendDataToCard()}
+      //       </div>
+      //     </div>
+      //   }
+      // </React.Fragment>
   }
 }
 

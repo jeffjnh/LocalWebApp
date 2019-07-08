@@ -1,16 +1,16 @@
-#testroot {
+#root-offerings {
   margin: 0 auto;
   box-sizing: border-box;
-  //   background: #f6f6f6;
   color: #666666;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  .container {
+  .offerings-card-container {
     margin: 50px auto;
-    max-width: 1300px;
+    max-width: 92%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
   }
 }
