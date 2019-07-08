@@ -29,15 +29,6 @@ const Card = styled.div`
     position: relative;
     height: 100%;
     
-    .card-icon-legend {
-      position: absolute;
-      width: 10%;
-      top: 10%;
-      left: 38%;
-      transform: translate(-50%, -50%);
-      // z-index: -1;
-    }
-
     .card-img {
       position: absolute;
       width: 60%;
@@ -111,6 +102,7 @@ class Testing extends React.Component {
     this.state = {
       data: [],
       err_api_fetch: null,
+      color: 'white'
     };
   }
 
@@ -147,6 +139,8 @@ class Testing extends React.Component {
     let cards = this.state.data.map(offering => {
 
       let logo = logo_sales_kit;
+      let opacity = 0.15;
+
       switch (offering.Offering_Type) {
         case "Align Offering":
           logo = logo_1_align;
@@ -162,22 +156,22 @@ class Testing extends React.Component {
           break;
         case "DK Only":
           logo = logo_delivery_kit;
+          // opacity = 0.3;
           break;
         case "SK Only":
           logo = logo_sales_kit;
+          // opacity = 0.1;
           break;
         default:
           logo = logo_sales_kit;
+          // opacity = 0.1;
       }
 
       return (
-        <Card>
+        <Card style={{background:this.state.color}} onClick={this.changeColor}>
           
-          <div className="card-wrapper">
-
-            <img alt="icon-legend" className="card-icon-legend" src={logo} />
-            <img alt="icon-legend" className="card-img" src={logo} />
-
+          <div className="card-wrapper" onClick={ this.enlargeCard } >
+            <img alt="icon-background" className="card-img" src={logo} style={{opacity}} />
             <Tags>
               <div className="type"><span>{offering.Offering_Type}</span></div>
               <div className="maturity"><span>{offering.Offering_Maturity_Level}</span></div>
@@ -186,21 +180,26 @@ class Testing extends React.Component {
               <div className="offering-name">{offering.Offering_Name}</div>
               <div className="practice-group">{offering.Practice_Group}</div>
             </div>
-
           </div>
 
           {/*
-          {offering.Offering_Maturity_Level}
-          {offering.Offering_Description}
-          {offering.Offering_Name}
-          {offering.Delivery_Kit}
-          {offering.Wiki_Link}
-          {offering.Owner}
+
           {offering.Offering_Type}
-          {offering.Capability}
-          {offering.CAF_Perspective}
+          {offering.Offering_Maturity_Level}
+
+          {offering.Offering_Name}
+          {offering.Offering_Description}
+          {offering.Capability} / {offering.GSP_Vertical}
+          {offering.Owner}
+            <a href ={`https://phonetool.amazon.com/search?query=${offering.Owner}&filter_type=All+fields`}> {offering.Owner} </a>
           {offering.Practice_Group}
-          {offering.GSP_Vertical}
+          {offering.CAF_Perspective}
+
+          {ProgressBar}
+          {offering.Delivery_Kit}
+          {offering.SalesKit}
+          {offering.Wiki_Link}
+          
           */}
 
         </Card>
@@ -208,6 +207,13 @@ class Testing extends React.Component {
     });
     return cards;
   };
+
+
+  changeColor = () => {
+    var newColor = this.state.color == 'white' ? 'black' : 'white';
+    this.setState({ color: newColor });
+
+  }
 
   render() {
     return (
