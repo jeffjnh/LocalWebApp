@@ -23,7 +23,6 @@
         border: 0;
         margin-right: 50px;
     }
-
 }
 
 #error-content {
@@ -31,16 +30,14 @@
     vertical-align: top;
     min-height: 225px;
     
-    > h1 {
+    h1 {
         color: $smile_orange;
         font-size: 45px;
         font-weight: bold;
     }
-}
 
-#error-footer {
-    #custom_message {
-        > p {
+    #error-footer {
+        #custom_message > p {
             display: block;
             margin-block-start: 1em;
             margin-block-end: 1em;
@@ -49,4 +46,3 @@
         }
     }
 }
-

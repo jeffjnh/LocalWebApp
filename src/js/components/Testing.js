@@ -1,9 +1,231 @@
-import React from 'react'
+import React from "react";
+import styled from "styled-components";
+import logo_1_align from "../../assets/img/logo/proserve/1_align_gray.png";
+import logo_2_launch from "../../assets/img/logo/proserve/2_launch_gray.png";
+import logo_3_scale from "../../assets/img/logo/proserve/3_scale_gray.png";
+import logo_4_optimize from "../../assets/img/logo/proserve/4_optimize_gray.png";
+import logo_delivery_kit from "../../assets/img/logo/proserve/delivery_kit.svg";
+import logo_sales_kit from "../../assets/img/logo/proserve/sales_kit.svg";
 
-function Testing() {
-  return (
-    <h1>Testing</h1>
-  );
+const Card = styled.div`
+  margin: 1rem;
+  background-image: url("../../assets/img/logo/proserve/1_align_gray.png");
+  background-color: white;
+  box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  transition: all 0.2s linear;
+
+  overflow: hidden;
+  height: 300px;
+  width: 453px; 
+
+  &:hover {
+    // h-offset v-offset blur color
+    box-shadow: 0px 10px 45px rgba(255, 255, 255, 0.3);
+    transform: translate3D(0, -2px, 0);
+  }
+
+  .card-wrapper {
+    position: relative;
+    height: 100%;
+    
+    .card-icon-legend {
+      position: absolute;
+      width: 10%;
+      top: 10%;
+      left: 38%;
+      transform: translate(-50%, -50%);
+      // z-index: -1;
+    }
+
+    .card-img {
+      position: absolute;
+      width: 60%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      // z-index: -1;
+    }
+
+    .text {
+      // position: relative;
+  
+      .offering-name {
+        margin: 0 0 2rem 0;
+        padding: 1.5rem 1.5rem 1rem 1.5rem;
+  
+        color: orange;
+        font-size: 1.5rem;
+  
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+  
+      .practice-group {
+        margin: 0;
+        padding: 0 1.5rem 1.5rem 1.5rem;
+        font-style: italic;
+      }
+    }
+
+  }
+
+  /* screen / card responsive design */
+  @media only screen and (min-width: 768px) {
+    flex: 1 1 calc(50% - 2rem);
+  }
+  @media only screen and (min-width: 992px) {
+    flex: 1 1 calc(33% - 2rem);
+  }
+  @media only screen and (min-width: 1200px) {
+    flex: 1 1 calc(25% - 2rem);
+  }
+  
+`;
+
+const Tags = styled.div `
+  margin-top: 0;
+  margin-right: 2px;
+  display: flex;
+  padding: 10px;
+  box-sizing: border-box;
+
+  .type {
+    flex: 0 0 90%;
+  }
+  .maturity {
+    flex: 1;
+    text-align: right;
+  }
+  span {
+    padding: 2px 10px;
+    border: 1px solid black;
+    border-radius: 25px;
+  }
+`;
+
+class Testing extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+      err_api_fetch: null,
+    };
+  }
+
+  // invoked after the component is mounted/inserted into the DOM tree.
+  componentDidMount() {
+    const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query/?Table_Name=Offerings";
+    // const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query/?Table_Name=Offerings&Index_Name=GSP-index&GSP_Vertical=AI";
+    this.fetchAPI(url);
+  }
+
+  fetchAPI = url => {
+    fetch(url)
+      // .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          this.setState({ err_api_fetch: true });
+          throw response;
+        } else {
+          this.setState({ err_api_fetch: false });
+          console.log("Success: API fetched");
+          return response.json();
+        }
+      })
+      .then(response => {
+        console.log("storing response to state");
+        this.setState({ data: response });
+      })
+      .catch(err_api_fetch => {
+        console.log("Error: API fetch error");
+      });
+  };
+
+  appendDataToCard = (props) => {
+    let cards = this.state.data.map(offering => {
+
+      let logo = logo_sales_kit;
+      switch (offering.Offering_Type) {
+        case "Align Offering":
+          logo = logo_1_align;
+          break;
+        case "Launch Offering":
+          logo = logo_2_launch;
+          break;
+        case "Scale Offering":
+          logo = logo_3_scale;
+          break;
+        case "Optimize Offering":
+          logo = logo_4_optimize;
+          break;
+        case "DK Only":
+          logo = logo_delivery_kit;
+          break;
+        case "SK Only":
+          logo = logo_sales_kit;
+          break;
+        default:
+          logo = logo_sales_kit;
+      }
+
+      return (
+        <Card>
+          
+          <div className="card-wrapper">
+
+            <img alt="icon-legend" className="card-icon-legend" src={logo} />
+            <img alt="icon-legend" className="card-img" src={logo} />
+
+            <Tags>
+              <div className="type"><span>{offering.Offering_Type}</span></div>
+              <div className="maturity"><span>{offering.Offering_Maturity_Level}</span></div>
+            </Tags>
+            <div className="text">
+              <div className="offering-name">{offering.Offering_Name}</div>
+              <div className="practice-group">{offering.Practice_Group}</div>
+            </div>
+
+          </div>
+
+          {/*
+          {offering.Offering_Maturity_Level}
+          {offering.Offering_Description}
+          {offering.Offering_Name}
+          {offering.Delivery_Kit}
+          {offering.Wiki_Link}
+          {offering.Owner}
+          {offering.Offering_Type}
+          {offering.Capability}
+          {offering.CAF_Perspective}
+          {offering.Practice_Group}
+          {offering.GSP_Vertical}
+          */}
+
+        </Card>
+      );
+    });
+    return cards;
+  };
+
+  render() {
+    return (
+      <React.Fragment>
+        {
+          this.state.err_api_fetch === true ?
+
+          <h1> error </h1>
+          :
+          <div id="testroot">
+            <div className="container">
+              {this.appendDataToCard()}
+            </div>
+          </div>
+        }
+      </React.Fragment>
+    );
+  }
 }
 
 export default Testing;

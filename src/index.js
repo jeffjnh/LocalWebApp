@@ -9,6 +9,7 @@ import Login from "./js/components/Login";
 import Testing from "./js/components/Testing";
 import Notfound from "./js/components/Notfound";
 import Offerings from "./js/components/offerings/Offerings";
+import Ghibli from "./js/components/Ghibli";
 
 const routing = (
   <Router>
@@ -20,13 +21,14 @@ const routing = (
       <Route path="/login" component={Login} />
       <Route path="/testing" component={Testing} />
       <Route path="/offerings" component={Offerings} />
+      <Route path="/ghibli" component={Ghibli} />
       <Route component={Notfound} />
     </Switch>
   </Router>
 );
 
 // entry point for react rendering
-ReactDOM.render(routing, document.getElementById("root"));
+ReactDOM.render(routing, document.getElementById('root'));
 
 // default
 // ReactDOM.render(<App />, document.getElementById('root'));
