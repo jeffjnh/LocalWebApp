@@ -19,9 +19,11 @@ const Card = styled.div`
   transition: all 0.2s linear;
 
   overflow: hidden;
-  height: 300px;
-  // width: 453px;
-  width: 10%;
+  // height: 300px;
+  height: 200px;
+  width: 453px;
+  // width: 10%;
+  // if use % then single card view gets screwed up for some reason, don't use
 
   &:hover {
     // h-offset v-offset blur color
@@ -35,7 +37,8 @@ const Card = styled.div`
     
     .card-img {
       position: absolute;
-      width: 60%;
+      // width: 60%;
+      width: 50%;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -148,10 +151,21 @@ class Testing extends React.Component {
   }
 
   sortData = () => {
-    // offering_type alphabetically, then maturity level desc
+    const order_of_offering_types = [
+      'Align Offering', 'V1 Align Offering',
+      'Launch Offering', 'V1 Launch Offering',
+      'Scale Offering', 'V1 Scale Offering',
+      'Optimize Offering', 'V1 Optimize Offering',
+      'DK', 'DK Only',
+      'SK', 'SK Only',
+      'Foundation Launch', 'TBD'
+    ];
+    var offerCompare = (o1, o2) => {
+      return order_of_offering_types.indexOf(o1) - order_of_offering_types.indexOf(o2);
+    }
     this.state.data.sort(
-      firstBy((a, b) => a.Offering_Type.localeCompare(b.Offering_Type) )
-      .thenBy((a, b) => a.Offering_Maturity_Level - b.Offering_Maturity_Level, -1)
+      firstBy("Offering_Type", {cmp: offerCompare, direction: 1})
+      .thenBy((o1, o2) => o1.Offering_Maturity_Level - o2.Offering_Maturity_Level, -1)
     );
   }
 
@@ -179,15 +193,12 @@ class Testing extends React.Component {
           break;
         case "DK Only":
           logo = logo_delivery_kit;
-          // opacity = 0.3;
           break;
         case "SK Only":
           logo = logo_sales_kit;
-          // opacity = 0.1;
           break;
         default:
           logo = logo_sales_kit;
-          // opacity = 0.1;
       }
 
       return (
@@ -199,6 +210,7 @@ class Testing extends React.Component {
             <Tags>
               <div className="type"><span>{offering.Offering_Type}</span></div>
               <div className="maturity"><span>{offering.Offering_Maturity_Level}</span></div>
+              {/* TODO : add tooltips for maturity level */}
             </Tags>
             <div className="text">
               <div className="offering-name">{offering.Offering_Name}</div>
@@ -238,36 +250,18 @@ class Testing extends React.Component {
   }
 
   render() {
-
-    if (this.state.err_api_fetch === true) {
-      return (
-        <h1>error</h1>
-      );
-
-    } else {
-      return (
-        <div id="root-offerings">
-          <div className="offerings-card-container">
-                {this.appendDataToCard()}
-          </div>
+    return(
+      this.state.err_api_fetch === true ? 
+      <div id="root-offerings">
+        <h1>Error! Please check console for error messages</h1>
+      </div>
+        :
+      <div id="root-offerings">
+        <div className="offerings-card-container">
+          {this.appendDataToCard()}
         </div>
-      );
-    }
-
-      // <React.Fragment>
-      //   {
-      //     this.state.err_api_fetch === true ?
-      //     <div id="root-offerings">
-      //       <h1>error</h1>
-      //     </div>
-      //     :
-      //     <div id="root-offerings">
-      //       <div className="offerings-card-container">
-      //         {this.appendDataToCard()}
-      //       </div>
-      //     </div>
-      //   }
-      // </React.Fragment>
+      </div>
+    )
   }
 }
 
