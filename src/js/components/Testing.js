@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ReactTooltip from 'react-tooltip'
 import { firstBy } from "thenby";
 import logo_1_align from "../../assets/img/logo/proserve/1_align_gray.png";
 import logo_2_launch from "../../assets/img/logo/proserve/2_launch_gray.png";
@@ -153,12 +154,12 @@ class Testing extends React.Component {
   sortData = () => {
     const order_of_offering_types = [
       'Align Offering', 'V1 Align Offering',
-      'Launch Offering', 'V1 Launch Offering',
+      'Launch Offering', 'V1 Launch Offering', 'Foundation Launch',
       'Scale Offering', 'V1 Scale Offering',
       'Optimize Offering', 'V1 Optimize Offering',
       'DK', 'DK Only',
       'SK', 'SK Only',
-      'Foundation Launch', 'TBD'
+      'TBD'
     ];
     var offerCompare = (o1, o2) => {
       return order_of_offering_types.indexOf(o1) - order_of_offering_types.indexOf(o2);
@@ -180,23 +181,32 @@ class Testing extends React.Component {
 
       switch (offering.Offering_Type) {
         case "Align Offering":
+        case "V1 Align Offering":
           logo = logo_1_align;
           break;
         case "Launch Offering":
+        case "V1 Launch Offering":
+        case "Foundation Launch":
           logo = logo_2_launch;
           break;
         case "Scale Offering":
+        case "V1 Scale Offering":
           logo = logo_3_scale;
           break;
         case "Optimize Offering":
+        case "V1 Optimize Offering":
           logo = logo_4_optimize;
           break;
+        case "DK":
         case "DK Only":
           logo = logo_delivery_kit;
           break;
+        case "SK":
         case "SK Only":
           logo = logo_sales_kit;
           break;
+        // TODO : make a mystery logo??
+        case "TBD":
         default:
           logo = logo_sales_kit;
       }
@@ -208,13 +218,21 @@ class Testing extends React.Component {
           <div className="card-wrapper" onClick={ this.enlargeCard } >
             <img alt="icon-background" className="card-img" src={logo} style={{opacity}} />
             <Tags>
-              <div className="type"><span>{offering.Offering_Type}</span></div>
-              <div className="maturity"><span>{offering.Offering_Maturity_Level}</span></div>
-              {/* TODO : add tooltips for maturity level */}
+              <div className="type">
+                <tooltip data-tip='Offering Type' data-for='offering_type'><span>{offering.Offering_Type}</span></tooltip>
+                <ReactTooltip id='offering_type' type='dark' delayShow={1000} effect='solid' />
+              </div>
+              <div className="maturity">
+                <tooltip data-tip='Maturity Level' data-for='offering_maturity_level'><span>{offering.Offering_Maturity_Level}</span></tooltip>
+                <ReactTooltip id='offering_maturity_level' type='warning' delayShow={1000} effect='solid' />
+              </div>
             </Tags>
             <div className="text">
               <div className="offering-name">{offering.Offering_Name}</div>
-              <div className="practice-group">{offering.Practice_Group}</div>
+              <div className="practice-group">
+                <tooltip data-tip='Practice Group'>{offering.Practice_Group}</tooltip>
+                <ReactTooltip place='bottom' type='success' delayShow={1000} effect='solid' />
+              </div>
             </div>
           </div>
 
@@ -233,7 +251,7 @@ class Testing extends React.Component {
 
           {ProgressBar}
           {offering.Delivery_Kit}
-          {offering.SalesKit}
+          {offering.Sales_Kit}
           {offering.Wiki_Link}
           
           */}
