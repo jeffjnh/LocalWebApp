@@ -220,18 +220,18 @@ class Testing extends React.Component {
             <Tags>
               <div className="type">
                 <tooltip data-tip='Offering Type' data-for='offering_type'><span>{offering.Offering_Type}</span></tooltip>
-                <ReactTooltip id='offering_type' type='dark' delayShow={1000} effect='solid' />
+                <ReactTooltip id='offering_type' place='top' type='dark' effect='solid' />
               </div>
               <div className="maturity">
                 <tooltip data-tip='Maturity Level' data-for='offering_maturity_level'><span>{offering.Offering_Maturity_Level}</span></tooltip>
-                <ReactTooltip id='offering_maturity_level' type='warning' delayShow={1000} effect='solid' />
+                <ReactTooltip id='offering_maturity_level' place='top' type='dark' effect='solid' />
               </div>
             </Tags>
             <div className="text">
               <div className="offering-name">{offering.Offering_Name}</div>
               <div className="practice-group">
-                <tooltip data-tip='Practice Group'>{offering.Practice_Group}</tooltip>
-                <ReactTooltip place='bottom' type='success' delayShow={1000} effect='solid' />
+                <tooltip data-tip='Practice Group' data-for='practice_group'>{offering.Practice_Group}</tooltip>
+                <ReactTooltip id='practice_group' place='bottom' type='dark' effect='solid' />
               </div>
             </div>
           </div>
