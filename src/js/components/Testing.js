@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { firstBy } from "thenby";
 import logo_1_align from "../../assets/img/logo/proserve/1_align_gray.png";
 import logo_2_launch from "../../assets/img/logo/proserve/2_launch_gray.png";
 import logo_3_scale from "../../assets/img/logo/proserve/3_scale_gray.png";
 import logo_4_optimize from "../../assets/img/logo/proserve/4_optimize_gray.png";
 import logo_delivery_kit from "../../assets/img/logo/proserve/delivery_kit.svg";
 import logo_sales_kit from "../../assets/img/logo/proserve/sales_kit.svg";
+
+const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query/?Table_Name=Offerings";
 
 const Card = styled.div`
   margin: 1rem;
@@ -42,6 +45,8 @@ const Card = styled.div`
     .text {
       // position: relative;
   
+      // display: flex;
+
       .offering-name {
         margin: 0 0 2rem 0;
         padding: 1.5rem 1.5rem 1rem 1.5rem;
@@ -52,6 +57,7 @@ const Card = styled.div`
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
+        // flex-wrap: wrap;
       }
   
       .practice-group {
@@ -108,7 +114,6 @@ class Testing extends React.Component {
   }
 
   componentWillMount() {
-    const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query/?Table_Name=Offerings";
     // const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query/?Table_Name=Offerings&Index_Name=GSP-index&GSP_Vertical=AI";
     this.fetchAPI(url);
   }
@@ -137,7 +142,23 @@ class Testing extends React.Component {
       });
   };
 
+  appendQueryToURL = () => {
+    // &Index_Name=GSP-index&GSP_Vertical=AI
+
+  }
+
+  sortData = () => {
+    // offering_type alphabetically, then maturity level desc
+    this.state.data.sort(
+      firstBy((a, b) => a.Offering_Type.localeCompare(b.Offering_Type) )
+      .thenBy((a, b) => a.Offering_Maturity_Level - b.Offering_Maturity_Level, -1)
+    );
+  }
+
   appendDataToCard = (props) => {
+    
+    this.sortData();
+
     let cards = this.state.data.map(offering => {
 
       let logo = logo_sales_kit;
@@ -170,7 +191,8 @@ class Testing extends React.Component {
       }
 
       return (
-        <Card style={{background:this.state.color}} onClick={this.changeColor}>
+        // <Card style={{background:this.state.color}} onClick={this.changeColor} key={`${offering.Offering_Name} + ${offering.Offering_Type}`}>
+        <Card style={{background:this.state.color}} key={`${offering.Offering_Name} + ${offering.Offering_Type}`}>
           
           <div className="card-wrapper" onClick={ this.enlargeCard } >
             <img alt="icon-background" className="card-img" src={logo} style={{opacity}} />
@@ -210,15 +232,12 @@ class Testing extends React.Component {
     return cards;
   };
 
-
   changeColor = () => {
     var newColor = this.state.color === 'white' ? 'black' : 'white';
     this.setState({ color: newColor });
-
   }
 
   render() {
-
 
     if (this.state.err_api_fetch === true) {
       return (
