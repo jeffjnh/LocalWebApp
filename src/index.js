@@ -8,8 +8,7 @@ import App from "./App";
 import Login from "./js/components/Login";
 import Testing from "./js/components/Testing";
 import Notfound from "./js/components/Notfound";
-import Offerings from "./js/components/offerings/Offerings";
-import Ghibli from "./js/components/Ghibli";
+// import Offerings from "./js/components/offerings/Offerings";
 
 const routing = (
   <Router>
@@ -20,8 +19,7 @@ const routing = (
       <Route exact path="/" component={App} />
       <Route path="/login" component={Login} />
       <Route path="/testing" component={Testing} />
-      <Route path="/offerings" component={Offerings} />
-      <Route path="/ghibli" component={Ghibli} />
+      {/* <Route path="/offerings" component={Offerings} /> */}
       <Route component={Notfound} />
     </Switch>
   </Router>

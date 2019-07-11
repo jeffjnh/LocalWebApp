@@ -1,4 +1,5 @@
 import React from "react";
+import { AWSCOLORS } from "../constants/AWSColors";
 import styled from "styled-components";
 import ReactTooltip from 'react-tooltip'
 import { firstBy } from "thenby";
@@ -55,7 +56,7 @@ const Card = styled.div`
         margin: 0 0 2rem 0;
         padding: 1.5rem 1.5rem 1rem 1.5rem;
   
-        color: orange;
+        color: ${AWSCOLORS.SMILE_ORANGE};
         font-size: 1.5rem;
   
         text-overflow: ellipsis;
@@ -107,20 +108,61 @@ const Tags = styled.div `
   }
 `;
 
+// let API_Params: [
+//   Index_Name = 'GSP-index',
+//   Offering_Name = 'a',
+//   Offering_Type = 'a',
+//   CAF_Perspective = 'a',
+//   Capability = 'a',
+//   GSP_Vertical = 'a',
+//   Offering_Description = 'a',
+//   Offering_maturity_Level = 'a',
+//   Owner = 'a',
+//   Practice_Group = 'a',
+//   Wiki_Link = 'a',
+//   Delivery_Kit = 'a',
+//   Sales_Kit = 'a',
+// ];
+
 class Testing extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      value: '',
       data: [],
       err_api_fetch: null,
-      color: 'white'
+      color: 'white',
+      
     };
+
   }
 
   componentWillMount() {
     // const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query/?Table_Name=Offerings&Index_Name=GSP-index&GSP_Vertical=AI";
     this.fetchAPI(url);
   }
+
+  onResetValue = event => {
+    this.setState({ value: '&' });
+    console.log(this.state.value);
+  }
+
+  onChangeValue = event => {
+    this.setState({ value: this.state.value + event.target.value });
+    console.log(this.state.value);
+  }
+
+  appendQueryToURL = () => {
+    // &Index_Name=GSP-index&GSP_Vertical=AI
+
+    this.onResetValue();
+    this.onChangeValue();
+    
+    
+    // API_Params
+
+  }
+
 
   fetchAPI = url => {
     fetch(url)
@@ -146,9 +188,8 @@ class Testing extends React.Component {
       });
   };
 
-  appendQueryToURL = () => {
-    // &Index_Name=GSP-index&GSP_Vertical=AI
-
+  onClearFetchedData = () => {
+    this.setState({ data: [] });
   }
 
   sortData = () => {
@@ -275,6 +316,16 @@ class Testing extends React.Component {
       </div>
         :
       <div id="root-offerings">
+        
+        <div style={{color:'#ffffff'}}>
+          Check: 
+          <label for="aaa"> aaa</label>
+          <input type="checkbox" name="aaa" value="aaa" onChange={this.onChangeValue} />
+          <label for="bbb"> bbb</label>
+          <input type="checkbox" name="bbb" value="bbb" onChange={this.onChangeValue} />
+          {/* <input type="submit" name="reset" value="reset" onChange={this.onResetValue} /> */}
+        </div>
+        
         <div className="offerings-card-container">
           {this.appendDataToCard()}
         </div>
