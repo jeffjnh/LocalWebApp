@@ -26,7 +26,7 @@ function Notfound() {
             <p>
               You currently do not have permissions to access the ProServe Portfolio.<br />
               Access is open by default to all full-time AWS employees.
-                </p>
+            </p>
             <p>
               Request permissions by emailing: <a href="mailto:miffyche@amazon.com">miffyche@amazon.com</a>
             </p>
