@@ -6,9 +6,10 @@ import * as serviceWorker from "./serviceWorker";
 import './scss/style.scss';
 import App from "./App";
 import Login from "./js/components/Login";
+import Offerings from "./js/components/Offerings";
 import Testing from "./js/components/Testing";
 import Notfound from "./js/components/Notfound";
-// import Offerings from "./js/components/offerings/Offerings";
+import Checkbox from "./js/components/testing/Testing_Checkbox";
 
 const routing = (
   <Router>
@@ -18,7 +19,9 @@ const routing = (
     <Switch>
       <Route exact path="/" component={App} />
       <Route path="/login" component={Login} />
+      <Route path="/offerings" component={Offerings} />
       <Route path="/testing" component={Testing} />
+      <Route path="/checkbox" component={Checkbox} />
       {/* <Route path="/offerings" component={Offerings} /> */}
       <Route component={Notfound} />
     </Switch>
