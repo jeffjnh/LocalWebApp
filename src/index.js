@@ -3,12 +3,14 @@ import ReactDOM from "react-dom";
 // import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import * as serviceWorker from "./serviceWorker";
+import "bootstrap/dist/css/bootstrap.css";
 import './scss/style.scss';
 import App from "./App";
+import Notfound from "./js/components/Notfound";
 import Login from "./js/components/Login";
 import Offerings from "./js/components/Offerings";
+import Customer from "./js/components/Customer";
 import Testing from "./js/components/Testing";
-import Notfound from "./js/components/Notfound";
 import Checkbox from "./js/components/testing/Testing_Checkbox";
 
 const routing = (
@@ -21,8 +23,8 @@ const routing = (
       <Route path="/login" component={Login} />
       <Route path="/offerings" component={Offerings} />
       <Route path="/testing" component={Testing} />
+      <Route path="/customer" component={Customer} />
       <Route path="/checkbox" component={Checkbox} />
-      {/* <Route path="/offerings" component={Offerings} /> */}
       <Route component={Notfound} />
     </Switch>
   </Router>
