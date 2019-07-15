@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import Table from "react-bootstrap/Table";
-import styled from "styled-components";
+// import styled from "styled-components";
 import { AWSCOLORS } from "../constants/AWSColors";
 const rowStyle = {
 	color: AWSCOLORS.LIGHT_BLUE_B3,
 	backgroundColor: AWSCOLORS.DARK_SQUID_INK,
 	borderColor: "purple"
 };
-const myRow = styled.div`
-.th {
-	color: AWSCOLORS.LIGHT_BLUE_B3,
-	backgroundColor: AWSCOLORS.DARK_SQUID_INK,
-	borderColor: "purple"
-}
-`;
+// const myRow = styled.div`
+// .th {
+// 	color: AWSCOLORS.LIGHT_BLUE_B3,
+// 	backgroundColor: AWSCOLORS.DARK_SQUID_INK,
+// 	borderColor: "purple"
+// }
+// `;
 
 class Customer extends Component {
 	state = {};
