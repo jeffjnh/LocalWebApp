@@ -1,5 +1,6 @@
 import React from "react";
-import { OFFERINGSDATA } from "../constants/OFFERINGSDATA";
+// import { OFFERINGSDATA } from "../constants/OFFERINGSDATA";
+import { OFFERINGSDATA_SHORT } from "../constants/OFFERINGSDATA_SHORT";
 import { firstBy } from "thenby";
 import Card from "../components/Card"
 
@@ -34,7 +35,7 @@ class Offerings extends React.Component {
 
   componentWillMount() {
     // this.fetchAPI(url);
-    this.setState( {data: OFFERINGSDATA} );
+    this.setState( {data: OFFERINGSDATA_SHORT} );
   }
 
   // onResetValue = event => {
