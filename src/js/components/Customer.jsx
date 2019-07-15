@@ -1,6 +1,19 @@
 import React, { Component } from "react";
 import Table from "react-bootstrap/Table";
+import styled from "styled-components";
 import { AWSCOLORS } from "../constants/AWSColors";
+const rowStyle = {
+	color: AWSCOLORS.LIGHT_BLUE_B3,
+	backgroundColor: AWSCOLORS.DARK_SQUID_INK,
+	borderColor: "purple"
+};
+const myRow = styled.div`
+.th {
+	color: AWSCOLORS.LIGHT_BLUE_B3,
+	backgroundColor: AWSCOLORS.DARK_SQUID_INK,
+	borderColor: "purple"
+}
+`;
 
 class Customer extends Component {
 	state = {};
@@ -15,7 +28,7 @@ class Customer extends Component {
 						backgroundColor: AWSCOLORS.DARK_SQUID_INK,
 						margin: "5px"
 					}}
-					className="btn btn-lg p-4"
+					className="btn btn-lg mx-4"
 				>
 					This button
 				</button>
@@ -29,20 +42,11 @@ class Customer extends Component {
 				>
 					This button
 				</button>
-				<div style={{ margin: "20px" }}>
-					<Table
-						style={{
-							color: AWSCOLORS.LIGHT_BLUE_B3,
-							backgroundColor: AWSCOLORS.DARK_SQUID_INK,
-							borderColor: "black"
-						}}
-						bordered
-						hover
-						responsive
-					>
+				<div className="panel" style={{ margin: "20px" }}>
+					<Table style={rowStyle} bordered hover responsive>
 						<thead>
 							<tr>
-								<th>#</th>
+								<th style={rowStyle}>#</th>
 								<th>First Name</th>
 								<th>Last Name</th>
 								<th>Username</th>
