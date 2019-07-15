@@ -4,7 +4,7 @@ import { firstBy } from "thenby";
 import Card from "../components/Card"
 
 // const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query/?Table_Name=Offerings";
-const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query/";
+// const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query/";
 
 // const OFFERINGS_HEADERS = {
     //   Index_Name = 'GSP-index',

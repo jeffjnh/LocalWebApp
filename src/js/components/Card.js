@@ -2,7 +2,6 @@ import React from "react";
 import { AWSCOLORS } from "../constants/AWSColors";
 import styled from "styled-components";
 import ReactTooltip from 'react-tooltip'
-import { firstBy } from "thenby";
 import logo_1_align from "../../assets/img/logo/proserve/1_align_gray.png";
 import logo_2_launch from "../../assets/img/logo/proserve/2_launch_gray.png";
 import logo_3_scale from "../../assets/img/logo/proserve/3_scale_gray.png";
@@ -190,7 +189,7 @@ class Card extends React.Component {
         {this.props.Delivery_Kit}
         {this.props.Sales_Kit}
         {this.props.Wiki_Link}
-        
+
         */}
 
       </CardStyle>
