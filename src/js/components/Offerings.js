@@ -1,10 +1,8 @@
 import React from "react";
-// import { OFFERINGSDATA } from "../constants/OFFERINGSDATA";
-import { OFFERINGSDATA_SHORT } from "../constants/OFFERINGSDATA_SHORT";
+// import { OFFERINGSDATA_SHORT } from "../constants/OFFERINGSDATA_SHORT";
 import { firstBy } from "thenby";
 import Card from "../components/Card"
 
-// const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query/?Table_Name=Offerings";
 const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
 
 // const OFFERINGS_HEADERS = {

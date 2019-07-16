@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Table from "react-bootstrap/Table";
-import { AWSCOLORS } from "../constants/AWSColors";
+import { AWS as AWSCOLORS } from "../constants/Colors";
 import Toggles from "./Toggles";
 
 const rowStyle = {
