@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.css";
-import './scss/style.scss';
+import "./scss/style.scss";
 import App from "./App";
 import Notfound from "./js/components/Notfound";
 import Login from "./js/components/Login";
@@ -18,16 +18,16 @@ const routing = (
 		{/* <Link to="/"> Home </Link>|
     <Link to="/login"> Login </Link>|
     <Link to="/testing"> Testing </Link>| */}
-    <Switch>
-      <Route exact path="/" component={App} />
-      <Route path="/login" component={Login} />
-      <Route path="/offerings" component={Offerings} />
-      <Route path="/testing" component={Testing} />
-      <Route path="/customer" component={Customer} />
-      <Route path="/checkbox" component={Checkbox} />
-      <Route component={Notfound} />
-    </Switch>
-  </Router>
+		<Switch>
+			<Route exact path="/" component={App} />
+			<Route path="/login" component={Login} />
+			<Route path="/offerings" component={Offerings} />
+			<Route path="/testing" component={Testing} />
+			<Route path="/customer" component={Customer} />
+			<Route path="/checkbox" component={Checkbox} />
+			<Route component={Notfound} />
+		</Switch>
+	</Router>
 );
 
 // entry point for react rendering
