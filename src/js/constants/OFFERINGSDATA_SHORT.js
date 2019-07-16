@@ -1,4 +1,4 @@
-
+// https://stackoverflow.com/questions/51618226/visual-studio-code-removing-lines-containing-criteria
 export const OFFERINGSDATA_SHORT = 
 [
     {

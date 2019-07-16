@@ -32,4 +32,11 @@ function App() {
 	);
 }
 
+/*
+  Needed for `$ amplify publish -c`
+  `$ amplify configure project` will change:
+   - amplify/.config/local-aws-info.json => "dev": profileName
+   - amplify/.config/local-env-info.json => "projectPath"
+*/
+
 export default App;
