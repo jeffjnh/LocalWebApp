@@ -155,18 +155,18 @@ class Card extends React.Component {
           <img alt="icon-background" className="card-img" src={logo} style={{ opacity }} />
           <Tags>
             <div className="type">
-              <div data-tip='Offering Type' data-for='offering_type'><span>{this.props.Offering_Type}</span></div>
+              <div data-tip='Offering Type' data-for='offering_type'><span>{this.props.offering_type}</span></div>
               <ReactTooltip id='offering_type' place='top' type='dark' effect='solid' />
             </div>
             <div className="maturity">
-              <div data-tip='Maturity Level' data-for='offering_maturity_level'><span>{this.props.Offering_Maturity_Level}</span></div>
+              <div data-tip='Maturity Level' data-for='offering_maturity_level'><span>{this.props.offering_maturity_level}</span></div>
               <ReactTooltip id='offering_maturity_level' place='top' type='dark' effect='solid' />
             </div>
           </Tags>
           <div className="text">
-            <div className="offering-name">{this.props.Offering_Name}</div>
+            <div className="offering-name">{this.props.offering_name}</div>
             <div className="practice-group">
-              <div data-tip='Practice Group' data-for='practice_group'>{this.props.Practice_Group}</div>
+              <div data-tip='Practice Group' data-for='practice_group'>{this.props.practice_group}</div>
               <ReactTooltip id='practice_group' place='bottom' type='dark' effect='solid' />
             </div>
           </div>

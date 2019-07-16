@@ -1,78 +1,94 @@
 import React, { Component } from "react";
 import Table from "react-bootstrap/Table";
-// import styled from "styled-components";
 import { AWSCOLORS } from "../constants/AWSColors";
+import Toggles from "./Toggles";
+
 const rowStyle = {
-	color: AWSCOLORS.LIGHT_BLUE_B3,
-	backgroundColor: AWSCOLORS.DARK_SQUID_INK,
-	borderColor: "purple"
+	color: AWSCOLORS.SMILE_ORANGE,
+	backgroundColor: AWSCOLORS.DARK_SQUID_INK
 };
-// const myRow = styled.div`
-// .th {
-// 	color: AWSCOLORS.LIGHT_BLUE_B3,
-// 	backgroundColor: AWSCOLORS.DARK_SQUID_INK,
-// 	borderColor: "purple"
-// }
-// `;
 
 class Customer extends Component {
 	state = {};
-
+	data = [
+		{ key: 1, name: "Jeff", idNum: 1 },
+		{ key: 2, name: "Edmund", idNum: 2 },
+		{ key: 3, name: "Miffy", idNum: 3 },
+		{ key: 4, name: "Jeff", idNum: 1 },
+		{ key: 5, name: "Edmund", idNum: 2 },
+		{ key: 6, name: "Miffy", idNum: 3 },
+		{ key: 7, name: "Jeff", idNum: 1 },
+		{ key: 8, name: "Edmund", idNum: 2 },
+		{ key: 9, name: "Miffy", idNum: 3 },
+		{ key: 10, name: "Jeff", idNum: 1 },
+		{ key: 11, name: "Edmund", idNum: 2 },
+		{ key: 12, name: "Miffy", idNum: 3 }
+	];
 	render() {
+		let titles = ["name", "idNum"];
+		console.log(titles[0]);
 		return (
-			<div style={{ margin: "20px" }}>
-				<h1 style={{ color: "white" }}>Test this</h1>
-				<button
-					style={{
-						color: AWSCOLORS.LIGHT_BLUE_B3,
-						backgroundColor: AWSCOLORS.DARK_SQUID_INK,
-						margin: "5px"
-					}}
-					className="btn btn-lg mx-4"
+			<div
+				style={{
+					backgroundColor: AWSCOLORS.DARK_SQUID_INK
+				}}
+			>
+				<Toggles />
+				<h2
+					style={{ color: AWSCOLORS.SMILE_ORANGE }}
+					className="text-center"
 				>
-					This button
-				</button>
-				<button
+					Completed Offerings
+				</h2>
+				<div
+					className="panel"
 					style={{
-						color: AWSCOLORS.LIGHT_BLUE_B3,
-						backgroundColor: AWSCOLORS.DARK_SQUID_INK,
-						margin: "5px"
+						margin: "40px",
+						height: "250px",
+						overflow: "scroll"
 					}}
-					className="btn btn-lg"
 				>
-					This button
-				</button>
-				<div className="panel" style={{ margin: "20px" }}>
-					<Table style={rowStyle} bordered hover responsive>
-						<thead>
-							<tr>
-								<th style={rowStyle}>#</th>
-								<th>First Name</th>
-								<th>Last Name</th>
-								<th>Username</th>
+					<Table style={rowStyle} bordered hover>
+						<thead
+							style={{
+								position: "sticky",
+								top: 0
+							}}
+						>
+							<tr
+								style={{
+									position: "sticky",
+									top: 0
+								}}
+							>
+								{titles.map(title => (
+									<th
+										style={{
+											position: "sticky",
+											top: 0,
+											backgroundColor:
+												AWSCOLORS.DARK_SQUID_INK
+										}}
+										key={title}
+									>
+										{title}
+									</th>
+								))}
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Mark</td>
-								<td>Otto</td>
-								<td>@mdo</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>Jacob</td>
-								<td>Thornton</td>
-								<td>@fat</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td colSpan="2">Larry the Bird</td>
-								<td>@twitter</td>
-							</tr>
+							{this.data.map(item => (
+								<tr key={item.key}>
+									{titles.map(title => (
+										<td key={title}>{item[title]}</td>
+									))}
+								</tr>
+							))}
 						</tbody>
 					</Table>
 				</div>
+
+				<div />
 			</div>
 		);
 	}

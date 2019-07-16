@@ -5,17 +5,17 @@ import { firstBy } from "thenby";
 import Card from "../components/Card"
 
 // const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query/?Table_Name=Offerings";
-// const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query/";
+const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
 
 // const OFFERINGS_HEADERS = {
     //   Index_Name = 'GSP-index',
-    //   Offering_Name = '',
+    //   offering_name = '',
     //   Offering_Type = '',
     //   CAF_Perspective = '',
     //   Capability = '',
-    //   GSP_Vertical = '',
+    //   gsp_vertical = '',
     //   Offering_Description = '',
-    //   Offering_maturity_Level = '',
+    //   offering_maturity_level = '',
     //   Owner = '',
     //   Practice_Group = '',
     //   Wiki_Link = '',
@@ -34,8 +34,8 @@ class Offerings extends React.Component {
   }
 
   componentWillMount() {
-    // this.fetchAPI(url);
-    this.setState( {data: OFFERINGSDATA_SHORT} );
+    this.fetchAPI(url);
+    // this.setState( {data: OFFERINGSDATA_SHORT} );
   }
 
   // onResetValue = event => {
@@ -49,60 +49,50 @@ class Offerings extends React.Component {
   // }
 
   appendQueryToURL = (event) => {
-    // &Index_Name=GSP-index&GSP_Vertical=AI
+    // &Index_Name=GSP-index&gsp_vertical=AI
 
-    if (event.target.value === "Offering_Maturity_Level") {
-      // this.setState({checkBoxValue : {'Offering_Maturity_Level': event.target.value }});
-      this.setState({checkBoxValue : {'Offering_Maturity_Level': '3' }});
+    if (event.target.value === "offering_maturity_level") {
+      // this.setState({checkBoxValue : {'offering_maturity_level': event.target.value }});
+      this.setState({checkBoxValue : {'offering_maturity_level': '3' }});
     }
 
-    if (event.target.value === "GSP_Vertical") {
-      // this.setState({checkBoxValue : { 'GSP_Vertical': event.target.value }});
-      this.setState({checkBoxValue : { 'GSP_Vertical': 'AI' }});
+    if (event.target.value === "gsp_vertical") {
+      // this.setState({checkBoxValue : { 'gsp_vertical': event.target.value }});
+      this.setState({checkBoxValue : { 'gsp_vertical': 'AI' }});
     }
 
     this.fetchAPI();
   }
 
+
+
   fetchAPI = (url) => {
     fetch(url, {
         method: 'GET',
-        mode: 'no-cors',
+        mode: 'cors',
         headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin' : '*',
-          'Table_Name' : 'Offerings'
+          'Access-Control-Allow-Origin':'*',
+          'Content-Type':'application/json',
+          'Table_Name':'Offerings',
+          // "Index_Name":"short-index"
         }
       }
-      // ,
-      // {
-      //   method: 'GET',
-      //   mode: 'cors',
-      //   crossDomain: true,
-      //   headers: {
-      //     'Content-Type' : 'application/json',
-      //     'Access-Control-Allow-Origin' : '*',
-      //     'Table_Name' : 'Offerings',
-      //     'CAF_Perspective' : 'CAF'
-      //   }
-      // }
-    )
-      .then(response => {
+    ).then(response => {
         if (!response.ok) {
           this.setState({ err_api_fetch: true });
           throw response;
         } else {
           this.setState({ err_api_fetch: false });
           console.log("Success: API fetched");
+          console.log(response.body);
           return response.json();
         }
-      })
-      .then(response => {
+      }).then(response => {
         console.log("storing response to state");
         this.setState({ data: response });
-      })
-      .catch(err => {
+      }).catch(err => {
         console.log("Error: API fetch error");
+        console.log(err.message)
         console.log(this.state.err_api_fetch);
       });
   };
@@ -121,8 +111,8 @@ class Offerings extends React.Component {
       return order_of_offering_types.indexOf(o1) - order_of_offering_types.indexOf(o2);
     }
     this.state.data.sort(
-      firstBy("Offering_Type", {cmp: offerCompare, direction: 1})
-      .thenBy((o1, o2) => o1.Offering_Maturity_Level - o2.Offering_Maturity_Level, -1)
+      firstBy("offering_type", {cmp: offerCompare, direction: 1})
+      .thenBy((o1, o2) => o1.offering_maturity_level - o2.offering_maturity_level, -1)
     );
   }
 
@@ -136,7 +126,7 @@ class Offerings extends React.Component {
     let cards = this.state.data.map(offering => {
       return (
         <Card
-          key={`${offering.Offering_Name} + ${offering.Offering_Type}`}
+          key={`${offering.offering_name} + ${offering.offering_type}`}
           {...offering}
         />
       )
@@ -150,23 +140,23 @@ class Offerings extends React.Component {
     // console.log(this.state.checkBoxValue);
 
     return(
-      // this.state.err_api_fetch === true ? 
+      // this.state.err_api_fetch === true ?
       // <div id="root-offerings">
       //   <h1>Error! Please check console for error messages</h1>
       // </div>
       //   :
 
       <div id="root-offerings">
-        
+
         {/* <div style={{color:'#ffffff'}}>
-          Check: 
-          <label> Offering_Maturity_Level = '3' </label>
-          <input type="checkbox" value="Offering_Maturity_Level" onChange={this.appendQueryToURL} />
-          <label> GSP_Vertical = 'AI' </label>
-          <input type="checkbox" value="GSP_Vertical" onChange={this.appendQueryToURL} />
+          Check:
+          <label> offering_maturity_level = '3' </label>
+          <input type="checkbox" value="offering_maturity_level" onChange={this.appendQueryToURL} />
+          <label> gsp_vertical = 'AI' </label>
+          <input type="checkbox" value="gsp_vertical" onChange={this.appendQueryToURL} />
           <input type="submit" name="reset" value="reset" onChange={this.onResetValue} />
         </div> */}
-        
+
         <div className="offerings-card-container">
           {this.appendDataToCard()}
         </div>
