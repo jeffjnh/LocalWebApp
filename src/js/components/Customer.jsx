@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import NavBar from './NavBar';
 import Table from "react-bootstrap/Table";
 import { AWS as AWSCOLORS } from "../constants/Colors";
 import Toggles from "./Toggles";
@@ -28,67 +29,69 @@ class Customer extends Component {
 		let titles = ["name", "idNum"];
 		console.log(titles[0]);
 		return (
-			<div
-				style={{
-					backgroundColor: AWSCOLORS.DARK_SQUID_INK
-				}}
-			>
-				<Toggles />
-				<h2
-					style={{ color: AWSCOLORS.SMILE_ORANGE }}
-					className="text-center"
-				>
-					Completed Offerings
-				</h2>
+			<div>
+				<NavBar></NavBar>
+				
 				<div
-					className="panel"
 					style={{
-						margin: "40px",
-						height: "250px",
-						overflow: "scroll"
+						backgroundColor: AWSCOLORS.DARK_SQUID_INK
 					}}
 				>
-					<Table style={rowStyle} bordered hover>
-						<thead
-							style={{
-								position: "sticky",
-								top: 0
-							}}
-						>
-							<tr
+					<Toggles />
+					<h2
+						style={{ color: AWSCOLORS.SMILE_ORANGE }}
+						className="text-center"
+					>
+						Completed Offerings
+					</h2>
+					<div
+						className="panel"
+						style={{
+							margin: "40px",
+							height: "250px",
+							overflow: "scroll"
+						}}
+					>
+						<Table style={rowStyle} bordered hover>
+							<thead
 								style={{
 									position: "sticky",
 									top: 0
 								}}
 							>
-								{titles.map(title => (
-									<th
-										style={{
-											position: "sticky",
-											top: 0,
-											backgroundColor:
-												AWSCOLORS.DARK_SQUID_INK
-										}}
-										key={title}
-									>
-										{title}
-									</th>
-								))}
-							</tr>
-						</thead>
-						<tbody>
-							{this.data.map(item => (
-								<tr key={item.key}>
+								<tr
+									style={{
+										position: "sticky",
+										top: 0
+									}}
+								>
 									{titles.map(title => (
-										<td key={title}>{item[title]}</td>
+										<th
+											style={{
+												position: "sticky",
+												top: 0,
+												backgroundColor:
+													AWSCOLORS.DARK_SQUID_INK
+											}}
+											key={title}
+										>
+											{title}
+										</th>
 									))}
 								</tr>
-							))}
-						</tbody>
-					</Table>
+							</thead>
+							<tbody>
+								{this.data.map(item => (
+									<tr key={item.key}>
+										{titles.map(title => (
+											<td key={title}>{item[title]}</td>
+										))}
+									</tr>
+								))}
+							</tbody>
+						</Table>
+					</div>
 				</div>
-
-				<div />
 			</div>
 		);
 	}
