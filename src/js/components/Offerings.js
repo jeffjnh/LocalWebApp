@@ -39,34 +39,6 @@ class Offerings extends React.Component {
     // this.setState( {data: OFFERINGSDATA_SHORT} );
   }
 
-  // onResetValue = event => {
-  //   this.setState({ value: '&' });
-  //   console.log(this.state.value);
-  // }
-
-  // onChangeValue = event => {
-  //   this.setState({ value: this.state.value + event.target.value });
-  //   console.log(this.state.value);
-  // }
-
-  appendQueryToURL = (event) => {
-    // &Index_Name=GSP-index&gsp_vertical=AI
-
-    if (event.target.value === "offering_maturity_level") {
-      // this.setState({checkBoxValue : {'offering_maturity_level': event.target.value }});
-      this.setState({checkBoxValue : {'offering_maturity_level': '3' }});
-    }
-
-    if (event.target.value === "gsp_vertical") {
-      // this.setState({checkBoxValue : { 'gsp_vertical': event.target.value }});
-      this.setState({checkBoxValue : { 'gsp_vertical': 'AI' }});
-    }
-
-    this.fetchAPI();
-  }
-
-
-
   fetchAPI = (url) => {
     fetch(url, {
         method: 'GET',
@@ -74,8 +46,8 @@ class Offerings extends React.Component {
         headers: {
           'Access-Control-Allow-Origin':'*',
           'Content-Type':'application/json',
-          'Table_Name':'Offerings',
-          // "Index_Name":"short-index"
+          'table_name':'Offerings',
+          'index_name':'short-index'
         }
       }
     ).then(response => {
@@ -159,15 +131,6 @@ class Offerings extends React.Component {
         <div id="root-offerings">
 
           {/* <FilterBar></FilterBar> */}
-
-          {/* <div style={{color:'#ffffff'}}>
-            Check:
-            <label> offering_maturity_level = '3' </label>
-            <input type="checkbox" value="offering_maturity_level" onChange={this.appendQueryToURL} />
-            <label> gsp_vertical = 'AI' </label>
-            <input type="checkbox" value="gsp_vertical" onChange={this.appendQueryToURL} />
-            <input type="submit" name="reset" value="reset" onChange={this.onResetValue} />
-          </div> */}
 
           <div className="offerings-card-container">
             {this.appendDataToCard()}
