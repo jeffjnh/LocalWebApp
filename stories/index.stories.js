@@ -6,7 +6,6 @@ import { linkTo } from '@storybook/addon-links';
 
 import { Button, Welcome } from '@storybook/react/demo';
 
-import NavBar from '../src/js/components/NavBar';
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -19,6 +18,3 @@ storiesOf('Button', module)
       </span>
     </Button>
   ));
-
-storiesOf('NavBar', module)
-  .add('test 1', () => <NavBar></NavBar>);
