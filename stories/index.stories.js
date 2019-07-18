@@ -6,7 +6,6 @@ import { linkTo } from '@storybook/addon-links';
 
 import { Button, Welcome } from '@storybook/react/demo';
 
-import NavBar from '../src/js/components/NavBar';
 
 import AutoField from '../src/js/components/AutoField';
 
@@ -21,8 +20,5 @@ storiesOf('Button', module)
       </span>
     </Button>
   ));
-
-storiesOf('NavBar', module)
-  .add('test 1', () => <NavBar></NavBar>);
 
 storiesOf('AutoField', module).add('InitialField', () => <AutoField></AutoField>);

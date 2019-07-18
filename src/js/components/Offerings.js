@@ -1,10 +1,9 @@
 import React from "react";
-// import { OFFERINGSDATA } from "../constants/OFFERINGSDATA";
-import { OFFERINGSDATA_SHORT } from "../constants/OFFERINGSDATA_SHORT";
+import NavBar from './NavBar';
+// import { OFFERINGSDATA_SHORT } from "../constants/OFFERINGSDATA_SHORT";
 import { firstBy } from "thenby";
 import Card from "../components/Card"
 
-// const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query/?Table_Name=Offerings";
 const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
 
 // const OFFERINGS_HEADERS = {
@@ -29,7 +28,8 @@ class Offerings extends React.Component {
     this.state = {
       data: [],
       err_api_fetch: null,
-      checkBoxValue: {}
+      checkBoxValue: {},
+      color: 'white',
     };
   }
 
@@ -135,6 +135,12 @@ class Offerings extends React.Component {
     return cards;
   };
 
+  changeColor = () => { 
+    var newColor = this.state.color === 'white' ? 'black' : 'white'; 
+    this.setState({ color: newColor });
+    // filter: blur(8px);
+  }
+
   render() {
 
     // console.log(this.state.checkBoxValue);
@@ -146,21 +152,24 @@ class Offerings extends React.Component {
       // </div>
       //   :
 
-      <div id="root-offerings">
+      // <div id="root-offerings" style={{background:this.state.color}} onClick={this.changeColor}>
+      <div>
+        <NavBar></NavBar>
+        <div id="root-offerings">
+          {/* <div style={{color:'#ffffff'}}>
+            Check:
+            <label> offering_maturity_level = '3' </label>
+            <input type="checkbox" value="offering_maturity_level" onChange={this.appendQueryToURL} />
+            <label> gsp_vertical = 'AI' </label>
+            <input type="checkbox" value="gsp_vertical" onChange={this.appendQueryToURL} />
+            <input type="submit" name="reset" value="reset" onChange={this.onResetValue} />
+          </div> */}
 
-        {/* <div style={{color:'#ffffff'}}>
-          Check:
-          <label> offering_maturity_level = '3' </label>
-          <input type="checkbox" value="offering_maturity_level" onChange={this.appendQueryToURL} />
-          <label> gsp_vertical = 'AI' </label>
-          <input type="checkbox" value="gsp_vertical" onChange={this.appendQueryToURL} />
-          <input type="submit" name="reset" value="reset" onChange={this.onResetValue} />
-        </div> */}
+          <div className="offerings-card-container">
+            {this.appendDataToCard()}
+          </div>
 
-        <div className="offerings-card-container">
-          {this.appendDataToCard()}
         </div>
-
       </div>
     )
   }

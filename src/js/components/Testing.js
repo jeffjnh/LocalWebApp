@@ -1,4 +1,5 @@
 import React from 'react';
+import NavBar from './NavBar';
 // import styled from 'styled-components';
 
 class Testing extends React.Component {
@@ -15,11 +16,7 @@ class Testing extends React.Component {
     render() {
 
         return (
-            <React.Fragment>
-                <div>
-
-                </div>
-            </React.Fragment>
+            <NavBar></NavBar>
         );
 
     }
