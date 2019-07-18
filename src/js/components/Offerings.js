@@ -1,5 +1,6 @@
 import React from "react";
-import NavBar from './NavBar';
+import NavBar from './Global/NavBar';
+// import FilterBar from './FilterBar';
 // import { OFFERINGSDATA_SHORT } from "../constants/OFFERINGSDATA_SHORT";
 import { firstBy } from "thenby";
 import Card from "../components/Card"
@@ -156,6 +157,9 @@ class Offerings extends React.Component {
       <div>
         <NavBar></NavBar>
         <div id="root-offerings">
+
+          {/* <FilterBar></FilterBar> */}
+
           {/* <div style={{color:'#ffffff'}}>
             Check:
             <label> offering_maturity_level = '3' </label>

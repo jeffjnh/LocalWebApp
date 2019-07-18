@@ -1,5 +1,6 @@
 import React from 'react';
-import NavBar from './NavBar';
+import NavBar from './Global/NavBar';
+import FilterBar from './FilterBar/FilterBar';
 // import styled from 'styled-components';
 
 class Testing extends React.Component {
@@ -16,7 +17,10 @@ class Testing extends React.Component {
     render() {
 
         return (
-            <NavBar></NavBar>
+            <React.Fragment>
+                <NavBar></NavBar>
+                <FilterBar></FilterBar>
+            </React.Fragment>
         );
 
     }
