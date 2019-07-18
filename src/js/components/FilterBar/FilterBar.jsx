@@ -71,7 +71,7 @@ class FilterBar extends React.Component {
 
   selectAll = () => this.selectAllCheckboxes(true);
 
-  deselectAll = () => this.selectAllCheckboxes(false);
+  unselectAll = () => this.selectAllCheckboxes(false);
 
   handleCheckboxChange = changeEvent => {
     const { name } = changeEvent.target;
@@ -134,8 +134,8 @@ class FilterBar extends React.Component {
                     <button type="button" className="btn btn-outline-primary mr-2" onClick={this.selectAll}>
                       Select All
                     </button>
-                    <button type="button" className="btn btn-outline-primary mr-2" onClick={this.deselectAll}>
-                      Deselect All
+                    <button type="button" className="btn btn-outline-primary mr-2" onClick={this.unselectAll}>
+                      Unselect All
                     </button>
                     <button type="submit" className="btn btn-primary">
                       Apply
@@ -158,8 +158,8 @@ class FilterBar extends React.Component {
                     <button type="button" className="btn btn-outline-primary mr-2" onClick={this.selectAll}>
                       Select All
                     </button>
-                    <button type="button" className="btn btn-outline-primary mr-2" onClick={this.deselectAll}>
-                      Deselect All
+                    <button type="button" className="btn btn-outline-primary mr-2" onClick={this.unselectAll}>
+                      Unselect All
                     </button>
                     <button type="submit" className="btn btn-primary">
                       Apply
@@ -182,8 +182,8 @@ class FilterBar extends React.Component {
                     <button type="button" className="btn btn-outline-primary mr-2" onClick={this.selectAll}>
                       Select All
                     </button>
-                    <button type="button" className="btn btn-outline-primary mr-2" onClick={this.deselectAll}>
-                      Deselect All
+                    <button type="button" className="btn btn-outline-primary mr-2" onClick={this.unselectAll}>
+                      Unselect All
                     </button>
                     <button type="submit" className="btn btn-primary">
                       Apply

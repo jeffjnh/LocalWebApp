@@ -27,7 +27,7 @@ class Checkbox_Form extends Component {
 
   selectAll = () => this.selectAllCheckboxes(true);
 
-  deselectAll = () => this.selectAllCheckboxes(false);
+  unselectAll = () => this.selectAllCheckboxes(false);
 
   handleCheckboxChange = changeEvent => {
     const { name } = changeEvent.target;
@@ -81,9 +81,9 @@ class Checkbox_Form extends Component {
                 <button
                   type="button"
                   className="btn btn-outline-primary mr-2"
-                  onClick={this.deselectAll}
+                  onClick={this.unselectAll}
                 >
-                  Deselect All
+                  Unselect All
                 </button>
                 <button type="submit" className="btn btn-primary">
                   Apply
