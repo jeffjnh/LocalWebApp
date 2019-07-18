@@ -11,9 +11,13 @@ import Login from "./js/components/Login";
 import Offerings from "./js/components/Offerings";
 import Customer from "./js/components/Customer";
 import Testing from "./js/components/Testing";
-import Checkbox from "./js/components/testing/Testing_Checkbox";
+import Checkbox from "./js/components/FilterBar/Checkbox_Form";
 
 const routing = (
+
+  // TODO: Add loading spinners at root level
+  // https://react-bootstrap.github.io/components/spinners/
+  
 	<Router>
 		{/* <Link to="/"> Home </Link>|
     <Link to="/login"> Login </Link>|

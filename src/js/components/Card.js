@@ -1,5 +1,5 @@
 import React from "react";
-import { AWSCOLORS } from "../constants/AWSColors";
+import { AWS as AWSCOLORS } from "../constants/Colors";
 import styled from "styled-components";
 import ReactTooltip from 'react-tooltip'
 import logo_1_align from "../../assets/img/logo/proserve/1_align_gray.png";

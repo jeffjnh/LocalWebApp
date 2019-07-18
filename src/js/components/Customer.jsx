@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import NavBar from "./Global/NavBar";
 import Table from "react-bootstrap/Table";
-import { AWSCOLORS } from "../constants/AWSColors";
+import { AWS as AWSCOLORS } from "../constants/Colors";
 import Toggles from "./Toggles";
 import "./CustomerStyles.css";
 
@@ -31,12 +32,15 @@ class Customer extends Component {
 		let titles = ["name", "idNum"];
 		console.log(titles[0]);
 		return (
-			<div
-				style={{
-					backgroundColor: AWSCOLORS.DARK_SQUID_INK
-				}}
-			>
-				{/* <div class="container">
+			<div>
+				<NavBar />
+
+				<div
+					style={{
+						backgroundColor: AWSCOLORS.DARK_SQUID_INK
+					}}
+				>
+					{/* <div class="container">
 					<div class="row">
 						<div class="panel panel-default">
 							<div class="panel-heading">
@@ -117,20 +121,98 @@ class Customer extends Component {
 					</div>
 				</div> */}
 
-				<Toggles />
+					<Toggles />
 
-				<div className="container">
-					<div className="row">
-						{/* <div className="panel panel-default"> */}
-						<div className="panel-heading">
-							<h4>Fixed Header Scrolling Table</h4>
+					<div className="container">
+						<div className="row">
+							{/* <div className="panel panel-default"> */}
+							<div className="panel-heading">
+								<h4>Fixed Header Scrolling Table</h4>
+							</div>
+							<table className="table table-fixed table-hover table-striped">
+								<thead>
+									<tr>
+										{titles.map(title => (
+											<th
+												// className="col-xs-2"
+												key={title}
+											>
+												{title}
+											</th>
+										))}
+									</tr>
+								</thead>
+								<tbody className="scroll">
+									{this.data.map(item => (
+										<tr key={item.key}>
+											{titles.map(title => (
+												<td
+													// className="col-xs-2"
+													key={title}
+												>
+													{item[title]}
+												</td>
+											))}
+										</tr>
+									))}
+								</tbody>
+							</table>
+							{/* </div> */}
 						</div>
-						<table className="table table-fixed table-hover table-striped">
-							<thead>
-								<tr>
+					</div>
+
+					<h2
+						style={{ color: AWSCOLORS.SMILE_ORANGE }}
+						className="text-center"
+					>
+						Completed Offerings
+					</h2>
+					<div
+						className="panel-body panel-flex-table"
+						style={
+							{
+								// margin: "40px",
+								// height: "250px",
+								// overflow: "scroll",
+								// borderCollapse: "collapse"
+							}
+						}
+					>
+						<table
+							style={rowStyle}
+							className="table flex-table table-striped table-hover"
+						>
+							<thead
+								style={{
+									position: "sticky",
+									// display: "block",
+									width: "100%",
+									top: 0,
+									borderBottom: "none"
+									// borderCollapse: "separate"
+								}}
+							>
+								<tr
+									style={{
+										position: "sticky",
+										// display: "block",
+										width: "100%",
+										top: 0,
+										// borderCollapse: "collapse",
+										borderBottom: "none"
+									}}
+								>
 									{titles.map(title => (
 										<th
-											// className="col-xs-2"
+											style={{
+												position: "sticky",
+												top: 0,
+												width: "100%",
+												// borderWidth: "0px",
+												// border: "2px solid blue",
+												backgroundColor:
+													AWSCOLORS.DARK_SQUID_INK
+											}}
 											key={title}
 										>
 											{title}
@@ -142,93 +224,24 @@ class Customer extends Component {
 								{this.data.map(item => (
 									<tr key={item.key}>
 										{titles.map(title => (
-											<td
-												// className="col-xs-2"
+											<th
+												style={{
+													position: "sticky",
+													top: 0,
+													backgroundColor:
+														AWSCOLORS.DARK_SQUID_INK
+												}}
 												key={title}
 											>
-												{item[title]}
-											</td>
+												{title}
+											</th>
 										))}
 									</tr>
 								))}
 							</tbody>
 						</table>
-						{/* </div> */}
 					</div>
 				</div>
-
-				<h2
-					style={{ color: AWSCOLORS.SMILE_ORANGE }}
-					className="text-center"
-				>
-					Completed Offerings
-				</h2>
-				<div
-					className="panel-body panel-flex-table"
-					style={
-						{
-							// margin: "40px",
-							// height: "250px",
-							// overflow: "scroll",
-							// borderCollapse: "collapse"
-						}
-					}
-				>
-					<table
-						style={rowStyle}
-						className="table flex-table table-striped table-hover"
-					>
-						<thead
-							style={{
-								position: "sticky",
-								// display: "block",
-								width: "100%",
-								top: 0,
-								borderBottom: "none"
-								// borderCollapse: "separate"
-							}}
-						>
-							<tr
-								style={{
-									position: "sticky",
-									// display: "block",
-									width: "100%",
-									top: 0,
-									// borderCollapse: "collapse",
-									borderBottom: "none"
-								}}
-							>
-								{titles.map(title => (
-									<th
-										style={{
-											position: "sticky",
-											top: 0,
-											width: "100%",
-											// borderWidth: "0px",
-											// border: "2px solid blue",
-											backgroundColor:
-												AWSCOLORS.DARK_SQUID_INK
-										}}
-										key={title}
-									>
-										{title}
-									</th>
-								))}
-							</tr>
-						</thead>
-						<tbody className="scroll">
-							{this.data.map(item => (
-								<tr key={item.key}>
-									{titles.map(title => (
-										<td key={title}>{item[title]}</td>
-									))}
-								</tr>
-							))}
-						</tbody>
-					</table>
-				</div>
-
-				<div />
 			</div>
 		);
 	}

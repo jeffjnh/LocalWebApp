@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5f0c6b02d5ad973f884f950ce98982d3",
+    "revision": "b6f7935b6b70502b8fce446a4e9499b5",
     "url": "/index.html"
   },
   {
-    "revision": "e4c89840249f1ecb57f3",
+    "revision": "82594ff809c51ee89dbe",
     "url": "/static/css/2.510409cd.chunk.css"
   },
   {
-    "revision": "c2a654bb5ffef936277d",
-    "url": "/static/css/main.f50c4059.chunk.css"
+    "revision": "8dc5b0ae5236cf0a9057",
+    "url": "/static/css/main.fbf51274.chunk.css"
   },
   {
-    "revision": "e4c89840249f1ecb57f3",
-    "url": "/static/js/2.8acb9acc.chunk.js"
+    "revision": "82594ff809c51ee89dbe",
+    "url": "/static/js/2.6fe80c5f.chunk.js"
   },
   {
-    "revision": "c2a654bb5ffef936277d",
-    "url": "/static/js/main.639f8a98.chunk.js"
+    "revision": "8dc5b0ae5236cf0a9057",
+    "url": "/static/js/main.81624120.chunk.js"
   },
   {
     "revision": "42ac5946195a7306e2a5",
@@ -38,6 +38,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "8b15caaaa20f5b1c8be4c963532f2daf",
     "url": "/static/media/4_optimize_gray.8b15caaa.png"
+  },
+  {
+    "revision": "e5962f4eb9d9b8cf5d22bc71f773a5f8",
+    "url": "/static/media/AWS_logo_RGB.e5962f4e.svg"
   },
   {
     "revision": "0ef4572ed94a0db96ad1d569fb087158",

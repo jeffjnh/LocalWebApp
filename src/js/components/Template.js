@@ -1,4 +1,5 @@
 import React from 'react';
+import NavBar from './Global/NavBar';
 // import styled from 'styled-components';
 
 class Template extends React.Component {
@@ -16,9 +17,7 @@ class Template extends React.Component {
 
         return (
             <React.Fragment>
-                <div>
-
-                </div>
+                <NavBar></NavBar>
             </React.Fragment>
         );
 
