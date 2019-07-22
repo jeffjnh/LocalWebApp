@@ -1,27 +1,31 @@
 import React, { Component } from "react";
 import Checkbox from "./Checkbox";
 
-const OPTIONS = ["Align", "Launch", "Scale", "Optimize"];
-
 class Checkbox_Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      checkboxes: this.props.filters,
+
+      // If we want to do this as arrays:
       // Array<String>.reduce transforms array["1", "2", "3"] into object{"1": false, "2": false, "3": false}
-      checkboxes: OPTIONS.reduce(
-        // key = options, value = isChecked
-        (options, isChecked) => ({
-          ...options,
-          [isChecked]: false
-        }),
-        {}
-      )
+      // checkboxes: this.OPTIONS.reduce(
+      //   // key = options, value = isChecked
+      //   (options, isChecked) => ({
+      //     ...options,
+      //     [isChecked]: false
+      //   }),
+      //   {}
+      // )
     }
   }
 
   // func createCheckboxes = (pass in optional param to JSX) = > (JSX element[] to be returned)
   // Iterates over OPTIONS array and calls this.creatCheckbox function for each item in that array
-  createCheckboxes = () => (OPTIONS.map(this.createCheckbox));
+  // If we want to do this as arrays:
+  // createCheckboxes = () => (OPTIONS.map(this.createCheckbox));
+  createCheckboxes = () => (Object.keys(this.state.checkboxes).map(this.createCheckbox));
+
 
   // func createCheckbox = (single option from OPTIONS.map) => (JSX element[] to be returned)
   // Returns an array of OPTIONS.length instances of Checkbox components
