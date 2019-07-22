@@ -3,6 +3,7 @@ import NavBar from './NavBar';
 import Table from "react-bootstrap/Table";
 import { AWS as AWSCOLORS } from "../constants/Colors";
 import Toggles from "./Toggles";
+import AutoField from "./AutoField";
 
 const rowStyle = {
 	color: AWSCOLORS.SMILE_ORANGE,
@@ -31,7 +32,13 @@ class Customer extends Component {
 		return (
 			<div>
 				<NavBar></NavBar>
-				
+
+				<AutoField
+					style={{
+						padding:'20px'
+					}}
+				/>
+
 				<div
 					style={{
 						backgroundColor: AWSCOLORS.DARK_SQUID_INK
