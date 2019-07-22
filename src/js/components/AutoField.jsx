@@ -1,7 +1,7 @@
 import React from 'react';
 import AutoSuggest from 'react-autosuggest';
 import autofield from '../../scss/ui/autofield.scss';
-
+import IsolatedScroll from 'react-isolated-scroll';
 
 const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
 
@@ -67,6 +67,22 @@ async function genData() {
       });
 }
 
+function renderSuggestionsContainer({ containerProps, children }) {
+    const { ref, ...restContainerProps } = containerProps;
+    const callRef = isolatedScroll => {
+        if (isolatedScroll !== null) {
+            ref(isolatedScroll.component);
+        }
+    };
+
+    return (
+        <IsolatedScroll ref={callRef} {...restContainerProps}>
+            {children}
+        </IsolatedScroll>
+    );
+}
+
+
 
 class AutoField extends React.Component{
 
@@ -76,9 +92,7 @@ class AutoField extends React.Component{
             value:'',
             suggestions:[],
         };
-
         genData();
-
     }
 
     onChangeHandler = (event, {newValue}) => {
@@ -127,6 +141,8 @@ class AutoField extends React.Component{
         });
     };
 
+
+
     render(){
 
         const {value, suggestions} = this.state;
@@ -135,7 +151,9 @@ class AutoField extends React.Component{
             placeholder:"Company Name",
             value,
             onChange:this.onChangeHandler
+
         }
+
 
         return(
             <AutoSuggest
@@ -144,6 +162,7 @@ class AutoField extends React.Component{
                 onSuggestionsClearRequested={this.onSuggestionsClearRequested}
                 getSuggestionValue={getSuggestionValue}
                 onSuggestionSelected={this.onSuggestionSelected}
+                // renderSuggestionsContainer={renderSuggestionsContainer}
                 renderSuggestion={renderSuggestion}
                 inputProps={inputProps}
             />

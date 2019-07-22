@@ -30,8 +30,13 @@ class Customer extends Component {
 			<div>
 				<NavBar></NavBar>
 
-				<AutoField
-				/>
+				<div style={{
+					color:AWSCOLORS.DARK_SQUID_INK
+				}}>
+					<AutoField/>
+				</div>
+
+
 				<div
 					style={{
 						backgroundColor: AWSCOLORS.DARK_SQUID_INK

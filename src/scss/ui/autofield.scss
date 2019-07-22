@@ -44,6 +44,8 @@
 .react-autosuggest__suggestions-list {
   margin: 0;
   padding: 0;
+  max-height: 400px;
+  overflow-y: auto;
   list-style-type: none;
 }
 
@@ -55,5 +57,10 @@
 .react-autosuggest__suggestion--highlighted {
   background-color: #ddd;
 }
+
+
+
+
+
 
 
