@@ -1,9 +1,9 @@
 import React from "react";
 import styled from 'styled-components';
-// import { AWS as AWSCOLORS } from "../constants/Colors";
-import { RETAIL } from "../constants/Colors";
-import logo from '../../assets/img/logo/AWS_logo_RGB.svg';
-// import logo from '../../assets/img/logo/AWS_logo_RGB_REV.svg';
+// import { AWS as AWSCOLORS } from "../../constants/Colors";
+import { RETAIL } from "../../constants/Colors";
+import logo from '../../../assets/img/logo/AWS_logo_RGB.svg';
+// import logo from '../../../assets/img/logo/AWS_logo_RGB_REV.svg';
 // import Button from "react-bootstrap/Button";
 // import Form from "react-bootstrap/Form";
 // import FormControl from "react-bootstrap/FormControl";
