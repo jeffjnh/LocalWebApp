@@ -67,21 +67,6 @@ async function genData() {
       });
 }
 
-function renderSuggestionsContainer({ containerProps, children }) {
-    const { ref, ...restContainerProps } = containerProps;
-    const callRef = isolatedScroll => {
-        if (isolatedScroll !== null) {
-            ref(isolatedScroll.component);
-        }
-    };
-
-    return (
-        <IsolatedScroll ref={callRef} {...restContainerProps}>
-            {children}
-        </IsolatedScroll>
-    );
-}
-
 
 
 class AutoField extends React.Component{
@@ -135,6 +120,7 @@ class AutoField extends React.Component{
         }).then(response =>{
             // customerNames = response.map( obj => obj.customer_name);
             console.log(response);
+            this.props.stateSetter(response);
         }).catch(err => {
             console.log("Error: API fetch error");
             console.log(err.message)

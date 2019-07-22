@@ -9,7 +9,9 @@ import "react-table/react-table.css";
 import Card from "./Card";
 
 class Customer extends Component {
-	state = {};
+	state = {
+		customer_sales: []
+	};
 	data = [
 		{ key: 3, name: "Miffy", idNum: 3 },
 		{ key: 2, name: "Edmund", idNum: 2 },
@@ -24,6 +26,14 @@ class Customer extends Component {
 		{ key: 11, name: "Edmund", idNum: 2 },
 		{ key: 12, name: "Miffy", idNum: 3 }
 	];
+
+	customerStateUpdate = response_object => {
+		console.log("IT WORKS");
+		this.setState({
+			customer_sales: response_object
+		});
+	};
+
 	render() {
 		let titles = ["name", "idNum"];
 		const container_style = {
@@ -35,9 +45,14 @@ class Customer extends Component {
 		console.log(titles[0]);
 		return (
 			<div>
+				{/*Navigation Bar*/}
 				<NavBar />
 
-				<AutoField />
+				{/*AutoField Search bar for Customer Data*/}
+				<div style={{ color: AWSCOLORS.DARK_SQUID_INK }}>
+					<AutoField stateSetter={this.customerStateUpdate} />
+				</div>
+
 				<div
 					style={{
 						backgroundColor: AWSCOLORS.DARK_SQUID_INK
@@ -82,32 +97,45 @@ class Customer extends Component {
 						}}
 					>
 						<ReactTable
-							data={this.data}
+							data={this.state.customer_sales}
 							columns={[
 								{
-									Header: "Name",
+									Header: "Customer Information",
 									columns: [
 										{
-											Header: "First Name",
-											accessor: "key"
+											Header: "Product Name",
+											accessor: "product_name"
 										},
 										{
-											Header: "Last Name",
-											accessor: "name"
+											Header: "Owner Name",
+											accessor: "owner_name"
+										},
+										{
+											Header: "Practice",
+											accessor:
+												"practice_lookup-practice_name"
 										}
 									]
 								},
 								{
-									Header: "Info",
+									Header: "General Information",
 									columns: [
 										{
-											Header: "Age",
-											accessor: "idNum"
+											Header: "Date",
+											accessor: "close_date"
+										},
+										{
+											Header: "Stage",
+											accessor: "stage"
+										},
+										{
+											Header: "Total Opportunity",
+											accessor: "total_opportunity"
 										}
 									]
 								}
 							]}
-							defaultPageSize={10}
+							defaultPageSize={5}
 							style={{
 								height: "300px" // This will force the table body to overflow and scroll, since there is not enough room
 							}}
