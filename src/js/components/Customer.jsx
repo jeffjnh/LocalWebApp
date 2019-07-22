@@ -37,12 +37,7 @@ class Customer extends Component {
 			<div>
 				<NavBar />
 
-				<div style={{
-					color:AWSCOLORS.DARK_SQUID_INK
-				}}>
-					<AutoField/>
-				</div>
-				
+				<AutoField />
 				<div
 					style={{
 						backgroundColor: AWSCOLORS.DARK_SQUID_INK
@@ -53,7 +48,8 @@ class Customer extends Component {
 						style={{
 							display: "flex",
 							height: "400px",
-							margin: "40px"
+							margin: "40px",
+							minWidth: "900px"
 						}}
 					>
 						<div style={container_style}>
