@@ -6,6 +6,7 @@ import AutoField from "./AutoField";
 import "./CustomerStyles.css";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import Card from "./Card";
 
 class Customer extends Component {
 	state = {};
@@ -25,31 +26,50 @@ class Customer extends Component {
 	];
 	render() {
 		let titles = ["name", "idNum"];
+		const container_style = {
+			border: "3px solid white",
+			borderLeft: "3px solid red",
+			borderRight: "3px solid green",
+			width: "25%"
+		};
 		console.log(titles[0]);
 		return (
 			<div>
-				<NavBar></NavBar>
+				<NavBar />
 
 				<div style={{
 					color:AWSCOLORS.DARK_SQUID_INK
 				}}>
 					<AutoField/>
 				</div>
-
-
+				
 				<div
 					style={{
 						backgroundColor: AWSCOLORS.DARK_SQUID_INK
 					}}
 				>
-					<Toggles />
-					<vl
+					{/* <Toggles /> */}
+					<div
 						style={{
-							color: "white",
-							backgroundColor: "white",
-							height: 5
+							display: "flex",
+							height: "400px",
+							margin: "40px"
 						}}
-					/>
+					>
+						<div style={container_style}>
+							<div id="root-offerings" style={{ margin: "10px" }}>
+								<div
+									className="offerings-card-container"
+									style={{ margin: "20px" }}
+								>
+									<Card />
+								</div>
+							</div>
+						</div>
+						<div style={container_style} />
+						<div style={container_style} />
+						<div style={container_style} />
+					</div>
 					<h2
 						style={{ color: AWSCOLORS.SMILE_ORANGE }}
 						className="text-center"
@@ -60,8 +80,9 @@ class Customer extends Component {
 					<div
 						style={{
 							margin: "40px",
-							color: AWSCOLORS.SMILE_ORANGE,
-							backgroundColor: AWSCOLORS.SQUID_INK
+							color: AWSCOLORS.BLACK,
+							backgroundColor: AWSCOLORS.WHITE,
+							borderRadius: "10px"
 						}}
 					>
 						<ReactTable
