@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-// import { AWS as AWSCOLORS } from "../../constants/Colors";
+import { AWS as AWSCOLORS } from "../../constants/Colors";
 import { RETAIL } from "../../constants/Colors";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
@@ -11,6 +11,7 @@ import Checkbox_Form from "./Checkbox_Form";
 const FilteringBar = styled.div`
   display: inline-block;
   position: relative;
+  background-color: ${AWSCOLORS.SMILE_ORANGE};
 `;
 const FilteringBarText = styled.div`
   position: absolute;

@@ -22,27 +22,27 @@ class Testing extends React.Component {
   printAll = () => {
     const allData = [];
 
-    for (let[key, value] of Object.entries(this.state.filters["OFFERING_TYPE"])) {
+    for (let [key, value] of Object.entries(this.state.filters["OFFERING_TYPE"])) {
       allData.push(
-          <div>
-            {key} : {value.toString()}
-          </div>
+        <div>
+          {key} : {value.toString()}
+        </div>
       )
     }
 
-    for (let[key, value] of Object.entries(this.state.filters["MATURITY_LEVEL"])) {
+    for (let [key, value] of Object.entries(this.state.filters["MATURITY_LEVEL"])) {
       allData.push(
-          <div>
-            {key} : {value.toString()}
-          </div>
+        <div>
+          {key} : {value.toString()}
+        </div>
       )
     }
 
-    for (let[key, value] of Object.entries(this.state.filters["GSP_INDUSTRYVERTICALS"])) {
+    for (let [key, value] of Object.entries(this.state.filters["GSP_INDUSTRYVERTICALS"])) {
       allData.push(
-          <div>
-            {key} : {value.toString()}
-          </div>
+        <div>
+          {key} : {value.toString()}
+        </div>
       )
     }
 
@@ -54,7 +54,7 @@ class Testing extends React.Component {
       <React.Fragment>
         <NavBar></NavBar>
         <FilterBar filters={this.state.filters}></FilterBar>
-        { this.printAll() }
+        {/* {this.printAll()} */}
       </React.Fragment>
     );
   }
