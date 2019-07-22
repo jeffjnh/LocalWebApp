@@ -5,13 +5,8 @@ import autofield from '../../scss/ui/autofield.scss';
 
 const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
 
-var customerNames = [];
+let customerNames = [];
 let mappedFlag = false;
-
-
-
-
-
 
 const getSuggestions = value => {
     if( !mappedFlag ){
@@ -39,12 +34,12 @@ const getSuggestions = value => {
 const getSuggestionValue = suggestion => suggestion.name;
 
 const renderSuggestion = suggestion => (
-    <div
-
-    >
+    <div>
         {suggestion.name}
     </div>
 );
+
+
 
 async function genData() {
     fetch(url, {
@@ -75,8 +70,8 @@ async function genData() {
 
 class AutoField extends React.Component{
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             value:'',
             suggestions:[],
@@ -104,6 +99,34 @@ class AutoField extends React.Component{
         });
     };
 
+    onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
+        fetch(url, {
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                    'Access-Control-Allow-Origin':'*',
+                    'Content-Type':'application/json',
+                    'table_name':'OfferingSales',
+                    // "index_name":"customer_name-index"
+                    'customer_name': suggestionValue,
+                }
+            }
+        ).then(response => {
+            if (!response.ok) {
+                throw response;
+            } else {
+                console.log("Success: API fetched");
+                return response.json();
+            }
+        }).then(response =>{
+            // customerNames = response.map( obj => obj.customer_name);
+            console.log(response);
+        }).catch(err => {
+            console.log("Error: API fetch error");
+            console.log(err.message)
+        });
+    };
+
     render(){
 
         const {value, suggestions} = this.state;
@@ -116,11 +139,11 @@ class AutoField extends React.Component{
 
         return(
             <AutoSuggest
-                // theme={autofield}
                 suggestions={suggestions}
                 onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
                 onSuggestionsClearRequested={this.onSuggestionsClearRequested}
                 getSuggestionValue={getSuggestionValue}
+                onSuggestionSelected={this.onSuggestionSelected}
                 renderSuggestion={renderSuggestion}
                 inputProps={inputProps}
             />
