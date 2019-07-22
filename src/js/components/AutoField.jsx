@@ -1,5 +1,6 @@
 import React from 'react';
 import AutoSuggest from 'react-autosuggest';
+import autofield from '../../scss/ui/autofield.scss';
 
 
 const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";

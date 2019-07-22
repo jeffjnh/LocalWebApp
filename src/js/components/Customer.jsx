@@ -31,9 +31,6 @@ class Customer extends Component {
 				<NavBar></NavBar>
 
 				<AutoField
-					style={{
-						padding:'20px'
-					}}
 				/>
 				<div
 					style={{
