@@ -1,0 +1,23 @@
+.table-fixed thead {
+	width: 97%;
+}
+.table-fixed tbody {
+	height: 230px;
+	overflow-y: auto;
+	width: 100%;
+}
+.table-fixed th,
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed td {
+	display: block;
+	width: 100%;
+}
+.table-fixed tr {
+	display: block;
+}
+.table-fixed tbody td,
+.table-fixed thead > tr > th {
+	float: left;
+	border-bottom-width: 0;
+}

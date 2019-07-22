@@ -8,7 +8,8 @@ class Toggle extends Component {
 		return (
 			// <div className="col-md-3 text-center">
 			<Button
-				style={{ margin: "1rem", color: "black" }}
+				className="btn btn-lg m-4"
+				// style={{ color: "black" }}
 				variant={this.getButtonClass()}
 				onClick={() => {
 					this.props.onPress(this.props.button);
@@ -21,9 +22,9 @@ class Toggle extends Component {
 	}
 	getButtonClass = () => {
 		if (this.props.button.pressed) {
-			return "success";
+			return "warning";
 		} else {
-			return "secondary";
+			return "outline-warning";
 		}
 	};
 }

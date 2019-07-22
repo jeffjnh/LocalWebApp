@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import Checkbox from "./Checkbox";
 
-const OPTIONS = ["One", "Two", "Three"];
+const OPTIONS = ["Align", "Launch", "Scale", "Optimize"];
 
-class Testing_Checkbox extends Component {
+class Checkbox_Form extends Component {
   state = {
     checkboxes: OPTIONS.reduce(
-      (options, option) => ({
+      (options, isChecked) => ({
         ...options,
-        [option]: false
+        [isChecked]: false
       }),
       {}
     )
@@ -16,7 +16,6 @@ class Testing_Checkbox extends Component {
 
   selectAllCheckboxes = isSelected => {
     Object.keys(this.state.checkboxes).forEach(checkbox => {
-      // BONUS: Can you explain why we pass updater function to setState instead of an object?
       this.setState(prevState => ({
         checkboxes: {
           ...prevState.checkboxes,
@@ -28,7 +27,7 @@ class Testing_Checkbox extends Component {
 
   selectAll = () => this.selectAllCheckboxes(true);
 
-  deselectAll = () => this.selectAllCheckboxes(false);
+  unselectAll = () => this.selectAllCheckboxes(false);
 
   handleCheckboxChange = changeEvent => {
     const { name } = changeEvent.target;
@@ -43,11 +42,12 @@ class Testing_Checkbox extends Component {
 
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
+    console.log("Selected: ");
 
     Object.keys(this.state.checkboxes)
       .filter(checkbox => this.state.checkboxes[checkbox])
       .forEach(checkbox => {
-        console.log(checkbox, "is selected.");
+        console.log("[v] " + checkbox);
       });
   };
 
@@ -81,12 +81,12 @@ class Testing_Checkbox extends Component {
                 <button
                   type="button"
                   className="btn btn-outline-primary mr-2"
-                  onClick={this.deselectAll}
+                  onClick={this.unselectAll}
                 >
-                  Deselect All
+                  Unselect All
                 </button>
                 <button type="submit" className="btn btn-primary">
-                  Save
+                  Apply
                 </button>
               </div>
             </form>
@@ -97,4 +97,4 @@ class Testing_Checkbox extends Component {
   }
 }
 
-export default Testing_Checkbox;
+export default Checkbox_Form;

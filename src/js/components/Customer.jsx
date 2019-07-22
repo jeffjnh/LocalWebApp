@@ -1,21 +1,18 @@
 import React, { Component } from "react";
-import NavBar from './NavBar';
-import Table from "react-bootstrap/Table";
+import NavBar from "./Global/NavBar";
 import { AWS as AWSCOLORS } from "../constants/Colors";
 import Toggles from "./Toggles";
 import AutoField from "./AutoField";
-
-const rowStyle = {
-	color: AWSCOLORS.SMILE_ORANGE,
-	backgroundColor: AWSCOLORS.DARK_SQUID_INK
-};
+import "./CustomerStyles.css";
+import ReactTable from "react-table";
+import "react-table/react-table.css";
 
 class Customer extends Component {
 	state = {};
 	data = [
-		{ key: 1, name: "Jeff", idNum: 1 },
-		{ key: 2, name: "Edmund", idNum: 2 },
 		{ key: 3, name: "Miffy", idNum: 3 },
+		{ key: 2, name: "Edmund", idNum: 2 },
+		{ key: 1, name: "Jeff", idNum: 1 },
 		{ key: 4, name: "Jeff", idNum: 1 },
 		{ key: 5, name: "Edmund", idNum: 2 },
 		{ key: 6, name: "Miffy", idNum: 3 },
@@ -38,65 +35,66 @@ class Customer extends Component {
 						padding:'20px'
 					}}
 				/>
-
 				<div
 					style={{
 						backgroundColor: AWSCOLORS.DARK_SQUID_INK
 					}}
 				>
 					<Toggles />
+					<vl
+						style={{
+							color: "white",
+							backgroundColor: "white",
+							height: 5
+						}}
+					/>
 					<h2
 						style={{ color: AWSCOLORS.SMILE_ORANGE }}
 						className="text-center"
 					>
 						Completed Offerings
 					</h2>
+
 					<div
-						className="panel"
 						style={{
 							margin: "40px",
-							height: "250px",
-							overflow: "scroll"
+							color: AWSCOLORS.SMILE_ORANGE,
+							backgroundColor: AWSCOLORS.SQUID_INK
 						}}
 					>
-						<Table style={rowStyle} bordered hover>
-							<thead
-								style={{
-									position: "sticky",
-									top: 0
-								}}
-							>
-								<tr
-									style={{
-										position: "sticky",
-										top: 0
-									}}
-								>
-									{titles.map(title => (
-										<th
-											style={{
-												position: "sticky",
-												top: 0,
-												backgroundColor:
-													AWSCOLORS.DARK_SQUID_INK
-											}}
-											key={title}
-										>
-											{title}
-										</th>
-									))}
-								</tr>
-							</thead>
-							<tbody>
-								{this.data.map(item => (
-									<tr key={item.key}>
-										{titles.map(title => (
-											<td key={title}>{item[title]}</td>
-										))}
-									</tr>
-								))}
-							</tbody>
-						</Table>
+						<ReactTable
+							data={this.data}
+							columns={[
+								{
+									Header: "Name",
+									columns: [
+										{
+											Header: "First Name",
+											accessor: "key"
+										},
+										{
+											Header: "Last Name",
+											accessor: "name"
+										}
+									]
+								},
+								{
+									Header: "Info",
+									columns: [
+										{
+											Header: "Age",
+											accessor: "idNum"
+										}
+									]
+								}
+							]}
+							defaultPageSize={10}
+							style={{
+								height: "300px" // This will force the table body to overflow and scroll, since there is not enough room
+							}}
+							className="-striped -highlight"
+						/>
+						<br />
 					</div>
 				</div>
 			</div>
