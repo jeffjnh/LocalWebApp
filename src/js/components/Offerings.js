@@ -47,7 +47,7 @@ class Offerings extends React.Component {
     this.state = {
       data: [],
       err_api_fetch: null,
-      showFilterBar: false,
+      open: false,
       filters: {
         OFFERING_TYPE,
         MATURITY_LEVEL,
@@ -170,13 +170,13 @@ class Offerings extends React.Component {
         <div id="root-offerings">
           <Button
             variant="info"
-            onClick={() => this.setState({open: !this.state.open})}
+            onClick={() => this.setState({showFilterBar: !this.state.showFilterBar})}
             aria-controls="example-collapse-text"
-            aria-expanded={this.state.open}
+            aria-expanded={this.state.showFilterBar}
           >
             <ButtonText>Filter</ButtonText>
           </Button>
-          <Collapse in={this.state.open}>
+          <Collapse in={this.state.showFilterBar}>
             <div id="example-collapse-text">
               {/* {this.printAllFilteringStates()} */}
               <FilterBar filters={this.state.filters}></FilterBar>
