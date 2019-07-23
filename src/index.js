@@ -11,7 +11,7 @@ import Login from "./js/components/Login";
 import Offerings from "./js/components/Offerings";
 import Customer from "./js/components/Customer";
 import Testing from "./js/components/Testing";
-import Checkbox from "./js/components/FilterBar/Checkbox_Form";
+import CardLarge from "./js/components/Global/CardLarge";
 
 const routing = (
 
@@ -28,7 +28,7 @@ const routing = (
       <Route path="/offerings" component={Offerings} />
       <Route path="/testing" component={Testing} />
       <Route path="/customer" component={Customer} />
-      <Route path="/checkbox" component={Checkbox} />
+      <Route path="/card" component={CardLarge} />
       <Route component={Notfound} />
     </Switch>
   </Router>

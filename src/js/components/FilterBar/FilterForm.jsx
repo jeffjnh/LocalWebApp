@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Checkbox from "./Checkbox";
 
-class Checkbox_Form extends Component {
+class FilterForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -96,17 +96,14 @@ class Checkbox_Form extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row mt-5">
-          <div className="col-sm-12">
-
+      <div className="container_filter_form">
+        <div className="row">
+          <div className="col-sm-12 m-2">
             {/* onFormSubmit */}
             <form onSubmit={this.handleFormSubmit}>
-
               {/* JSX element[] */}
               {this.createCheckboxes()}
-
-              <div className="form-group mt-2">
+              <div className="form-group mt-3 mb-1">
                 <button
                   type="button"
                   className="btn btn-outline-primary mr-2"
@@ -134,4 +131,4 @@ class Checkbox_Form extends Component {
   }
 }
 
-export default Checkbox_Form;
+export default FilterForm;

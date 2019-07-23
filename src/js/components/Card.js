@@ -1,6 +1,6 @@
 import React from "react";
-import { AWS as AWSCOLORS } from "../constants/Colors";
 import styled from "styled-components";
+import { AWS as AWSCOLORS } from "../constants/Colors";
 import ReactTooltip from 'react-tooltip'
 import logo_1_align from "../../assets/img/logo/proserve/1_align_gray.png";
 import logo_2_launch from "../../assets/img/logo/proserve/2_launch_gray.png";
@@ -106,11 +106,6 @@ const Tags = styled.div`
 
 class Card extends React.Component {
 
-  changeColor = () => {
-    var newColor = this.state.color === 'white' ? 'black' : 'white';
-    this.setState({ color: newColor });
-  }
-
   render() {
 
     let logo = logo_sales_kit;
@@ -151,7 +146,7 @@ class Card extends React.Component {
     return (
       <CardStyle style={{ background: 'white' }}>
 
-        <div className="card-wrapper" onClick={this.enlargeCard} >
+        <div className="card-wrapper">
           <img alt="icon-background" className="card-img" src={logo} style={{ opacity }} />
           <Tags>
             <div className="type">
