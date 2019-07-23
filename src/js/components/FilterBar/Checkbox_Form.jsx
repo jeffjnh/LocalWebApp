@@ -96,17 +96,14 @@ class Checkbox_Form extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row mt-5">
+      <div className="container_filter_form pl-2">
+        <div className="row mt-2">
           <div className="col-sm-12">
-
             {/* onFormSubmit */}
             <form onSubmit={this.handleFormSubmit}>
-
               {/* JSX element[] */}
               {this.createCheckboxes()}
-
-              <div className="form-group mt-2">
+              <div className="form-group m-2">
                 <button
                   type="button"
                   className="btn btn-outline-primary mr-2"

@@ -55,7 +55,7 @@ class FilterBar extends React.Component {
           Filters:
         </FilteringBarText>
 
-        <Accordion defaultActiveKey="0" style={{ width: "400px" }}>
+        <Accordion defaultActiveKey="0" style={{ width: "370px" }}>
 
           <Card>
             <Accordion.Toggle as={Card.Header} eventKey="accd-0">
