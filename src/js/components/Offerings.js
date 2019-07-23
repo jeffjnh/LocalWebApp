@@ -157,12 +157,6 @@ class Offerings extends React.Component {
     return allData;
   }
 
-  changeColor = () => { 
-    var newColor = this.state.color === 'white' ? 'black' : 'white'; 
-    this.setState({ color: newColor });
-    // filter: blur(8px);
-  }
-
   render() {
     return(
       // this.state.err_api_fetch === true ?
@@ -173,7 +167,6 @@ class Offerings extends React.Component {
 
       <div>
         <NavBar></NavBar>
-        {/* <div id="root-offerings" style={{background:this.state.color}} onClick={this.changeColor}> */}
         <div id="root-offerings">
           <Button
             variant="info"
