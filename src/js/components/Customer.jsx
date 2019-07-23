@@ -7,7 +7,7 @@ import AutoField from "./AutoField";
 import "./CustomerStyles.css";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import Card from "./Card";
+import CardSmall from "./Global/Card/CardSmall";
 
 class Customer extends Component {
 
@@ -79,7 +79,7 @@ class Customer extends Component {
 									className="offerings-card-container"
 									style={{ margin: "20px" }}
 								>
-									<Card />
+									<CardSmall />
 								</div>
 							</div>
 						</div>
