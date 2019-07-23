@@ -13,4 +13,6 @@
 #awsconfiguration.json
 #general
 node_modules/
+sam-app/
+.idea/
 **/.DS_Store

@@ -3,21 +3,24 @@ import NavBar from "./Global/NavBar";
 // import Table from "react-bootstrap/Table";
 import { AWS as AWSCOLORS } from "../constants/Colors";
 import Toggles from "./Toggles";
+import AutoField from "./AutoField";
 import "./CustomerStyles.css";
-
-const rowStyle = {
-	color: AWSCOLORS.SMILE_ORANGE,
-	backgroundColor: AWSCOLORS.SQUID_INK,
-	border: "none",
-	borderCollapse: "separate"
-};
+import ReactTable from "react-table";
+import "react-table/react-table.css";
+import Card from "./Card";
 
 class Customer extends Component {
-	state = {};
+
+	state = {
+		customer_sales: [],
+		customer_name: ""
+	};
+
+
 	data = [
-		{ key: 1, name: "Jeff", idNum: 1 },
-		{ key: 2, name: "Edmund", idNum: 2 },
 		{ key: 3, name: "Miffy", idNum: 3 },
+		{ key: 2, name: "Edmund", idNum: 2 },
+		{ key: 1, name: "Jeff", idNum: 1 },
 		{ key: 4, name: "Jeff", idNum: 1 },
 		{ key: 5, name: "Edmund", idNum: 2 },
 		{ key: 6, name: "Miffy", idNum: 3 },
@@ -28,137 +31,136 @@ class Customer extends Component {
 		{ key: 11, name: "Edmund", idNum: 2 },
 		{ key: 12, name: "Miffy", idNum: 3 }
 	];
+
+	customerStateUpdate = (response_object, name) => {
+		this.setState({
+			customer_sales: response_object,
+			customer_name: name
+		});
+	};
+
 	render() {
 		let titles = ["name", "idNum"];
+		const container_style = {
+			border: "3px solid white",
+			borderLeft: "3px solid red",
+			borderRight: "3px solid green",
+			width: "25%"
+		};
 		console.log(titles[0]);
 		return (
 			<div>
+				{/*Navigation Bar*/}
 				<NavBar />
 
+				{/*AutoField Search bar for Customer Data*/}
+				<div style={{ color: AWSCOLORS.DARK_SQUID_INK }}>
+					<AutoField stateSetter={this.customerStateUpdate} />
+				</div>
+
+				
 				<div
 					style={{
-						backgroundColor: AWSCOLORS.DARK_SQUID_INK
+						// backgroundColor: AWSCOLORS.DARK_SQUID_INK
 					}}
 				>
-					{/* <div class="container">
-					<div class="row">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4>Fixed Header Scrolling Table</h4>
+					{/* <Toggles /> */}
+					<div
+						style={{
+							display: "flex",
+							height: "400px",
+							margin: "40px",
+							minWidth: "900px"
+						}}
+					>
+						<div style={container_style}>
+							<div id="root-offerings" style={{ margin: "10px" }}>
+								<div
+									className="offerings-card-container"
+									style={{ margin: "20px" }}
+								>
+									<Card />
+								</div>
 							</div>
-							<table class="table table-fixed">
-								<thead>
-									<tr>
-										<th class="col-xs-2">#</th>
-										<th class="col-xs-8">Name</th>
-										<th class="col-xs-2">Points</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td class="col-xs-2">1</td>
-										<td class="col-xs-8">Mike Adams</td>
-										<td class="col-xs-2">23</td>
-									</tr>
-									<tr>
-										<td class="col-xs-2">2</td>
-										<td class="col-xs-8">Holly Galivan</td>
-										<td class="col-xs-2">44</td>
-									</tr>
-									<tr>
-										<td class="col-xs-2">3</td>
-										<td class="col-xs-8">Mary Shea</td>
-										<td class="col-xs-2">86</td>
-									</tr>
-									<tr>
-										<td class="col-xs-2">4</td>
-										<td class="col-xs-8">Jim Adams</td>
-										<td>23</td>
-									</tr>
-									<tr>
-										<td class="col-xs-2">5</td>
-										<td class="col-xs-8">Henry Galivan</td>
-										<td class="col-xs-2">44</td>
-									</tr>
-									<tr>
-										<td class="col-xs-2">6</td>
-										<td class="col-xs-8">Bob Shea</td>
-										<td class="col-xs-2">26</td>
-									</tr>
-									<tr>
-										<td class="col-xs-2">7</td>
-										<td class="col-xs-8">Andy Parks</td>
-										<td class="col-xs-2">56</td>
-									</tr>
-									<tr>
-										<td class="col-xs-2">8</td>
-										<td class="col-xs-8">Bob Skelly</td>
-										<td class="col-xs-2">96</td>
-									</tr>
-									<tr>
-										<td class="col-xs-2">9</td>
-										<td class="col-xs-8">William Defoe</td>
-										<td class="col-xs-2">13</td>
-									</tr>
-									<tr>
-										<td class="col-xs-2">10</td>
-										<td class="col-xs-8">Will Tripp</td>
-										<td class="col-xs-2">16</td>
-									</tr>
-									<tr>
-										<td class="col-xs-2">11</td>
-										<td class="col-xs-8">Bill Champion</td>
-										<td class="col-xs-2">44</td>
-									</tr>
-									<tr>
-										<td class="col-xs-2">12</td>
-										<td class="col-xs-8">Lastly Jane</td>
-										<td class="col-xs-2">6</td>
-									</tr>
-								</tbody>
-							</table>
 						</div>
+						<div style={container_style} />
+						<div style={container_style} />
+						<div style={container_style} />
 					</div>
-				</div> */}
 
-					<Toggles />
+					<h2
+						style={{ color: AWSCOLORS.SMILE_ORANGE }}
+						className="text-center"
+					>
+						Recommended Offerings
+					</h2>
 
-					<div className="container">
-						<div className="row">
-							{/* <div className="panel panel-default"> */}
-							<div className="panel-heading">
-								<h4>Fixed Header Scrolling Table</h4>
-							</div>
-							<table className="table table-fixed table-hover table-striped">
-								<thead>
-									<tr>
-										{titles.map(title => (
-											<th
-												// className="col-xs-2"
-												key={title}
-											>
-												{title}
-											</th>
-										))}
-									</tr>
-								</thead>
-								<tbody className="scroll">
-									{this.data.map(item => (
-										<tr key={item.key}>
-											{titles.map(title => (
-												<td
-													// className="col-xs-2"
-													key={title}
-												>
-													{item[title]}
-												</td>
-											))}
-										</tr>
-									))}
-								</tbody>
-							</table>
-							{/* </div> */}
-						</div>
+					<div
+						style={{
+							margin: "40px",
+							color: AWSCOLORS.BLACK,
+							backgroundColor: AWSCOLORS.WHITE,
+							borderRadius: "10px"
+						}}
+					>
+						<ReactTable
+							data={this.state.addDataHere} // add data
+							columns={[
+								{
+									Header: "Offering Information",
+									columns: [
+										{
+											Header: "Offering Name",
+											accessor: "offering_name"
+										},
+										{
+											Header: "Offering Type",
+											accessor: "offering_type"
+										},
+										{
+											Header: "CAF Perspective",
+											accessor: "caf_perspective"
+										},
+										{
+											Header: "GSP Vertical",
+											accessor: "gsp_vertical"
+										},
+										{
+											Header: "Maturity Level",
+											accessor: "offering_maturity_level"
+										},
+										{
+											Header: "Description",
+											accessor: "offering_description"
+										},
+										{
+											Header: "Owner",
+											accessor: "owner"
+										},
+										{
+											Header: "Wiki",
+											accessor: "wiki_link"
+										},
+										{
+											Header: "Delivery Kit",
+											accessor: "delivery_kit"
+										},
+										{
+											Header: "Sales Kit",
+											accessor: "sales_kit"
+										}
+									]
+								}
+							]}
+							defaultPageSize={5}
+							style={{
+								height: "300px" // This will force the table body to overflow and scroll, since there is not enough room
+							}}
+							className="-striped -highlight"
+						/>
+						<br />
+						<br/>
+
 					</div>
 
 					<h2
@@ -167,79 +169,61 @@ class Customer extends Component {
 					>
 						Completed Offerings
 					</h2>
+
 					<div
-						className="panel-body panel-flex-table"
-						style={
-							{
-								// margin: "40px",
-								// height: "250px",
-								// overflow: "scroll",
-								// borderCollapse: "collapse"
-							}
-						}
+						style={{
+							margin: "40px",
+							color: AWSCOLORS.BLACK,
+							backgroundColor: AWSCOLORS.WHITE,
+							borderRadius: "10px"
+						}}
 					>
-						<table
-							style={rowStyle}
-							className="table flex-table table-striped table-hover"
-						>
-							<thead
-								style={{
-									position: "sticky",
-									// display: "block",
-									width: "100%",
-									top: 0,
-									borderBottom: "none"
-									// borderCollapse: "separate"
-								}}
-							>
-								<tr
-									style={{
-										position: "sticky",
-										// display: "block",
-										width: "100%",
-										top: 0,
-										// borderCollapse: "collapse",
-										borderBottom: "none"
-									}}
-								>
-									{titles.map(title => (
-										<th
-											style={{
-												position: "sticky",
-												top: 0,
-												width: "100%",
-												// borderWidth: "0px",
-												// border: "2px solid blue",
-												backgroundColor:
-													AWSCOLORS.DARK_SQUID_INK
-											}}
-											key={title}
-										>
-											{title}
-										</th>
-									))}
-								</tr>
-							</thead>
-							<tbody className="scroll">
-								{this.data.map(item => (
-									<tr key={item.key}>
-										{titles.map(title => (
-											<th
-												style={{
-													position: "sticky",
-													top: 0,
-													backgroundColor:
-														AWSCOLORS.DARK_SQUID_INK
-												}}
-												key={title}
-											>
-												{title}
-											</th>
-										))}
-									</tr>
-								))}
-							</tbody>
-						</table>
+						<ReactTable
+							data={this.state.customer_sales}
+							columns={[
+								{
+									Header: "Customer Information",
+									columns: [
+										{
+											Header: "Product Name",
+											accessor: "product_name"
+										},
+										{
+											Header: "Owner Name",
+											accessor: "owner_name"
+										},
+										{
+											Header: "Practice",
+											accessor:
+												"practice_lookup-practice_name"
+										}
+									]
+								},
+								{
+									Header: "General Information",
+									columns: [
+										{
+											Header: "Date",
+											accessor: "close_date"
+										},
+										{
+											Header: "Stage",
+											accessor: "stage"
+										},
+										{
+											Header: "Total Opportunity",
+											accessor: "total_opportunity"
+										}
+									]
+								}
+							]}
+							defaultPageSize={5}
+							style={{
+								height: "300px" // This will force the table body to overflow and scroll, since there is not enough room
+							}}
+							className="-striped -highlight"
+						/>
+						<br />
 					</div>
 				</div>
 			</div>
