@@ -120,7 +120,7 @@ class AutoField extends React.Component{
         }).then(response =>{
             // customerNames = response.map( obj => obj.customer_name);
             console.log(response);
-            this.props.stateSetter(response);
+            this.props.stateSetter(response, suggestionValue);
         }).catch(err => {
             console.log("Error: API fetch error");
             console.log(err.message)

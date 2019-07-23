@@ -9,9 +9,13 @@ import "react-table/react-table.css";
 import Card from "./Card";
 
 class Customer extends Component {
+
 	state = {
-		customer_sales: []
+		customer_sales: [],
+		customer_name: ""
 	};
+
+
 	data = [
 		{ key: 3, name: "Miffy", idNum: 3 },
 		{ key: 2, name: "Edmund", idNum: 2 },
@@ -27,10 +31,10 @@ class Customer extends Component {
 		{ key: 12, name: "Miffy", idNum: 3 }
 	];
 
-	customerStateUpdate = response_object => {
-		console.log("IT WORKS");
+	customerStateUpdate = (response_object, name) => {
 		this.setState({
-			customer_sales: response_object
+			customer_sales: response_object,
+			customer_name: name
 		});
 	};
 
@@ -53,9 +57,10 @@ class Customer extends Component {
 					<AutoField stateSetter={this.customerStateUpdate} />
 				</div>
 
+				
 				<div
 					style={{
-						backgroundColor: AWSCOLORS.DARK_SQUID_INK
+						// backgroundColor: AWSCOLORS.DARK_SQUID_INK
 					}}
 				>
 					{/* <Toggles /> */}
@@ -81,6 +86,82 @@ class Customer extends Component {
 						<div style={container_style} />
 						<div style={container_style} />
 					</div>
+
+					<h2
+						style={{ color: AWSCOLORS.SMILE_ORANGE }}
+						className="text-center"
+					>
+						Recommended Offerings
+					</h2>
+
+					<div
+						style={{
+							margin: "40px",
+							color: AWSCOLORS.BLACK,
+							backgroundColor: AWSCOLORS.WHITE,
+							borderRadius: "10px"
+						}}
+					>
+						<ReactTable
+							data={this.state.addDataHere} // add data
+							columns={[
+								{
+									Header: "Offering Information",
+									columns: [
+										{
+											Header: "Offering Name",
+											accessor: "offering_name"
+										},
+										{
+											Header: "Offering Type",
+											accessor: "offering_type"
+										},
+										{
+											Header: "CAF Perspective",
+											accessor: "caf_perspective"
+										},
+										{
+											Header: "GSP Vertical",
+											accessor: "gsp_vertical"
+										},
+										{
+											Header: "Maturity Level",
+											accessor: "offering_maturity_level"
+										},
+										{
+											Header: "Description",
+											accessor: "offering_description"
+										},
+										{
+											Header: "Owner",
+											accessor: "owner"
+										},
+										{
+											Header: "Wiki",
+											accessor: "wiki_link"
+										},
+										{
+											Header: "Delivery Kit",
+											accessor: "delivery_kit"
+										},
+										{
+											Header: "Sales Kit",
+											accessor: "sales_kit"
+										}
+									]
+								}
+							]}
+							defaultPageSize={5}
+							style={{
+								height: "300px" // This will force the table body to overflow and scroll, since there is not enough room
+							}}
+							className="-striped -highlight"
+						/>
+						<br />
+						<br/>
+
+					</div>
+
 					<h2
 						style={{ color: AWSCOLORS.SMILE_ORANGE }}
 						className="text-center"
