@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import NavBar from "./Global/NavBar";
+// import Table from "react-bootstrap/Table";
 import { AWS as AWSCOLORS } from "../constants/Colors";
 import Toggles from "./Toggles";
 import AutoField from "./AutoField";

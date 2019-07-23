@@ -1,11 +1,29 @@
 import React from "react";
+import styled from 'styled-components';
 import NavBar from './Global/NavBar';
-// import FilterBar from './FilterBar';
+import FilterBar from './FilterBar/FilterBar';
+import Button from "react-bootstrap/Button";
+import Collapse from "react-bootstrap/Collapse";
+
 // import { OFFERINGSDATA_SHORT } from "../constants/OFFERINGSDATA_SHORT";
+import { OFFERING_TYPE } from './../constants/FILTERS';
+import { MATURITY_LEVEL } from './../constants/FILTERS';
+import { GSP_INDUSTRYVERTICALS } from './../constants/FILTERS';
 import { firstBy } from "thenby";
-import Card from "../components/Card"
+import Card from "./Card"
 
 const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
+
+const ButtonText = styled.div`
+  display: inline-block;
+  font-size: inherit;
+  
+  &::after {
+    margin-left: 6px;
+    font-size: 10px;
+    content: "\u25BC";
+  }
+`;
 
 // const OFFERINGS_HEADERS = {
     //   Index_Name = 'GSP-index',
@@ -29,7 +47,12 @@ class Offerings extends React.Component {
     this.state = {
       data: [],
       err_api_fetch: null,
-      checkBoxValue: {},
+      showFilterBar: false,
+      filters: {
+        OFFERING_TYPE,
+        MATURITY_LEVEL,
+        GSP_INDUSTRYVERTICALS,
+      },
       color: 'white',
     };
   }
@@ -39,34 +62,6 @@ class Offerings extends React.Component {
     // this.setState( {data: OFFERINGSDATA_SHORT} );
   }
 
-  // onResetValue = event => {
-  //   this.setState({ value: '&' });
-  //   console.log(this.state.value);
-  // }
-
-  // onChangeValue = event => {
-  //   this.setState({ value: this.state.value + event.target.value });
-  //   console.log(this.state.value);
-  // }
-
-  appendQueryToURL = (event) => {
-    // &Index_Name=GSP-index&gsp_vertical=AI
-
-    if (event.target.value === "offering_maturity_level") {
-      // this.setState({checkBoxValue : {'offering_maturity_level': event.target.value }});
-      this.setState({checkBoxValue : {'offering_maturity_level': '3' }});
-    }
-
-    if (event.target.value === "gsp_vertical") {
-      // this.setState({checkBoxValue : { 'gsp_vertical': event.target.value }});
-      this.setState({checkBoxValue : { 'gsp_vertical': 'AI' }});
-    }
-
-    this.fetchAPI();
-  }
-
-
-
   fetchAPI = (url) => {
     fetch(url, {
         method: 'GET',
@@ -74,8 +69,8 @@ class Offerings extends React.Component {
         headers: {
           'Access-Control-Allow-Origin':'*',
           'Content-Type':'application/json',
-          'Table_Name':'Offerings',
-          // "Index_Name":"short-index"
+          'table_name':'Offerings',
+          'index_name':'short-index'
         }
       }
     ).then(response => {
@@ -136,16 +131,33 @@ class Offerings extends React.Component {
     return cards;
   };
 
-  changeColor = () => { 
-    var newColor = this.state.color === 'white' ? 'black' : 'white'; 
-    this.setState({ color: newColor });
-    // filter: blur(8px);
+  printAllFilteringStates = () => {
+    const allData = [];
+    for (let [key, value] of Object.entries(this.state.filters["OFFERING_TYPE"])) {
+      allData.push(
+        <div>
+          {key} : {value.toString()}
+        </div>
+      )
+    }
+    for (let [key, value] of Object.entries(this.state.filters["MATURITY_LEVEL"])) {
+      allData.push(
+        <div>
+          {key} : {value.toString()}
+        </div>
+      )
+    }
+    for (let [key, value] of Object.entries(this.state.filters["GSP_INDUSTRYVERTICALS"])) {
+      allData.push(
+        <div>
+          {key} : {value.toString()}
+        </div>
+      )
+    }
+    return allData;
   }
 
   render() {
-
-    // console.log(this.state.checkBoxValue);
-
     return(
       // this.state.err_api_fetch === true ?
       // <div id="root-offerings">
@@ -153,26 +165,27 @@ class Offerings extends React.Component {
       // </div>
       //   :
 
-      // <div id="root-offerings" style={{background:this.state.color}} onClick={this.changeColor}>
       <div>
         <NavBar></NavBar>
         <div id="root-offerings">
-
-          {/* <FilterBar></FilterBar> */}
-
-          {/* <div style={{color:'#ffffff'}}>
-            Check:
-            <label> offering_maturity_level = '3' </label>
-            <input type="checkbox" value="offering_maturity_level" onChange={this.appendQueryToURL} />
-            <label> gsp_vertical = 'AI' </label>
-            <input type="checkbox" value="gsp_vertical" onChange={this.appendQueryToURL} />
-            <input type="submit" name="reset" value="reset" onChange={this.onResetValue} />
-          </div> */}
+          <Button
+            variant="info"
+            onClick={() => this.setState({open: !this.state.open})}
+            aria-controls="example-collapse-text"
+            aria-expanded={this.state.open}
+          >
+            <ButtonText>Filter</ButtonText>
+          </Button>
+          <Collapse in={this.state.open}>
+            <div id="example-collapse-text">
+              {/* {this.printAllFilteringStates()} */}
+              <FilterBar filters={this.state.filters}></FilterBar>
+            </div>
+          </Collapse>
 
           <div className="offerings-card-container">
             {this.appendDataToCard()}
           </div>
-
         </div>
       </div>
     )
