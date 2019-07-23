@@ -1,11 +1,29 @@
 import React from "react";
+import styled from 'styled-components';
 import NavBar from './Global/NavBar';
-// import FilterBar from './FilterBar';
+import FilterBar from './FilterBar/FilterBar';
+import Button from "react-bootstrap/Button";
+import Collapse from "react-bootstrap/Collapse";
+
 // import { OFFERINGSDATA_SHORT } from "../constants/OFFERINGSDATA_SHORT";
+import { OFFERING_TYPE } from './../constants/FILTERS';
+import { MATURITY_LEVEL } from './../constants/FILTERS';
+import { GSP_INDUSTRYVERTICALS } from './../constants/FILTERS';
 import { firstBy } from "thenby";
-import Card from "../components/Card"
+import Card from "./Card"
 
 const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
+
+const ButtonText = styled.div`
+  display: inline-block;
+  font-size: inherit;
+  
+  &::after {
+    margin-left: 6px;
+    font-size: 10px;
+    content: "\u25BC";
+  }
+`;
 
 // const OFFERINGS_HEADERS = {
     //   Index_Name = 'GSP-index',
@@ -29,7 +47,12 @@ class Offerings extends React.Component {
     this.state = {
       data: [],
       err_api_fetch: null,
-      checkBoxValue: {},
+      showFilterBar: false,
+      filters: {
+        OFFERING_TYPE,
+        MATURITY_LEVEL,
+        GSP_INDUSTRYVERTICALS,
+      },
       color: 'white',
     };
   }
@@ -108,6 +131,32 @@ class Offerings extends React.Component {
     return cards;
   };
 
+  printAllFilteringStates = () => {
+    const allData = [];
+    for (let [key, value] of Object.entries(this.state.filters["OFFERING_TYPE"])) {
+      allData.push(
+        <div>
+          {key} : {value.toString()}
+        </div>
+      )
+    }
+    for (let [key, value] of Object.entries(this.state.filters["MATURITY_LEVEL"])) {
+      allData.push(
+        <div>
+          {key} : {value.toString()}
+        </div>
+      )
+    }
+    for (let [key, value] of Object.entries(this.state.filters["GSP_INDUSTRYVERTICALS"])) {
+      allData.push(
+        <div>
+          {key} : {value.toString()}
+        </div>
+      )
+    }
+    return allData;
+  }
+
   changeColor = () => { 
     var newColor = this.state.color === 'white' ? 'black' : 'white'; 
     this.setState({ color: newColor });
@@ -115,9 +164,6 @@ class Offerings extends React.Component {
   }
 
   render() {
-
-    // console.log(this.state.checkBoxValue);
-
     return(
       // this.state.err_api_fetch === true ?
       // <div id="root-offerings">
@@ -125,17 +171,28 @@ class Offerings extends React.Component {
       // </div>
       //   :
 
-      // <div id="root-offerings" style={{background:this.state.color}} onClick={this.changeColor}>
       <div>
         <NavBar></NavBar>
+        {/* <div id="root-offerings" style={{background:this.state.color}} onClick={this.changeColor}> */}
         <div id="root-offerings">
-
-          {/* <FilterBar></FilterBar> */}
+          <Button
+            variant="info"
+            onClick={() => this.setState({open: !this.state.open})}
+            aria-controls="example-collapse-text"
+            aria-expanded={this.state.open}
+          >
+            <ButtonText>Filter</ButtonText>
+          </Button>
+          <Collapse in={this.state.open}>
+            <div id="example-collapse-text">
+              {/* {this.printAllFilteringStates()} */}
+              <FilterBar filters={this.state.filters}></FilterBar>
+            </div>
+          </Collapse>
 
           <div className="offerings-card-container">
             {this.appendDataToCard()}
           </div>
-
         </div>
       </div>
     )
