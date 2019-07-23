@@ -10,7 +10,7 @@ import { OFFERING_TYPE } from './../constants/FILTERS';
 import { MATURITY_LEVEL } from './../constants/FILTERS';
 import { GSP_INDUSTRYVERTICALS } from './../constants/FILTERS';
 import { firstBy } from "thenby";
-import Card from "./Card"
+import CardSmall from "./Global/Card/CardSmall"
 
 const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
 
@@ -121,7 +121,7 @@ class Offerings extends React.Component {
 
     let cards = this.state.data.map(offering => {
       return (
-        <Card
+        <CardSmall
           key={`${offering.offering_name} + ${offering.offering_type}`}
           {...offering}
         />

@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { AWS as AWSCOLORS } from "../constants/Colors";
-import ReactTooltip from 'react-tooltip'
-import logo_1_align from "../../assets/img/logo/proserve/1_align_gray.png";
-import logo_2_launch from "../../assets/img/logo/proserve/2_launch_gray.png";
-import logo_3_scale from "../../assets/img/logo/proserve/3_scale_gray.png";
-import logo_4_optimize from "../../assets/img/logo/proserve/4_optimize_gray.png";
-import logo_delivery_kit from "../../assets/img/logo/proserve/delivery_kit.svg";
-import logo_sales_kit from "../../assets/img/logo/proserve/sales_kit.svg";
+import { AWS as AWSCOLORS } from "../../../constants/Colors";
+import ReactTooltip from 'react-tooltip';
+import Tags from "./Tags";
+import logo_1_align from "../../../../assets/img/logo/proserve/1_align_gray.png";
+import logo_2_launch from "../../../../assets/img/logo/proserve/2_launch_gray.png";
+import logo_3_scale from "../../../../assets/img/logo/proserve/3_scale_gray.png";
+import logo_4_optimize from "../../../../assets/img/logo/proserve/4_optimize_gray.png";
+import logo_delivery_kit from "../../../../assets/img/logo/proserve/delivery_kit.svg";
+import logo_sales_kit from "../../../../assets/img/logo/proserve/sales_kit.svg";
 
 const CardStyle = styled.div`
   margin: 1rem;
@@ -83,27 +84,6 @@ const CardStyle = styled.div`
   
 `;
 
-const Tags = styled.div`
-  margin-top: 0;
-  margin-right: 2px;
-  display: flex;
-  padding: 10px;
-  box-sizing: border-box;
-
-  .type {
-    flex: 0 0 90%;
-  }
-  .maturity {
-    flex: 1;
-    text-align: right;
-  }
-  span {
-    padding: 2px 10px;
-    border: 1px solid black;
-    border-radius: 25px;
-  }
-`;
-
 class Card extends React.Component {
 
   render() {
@@ -148,7 +128,7 @@ class Card extends React.Component {
 
         <div className="card-wrapper">
           <img alt="icon-background" className="card-img" src={logo} style={{ opacity }} />
-          <Tags>
+          {/* <Tags>
             <div className="type">
               <div data-tip='Offering Type' data-for='offering_type'><span>{this.props.offering_type}</span></div>
               <ReactTooltip id='offering_type' place='top' type='dark' effect='solid' />
@@ -157,7 +137,8 @@ class Card extends React.Component {
               <div data-tip='Maturity Level' data-for='offering_maturity_level'><span>{this.props.offering_maturity_level}</span></div>
               <ReactTooltip id='offering_maturity_level' place='top' type='dark' effect='solid' />
             </div>
-          </Tags>
+          </Tags> */}
+          <Tags offering_type={this.props.offering_type} offering_maturity_level={this.props.offering_maturity_level} />
           <div className="text">
             <div className="offering-name">{this.props.offering_name}</div>
             <div className="practice-group">

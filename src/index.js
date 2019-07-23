@@ -11,7 +11,7 @@ import Login from "./js/components/Login";
 import Offerings from "./js/components/Offerings";
 import Customer from "./js/components/Customer";
 import Testing from "./js/components/Testing";
-import CardLarge from "./js/components/Global/CardLarge";
+import CardLarge from "./js/components/Global/Card/CardLarge";
 
 const routing = (
 

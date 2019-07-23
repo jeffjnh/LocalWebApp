@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
-import Card from "./Card";
+import CardSmall from "./Global/Card/CardSmall";
 
 class Toggle extends Component {
 	state = {};
@@ -59,30 +59,30 @@ class Toggles extends Component {
 						className="offerings-card-container"
 						// style={{ margin: "20px" }}
 					>
-						{this.state.buttons[0].pressed ? <Card /> : null}
-						{this.state.buttons[1].pressed ? <Card /> : null}
-						{this.state.buttons[2].pressed ? <Card /> : null}
-						{this.state.buttons[3].pressed ? <Card /> : null}
-						{this.state.buttons[0].pressed ? <Card /> : null}
-						{this.state.buttons[1].pressed ? <Card /> : null}
-						{this.state.buttons[2].pressed ? <Card /> : null}
-						{this.state.buttons[3].pressed ? <Card /> : null}
-						{this.state.buttons[0].pressed ? <Card /> : null}
-						{this.state.buttons[1].pressed ? <Card /> : null}
-						{this.state.buttons[2].pressed ? <Card /> : null}
-						{this.state.buttons[3].pressed ? <Card /> : null}
-						{this.state.buttons[0].pressed ? <Card /> : null}
-						{this.state.buttons[1].pressed ? <Card /> : null}
-						{this.state.buttons[2].pressed ? <Card /> : null}
-						{this.state.buttons[3].pressed ? <Card /> : null}
-						{this.state.buttons[0].pressed ? <Card /> : null}
-						{this.state.buttons[1].pressed ? <Card /> : null}
-						{this.state.buttons[2].pressed ? <Card /> : null}
-						{this.state.buttons[3].pressed ? <Card /> : null}
-						{this.state.buttons[0].pressed ? <Card /> : null}
-						{this.state.buttons[1].pressed ? <Card /> : null}
-						{this.state.buttons[2].pressed ? <Card /> : null}
-						{this.state.buttons[3].pressed ? <Card /> : null}
+						{this.state.buttons[0].pressed ? <CardSmall /> : null}
+						{this.state.buttons[1].pressed ? <CardSmall /> : null}
+						{this.state.buttons[2].pressed ? <CardSmall /> : null}
+						{this.state.buttons[3].pressed ? <CardSmall /> : null}
+						{this.state.buttons[0].pressed ? <CardSmall /> : null}
+						{this.state.buttons[1].pressed ? <CardSmall /> : null}
+						{this.state.buttons[2].pressed ? <CardSmall /> : null}
+						{this.state.buttons[3].pressed ? <CardSmall /> : null}
+						{this.state.buttons[0].pressed ? <CardSmall /> : null}
+						{this.state.buttons[1].pressed ? <CardSmall /> : null}
+						{this.state.buttons[2].pressed ? <CardSmall /> : null}
+						{this.state.buttons[3].pressed ? <CardSmall /> : null}
+						{this.state.buttons[0].pressed ? <CardSmall /> : null}
+						{this.state.buttons[1].pressed ? <CardSmall /> : null}
+						{this.state.buttons[2].pressed ? <CardSmall /> : null}
+						{this.state.buttons[3].pressed ? <CardSmall /> : null}
+						{this.state.buttons[0].pressed ? <CardSmall /> : null}
+						{this.state.buttons[1].pressed ? <CardSmall /> : null}
+						{this.state.buttons[2].pressed ? <CardSmall /> : null}
+						{this.state.buttons[3].pressed ? <CardSmall /> : null}
+						{this.state.buttons[0].pressed ? <CardSmall /> : null}
+						{this.state.buttons[1].pressed ? <CardSmall /> : null}
+						{this.state.buttons[2].pressed ? <CardSmall /> : null}
+						{this.state.buttons[3].pressed ? <CardSmall /> : null}
 					</div>
 				</div>
 			</div>
