@@ -47,7 +47,7 @@ class Offerings extends React.Component {
     this.state = {
       data: [],
       err_api_fetch: null,
-      open: false,
+      showFilterBar: false,
       filters: {
         OFFERING_TYPE,
         MATURITY_LEVEL,
