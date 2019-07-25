@@ -119,7 +119,11 @@ class Offerings extends React.Component {
   appendDataToCard = () => {
     this.sortData();
 
-    let cards = this.state.data.map(offering => {
+    let cards = this.state.data.filter( offering => !(
+       this.state.filters.GSP_INDUSTRYVERTICALS[offering.gsp_vertical] &&
+       this.state.filters.MATURITY_LEVEL[offering.offering_maturity_level] &&
+       this.state.filters.OFFERING_TYPE[offering.offering_type]
+    )).map(offering => {
       return (
         <CardSmall
           key={`${offering.offering_name} + ${offering.offering_type}`}

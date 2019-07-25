@@ -9,35 +9,85 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 import CardSmall from "./Global/Card/CardSmall";
 
+
+const match_predict_url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/customer/match";
+
+
 class Customer extends Component {
 
 	state = {
+		customer_name: "",
 		customer_sales: [],
-		customer_name: ""
+		matches:[],
+		suggestions:[],
+		visible: new Set()
 	};
-
-
-	data = [
-		{ key: 3, name: "Miffy", idNum: 3 },
-		{ key: 2, name: "Edmund", idNum: 2 },
-		{ key: 1, name: "Jeff", idNum: 1 },
-		{ key: 4, name: "Jeff", idNum: 1 },
-		{ key: 5, name: "Edmund", idNum: 2 },
-		{ key: 6, name: "Miffy", idNum: 3 },
-		{ key: 7, name: "Jeff", idNum: 1 },
-		{ key: 8, name: "Edmund", idNum: 2 },
-		{ key: 9, name: "Miffy", idNum: 3 },
-		{ key: 10, name: "Jeff", idNum: 1 },
-		{ key: 11, name: "Edmund", idNum: 2 },
-		{ key: 12, name: "Miffy", idNum: 3 }
-	];
 
 	customerStateUpdate = (response_object, name) => {
 		this.setState({
 			customer_sales: response_object,
 			customer_name: name
 		});
+
+		this.findPredictions(response_object);
+
 	};
+
+
+
+	findPredictions = (sales) => {
+		fetch(match_predict_url, {
+				method: 'GET',
+				mode: 'cors',
+				headers: {
+					'Access-Control-Allow-Origin':'*',
+					'access-control-allow-headers':'*',
+					'Content-Type':'application/json',
+					'sales': JSON.stringify(sales),
+				},
+			}
+		).then(response => {
+			if (!response.ok) {
+				this.setState({ err_api_fetch: true });
+				throw response;
+			} else {
+				this.setState({ err_api_fetch: false });
+				console.log("Success: API fetched");
+				return response.json();
+			}
+		}).then(response => {
+			console.log("storing response to state");
+			console.log(response);
+			this.setState({
+				matches: response['matches'],
+				suggestions: response['suggestions'].flat()
+			});
+		}).catch(err => {
+			console.log("Error: API fetch error");
+			console.log(err.message);
+			console.log(this.state.err_api_fetch);
+		});
+
+	};
+
+
+
+	onRowClick=(state, rowInfo, column, instance) => {
+		return {
+			onClick: (e, handleOriginal) => {
+				// console.log(rowInfo + " " + column + " " + state);
+				console.log("This row clicked:", rowInfo);
+				console.log("This State clicked:", state);
+				console.log("This column clicked:", column);
+				if(handleOriginal){
+					handleOriginal()
+				}
+			}
+			// style
+
+		}
+	};
+
 
 	render() {
 		let titles = ["name", "idNum"];
@@ -65,28 +115,28 @@ class Customer extends Component {
 					}}
 				>
 					{/* <Toggles /> */}
-					<div
-						style={{
-							display: "flex",
-							height: "400px",
-							margin: "40px",
-							minWidth: "900px"
-						}}
-					>
-						<div style={container_style}>
-							<div id="root-offerings" style={{ margin: "10px" }}>
-								<div
-									className="offerings-card-container"
-									style={{ margin: "20px" }}
-								>
-									<CardSmall />
-								</div>
-							</div>
-						</div>
-						<div style={container_style} />
-						<div style={container_style} />
-						<div style={container_style} />
-					</div>
+					{/*<div*/}
+					{/*	style={{*/}
+					{/*		display: "flex",*/}
+					{/*		height: "400px",*/}
+					{/*		margin: "40px",*/}
+					{/*		minWidth: "900px"*/}
+					{/*	}}*/}
+					{/*>*/}
+					{/*	<div style={container_style}>*/}
+					{/*		<div id="root-offerings" style={{ margin: "10px" }}>*/}
+					{/*			<div*/}
+					{/*				className="offerings-card-container"*/}
+					{/*				style={{ margin: "20px" }}*/}
+					{/*			>*/}
+					{/*				<CardSmall />*/}
+					{/*			</div>*/}
+					{/*		</div>*/}
+					{/*	</div>*/}
+					{/*	<div style={container_style} />*/}
+					{/*	<div style={container_style} />*/}
+					{/*	<div style={container_style} />*/}
+					{/*</div>*/}
 
 					<h2
 						style={{ color: AWSCOLORS.SMILE_ORANGE }}
@@ -104,7 +154,7 @@ class Customer extends Component {
 						}}
 					>
 						<ReactTable
-							data={this.state.addDataHere} // add data
+							data={this.state.suggestions} // add data
 							columns={[
 								{
 									Header: "Offering Information",
@@ -154,7 +204,7 @@ class Customer extends Component {
 							]}
 							defaultPageSize={5}
 							style={{
-								height: "300px" // This will force the table body to overflow and scroll, since there is not enough room
+								height: "800px" // This will force the table body to overflow and scroll, since there is not enough room
 							}}
 							className="-striped -highlight"
 						/>
@@ -180,6 +230,7 @@ class Customer extends Component {
 					>
 						<ReactTable
 							data={this.state.customer_sales}
+							getTdProps={this.onRowClick}
 							columns={[
 								{
 									Header: "Customer Information",

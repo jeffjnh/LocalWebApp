@@ -1,12 +1,13 @@
 import React from 'react';
 import AutoSuggest from 'react-autosuggest';
 import autofield from '../../scss/ui/autofield.scss';
-import IsolatedScroll from 'react-isolated-scroll';
 
 const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
 
 let customerNames = [];
 let mappedFlag = false;
+
+
 
 const getSuggestions = value => {
     if( !mappedFlag ){
@@ -17,6 +18,7 @@ const getSuggestions = value => {
         customerNames = tempData;
         mappedFlag = true;
     }
+
 
     return(
         [...new Set(
@@ -47,7 +49,7 @@ async function genData() {
         mode: 'cors',
         headers: {
           'Access-Control-Allow-Origin':'*',
-          'Content-Type':'application/json',
+            'Content-Type':'application/json',
           'table_name':'OfferingSales',
           "index_name":"customer_name-index"
         }
