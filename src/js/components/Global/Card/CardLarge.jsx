@@ -150,7 +150,7 @@ class CardLarge extends React.Component {
     if (data != undefined || data != null) {
       // console.log("data is not null: " + data);
       return(
-        <a href={data}>&nbsp;{data}</a>
+        <a href={data} target={"_blank"}>&nbsp;{data}</a>
       );
     } else {
       // console.log("data IS null: " + data);
@@ -227,7 +227,7 @@ class CardLarge extends React.Component {
 
           <div>
             Owner:&nbsp;
-            <a href={`https://phonetool.amazon.com/search?query=${data.owner}&filter_type=All+fields`}>
+            <a href={`https://phonetool.amazon.com/search?query=${data.owner}&filter_type=All+fields`} target={"_blank"}>
               {data.owner}
             </a>
           </div>
