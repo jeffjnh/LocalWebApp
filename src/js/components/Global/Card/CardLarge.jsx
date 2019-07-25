@@ -27,7 +27,8 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
 
-    color: AWSCOLORS.DARK_SQUID_INK
+    borderRadius: "12px",
+    color: AWSCOLORS.DARK_SQUID_INK,
   }
 };
 
@@ -130,6 +131,7 @@ class CardLarge extends React.Component {
           <Tags
             offering_type={data.offering_type}
             offering_maturity_level={data.offering_maturity_level}
+            place={"bottom"}
           />
 
           <h1 ref={subtitle => (this.subtitle = subtitle)}>
