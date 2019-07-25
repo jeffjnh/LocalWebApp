@@ -23,11 +23,11 @@ class Tags extends React.Component {
       <TAGS>
         <div data-tip="Offering Type" data-for="offering_type">
           <span>{this.props.offering_type}</span>
-          <ReactTooltip id="offering_type" place="top" type="dark" effect="solid" />
+          <ReactTooltip id="offering_type" place={this.props.place} type="dark" effect="solid" />
         </div>
         <div data-tip="Maturity Level" data-for="offering_maturity_level">
           <span>{this.props.offering_maturity_level}</span>
-          <ReactTooltip id="offering_maturity_level" place="top" type="dark" effect="solid" />
+          <ReactTooltip id="offering_maturity_level" place={this.props.place} type="dark" effect="solid" />
         </div>
       </TAGS>
     );
