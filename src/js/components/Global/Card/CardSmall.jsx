@@ -34,13 +34,6 @@ const CardStyle = styled.div`
     position: relative;
     height: 100%;
     
-    .card-img {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
     .text {
       // position: relative;
       // display: flex;
@@ -84,14 +77,19 @@ const CardStyle = styled.div`
   
 `;
 
+const logoStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "40%",
+  opacity: "0.15",
+};
+
 class Card extends React.Component {
 
   getBackgroundImg = () => {
     let logo = logo_sales_kit;
-    let logoStyle = {
-      width: "40%",
-      opacity: "0.15",
-    };
     switch (this.props.offering_type) {
       case "Align Offering":
       case "V1 Align Offering":
@@ -105,7 +103,6 @@ class Card extends React.Component {
       case "Scale Offering":
       case "V1 Scale Offering":
         logo = logo_3_scale;
-        logoStyle.width = "45%";
         break;
       case "Optimize Offering":
       case "V1 Optimize Offering":
@@ -126,7 +123,7 @@ class Card extends React.Component {
     }
 
     return (
-      <img alt="icon-background" className="card-img" src={logo} style={logoStyle} />
+      <img alt="icon-background" src={logo} style={logoStyle} />
     );
   }
 
