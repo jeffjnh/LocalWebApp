@@ -80,7 +80,7 @@ class Offerings extends React.Component {
         } else {
           this.setState({ err_api_fetch: false });
           console.log("Success: API fetched");
-          console.log(response.body);
+          // console.log(response.body);
           return response.json();
         }
       }).then(response => {

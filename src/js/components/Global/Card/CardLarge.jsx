@@ -5,13 +5,12 @@ import { AWS as AWSCOLORS } from "../../../constants/Colors";
 import { OFFERINGSDATA } from "../../../constants/OFFERINGSDATA";
 import NavBar from "../NavBar";
 import Tags from "./Tags";
-// import ReactTooltip from "react-tooltip";
-// import logo_1_align from "../../../../assets/img/logo/proserve/1_align_gray.png";
-// import logo_2_launch from "../../../../assets/img/logo/proserve/2_launch_gray.png";
-// import logo_3_scale from "../../../../assets/img/logo/proserve/3_scale_gray.png";
-// import logo_4_optimize from "../../../../assets/img/logo/proserve/4_optimize_gray.png";
-// import logo_delivery_kit from "../../../../assets/img/logo/proserve/delivery_kit.svg";
-// import logo_sales_kit from "../../../../assets/img/logo/proserve/sales_kit.svg";
+import logo_1_align from "../../../../assets/img/logo/proserve/1_align_gray.png";
+import logo_2_launch from "../../../../assets/img/logo/proserve/2_launch_gray.png";
+import logo_3_scale from "../../../../assets/img/logo/proserve/3_scale_gray.png";
+import logo_4_optimize from "../../../../assets/img/logo/proserve/4_optimize_gray.png";
+import logo_delivery_kit from "../../../../assets/img/logo/proserve/delivery_kit.svg";
+import logo_sales_kit from "../../../../assets/img/logo/proserve/sales_kit.svg";
 
 // import Button from "react-bootstrap/Button";
 // import ButtonToolbar from "react-bootstrap/ButtonToolbar";
@@ -26,10 +25,28 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    // backgroundColor: "purple",
 
     borderRadius: "12px",
     color: AWSCOLORS.DARK_SQUID_INK,
+  },
+  overlay: {
+    // backgroundColor: "purple",
+    // filter: "blur(8px)",
   }
+};
+
+const buttonStyle = {
+  margin: "5rem",
+};
+
+const logoStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "30%",
+  opacity: "0.10",
 };
 
 // const modalContentStyle = {
@@ -51,6 +68,45 @@ class CardLarge extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+  }
+
+  getBackgroundImg = (offering_type) => {
+    let logo = logo_sales_kit;
+    switch (offering_type) {
+      case "Align Offering":
+      case "V1 Align Offering":
+        logo = logo_1_align;
+        break;
+      case "Launch Offering":
+      case "V1 Launch Offering":
+      case "Foundation Launch":
+        logo = logo_2_launch;
+        break;
+      case "Scale Offering":
+      case "V1 Scale Offering":
+        logo = logo_3_scale;
+        break;
+      case "Optimize Offering":
+      case "V1 Optimize Offering":
+        logo = logo_4_optimize;
+        break;
+      case "DK":
+      case "DK Only":
+        logo = logo_delivery_kit;
+        break;
+      case "SK":
+      case "SK Only":
+        logo = logo_sales_kit;
+        break;
+      // TODO : make a mystery logo??
+      case "TBD":
+      default:
+        logo = logo_1_align;
+    }
+
+    return (
+      <img alt="icon-background" src={logo} style={logoStyle} />
+    );
   }
 
   openModal() {
@@ -89,6 +145,19 @@ class CardLarge extends React.Component {
   //   // filter: blur(8px);
   // };
 
+  setTextIfEmpty = (data) => {
+    // console.log(data);
+    if (data != undefined || data != null) {
+      // console.log("data is not null: " + data);
+      return(
+        <a href={data} target={"_blank"}>&nbsp;{data}</a>
+      );
+    } else {
+      // console.log("data IS null: " + data);
+      return " (N/A)";
+    }
+  }
+
   render() {
     const data = OFFERINGSDATA[0];
 
@@ -119,7 +188,9 @@ class CardLarge extends React.Component {
       <div>
         <NavBar />
 
-        <button onClick={this.openModal}>Open Modal</button>
+        <button onClick={this.openModal} style={buttonStyle}>
+          Open Expanded Card
+        </button>
 
         <Modal
           isOpen={this.state.modalIsOpen}
@@ -128,6 +199,8 @@ class CardLarge extends React.Component {
           style={customStyles}
           contentLabel="Offering Info Expanded"
         >
+          {this.getBackgroundImg(data.offering_type)}
+
           <Tags
             offering_type={data.offering_type}
             offering_maturity_level={data.offering_maturity_level}
@@ -154,7 +227,7 @@ class CardLarge extends React.Component {
 
           <div>
             Owner:&nbsp;
-            <a href={`https://phonetool.amazon.com/search?query=${data.owner}&filter_type=All+fields`}>
+            <a href={`https://phonetool.amazon.com/search?query=${data.owner}&filter_type=All+fields`} target={"_blank"}>
               {data.owner}
             </a>
           </div>
@@ -177,20 +250,20 @@ class CardLarge extends React.Component {
           <p />
 
           <div>
-            Delivery Kit: {data.delivery_kit}
+            Delivery Kit:
+            {this.setTextIfEmpty(data.delivery_kit)}
           </div>
           <p />
 
           <div>
-            Sales Kit: {data.sales_kit}
+            Sales Kit:
+            {this.setTextIfEmpty(data.sales_kit)}
           </div>
           <p />
 
           <div>
             Wiki Link:
-            <a href={data.wiki_link}>
-              &nbsp;{data.wiki_link}
-            </a>
+            {this.setTextIfEmpty(data.wiki_link)}
           </div>
 
         </Modal>
