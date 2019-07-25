@@ -7,13 +7,23 @@ import AutoField from "./AutoField";
 import "./CustomerStyles.css";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+// import { SkillTreeGroup, SkillTree, SkillProvider, SkillType } from 'beautiful-skill-tree';
 import CardSmall from "./Global/Card/CardSmall";
 
 
 const match_predict_url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/customer/match";
 
 
+// const tempData: SkillType[];
+
+
+// const data: Skills
+
+
+
 class Customer extends Component {
+
+
 
 	state = {
 		customer_name: "",
@@ -109,35 +119,7 @@ class Customer extends Component {
 				</div>
 
 				
-				<div
-					style={{
-						// backgroundColor: AWSCOLORS.DARK_SQUID_INK
-					}}
-				>
-					{/* <Toggles /> */}
-					{/*<div*/}
-					{/*	style={{*/}
-					{/*		display: "flex",*/}
-					{/*		height: "400px",*/}
-					{/*		margin: "40px",*/}
-					{/*		minWidth: "900px"*/}
-					{/*	}}*/}
-					{/*>*/}
-					{/*	<div style={container_style}>*/}
-					{/*		<div id="root-offerings" style={{ margin: "10px" }}>*/}
-					{/*			<div*/}
-					{/*				className="offerings-card-container"*/}
-					{/*				style={{ margin: "20px" }}*/}
-					{/*			>*/}
-					{/*				<CardSmall />*/}
-					{/*			</div>*/}
-					{/*		</div>*/}
-					{/*	</div>*/}
-					{/*	<div style={container_style} />*/}
-					{/*	<div style={container_style} />*/}
-					{/*	<div style={container_style} />*/}
-					{/*</div>*/}
-
+				<div>
 					<h2
 						style={{ color: AWSCOLORS.SMILE_ORANGE }}
 						className="text-center"
@@ -168,10 +150,6 @@ class Customer extends Component {
 											accessor: "offering_type"
 										},
 										{
-											Header: "CAF Perspective",
-											accessor: "caf_perspective"
-										},
-										{
 											Header: "GSP Vertical",
 											accessor: "gsp_vertical"
 										},
@@ -180,24 +158,24 @@ class Customer extends Component {
 											accessor: "offering_maturity_level"
 										},
 										{
-											Header: "Description",
-											accessor: "offering_description"
-										},
-										{
 											Header: "Owner",
 											accessor: "owner"
 										},
 										{
 											Header: "Wiki",
-											accessor: "wiki_link"
+											accessor: "wiki_link",
+											Cell: props => <a target={"_blank"} href={props.value}>{props.value}</a>
 										},
 										{
 											Header: "Delivery Kit",
-											accessor: "delivery_kit"
+											accessor: "delivery_kit",
+											Cell: props => <a target={"_blank"} href={props.value}>{props.value}</a>
 										},
 										{
 											Header: "Sales Kit",
-											accessor: "sales_kit"
+											accessor: "sales_kit",
+											Cell: props => <a target={"_blank"} href={props.value}>{props.value}</a>
+
 										}
 									]
 								}
@@ -217,7 +195,7 @@ class Customer extends Component {
 						style={{ color: AWSCOLORS.SMILE_ORANGE }}
 						className="text-center"
 					>
-						Completed Offerings
+						Offerings from SalesForce
 					</h2>
 
 					<div
@@ -262,8 +240,9 @@ class Customer extends Component {
 											accessor: "stage"
 										},
 										{
+											id: 'total_opportunity',
 											Header: "Total Opportunity",
-											accessor: "total_opportunity"
+											accessor: value => "$" + value.total_opportunity
 										}
 									]
 								}
