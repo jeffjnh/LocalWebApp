@@ -34,37 +34,30 @@ const CardStyle = styled.div`
     position: relative;
     height: 100%;
     
-    .card-img {
-      position: absolute;
-      // width: 60%;
-      width: 50%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      // z-index: -1;
-    }
-
     .text {
       // position: relative;
-  
       // display: flex;
 
       .offering-name {
+        position: absolute;
+        top: 24%;
         margin: 0 0 2rem 0;
-        padding: 1.5rem 1.5rem 1rem 1.5rem;
+        padding: 0.25rem 1.5rem 1rem 1.5rem;
   
         color: ${AWSCOLORS.SMILE_ORANGE};
         font-size: 1.5rem;
   
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        // text-overflow: ellipsis;
+        // white-space: nowrap;
         overflow: hidden;
         // flex-wrap: wrap;
       }
   
       .practice-group {
+        position: absolute;
+        bottom: 12%;
         margin: 0;
-        padding: 0 1.5rem 1.5rem 1.5rem;
+        padding: 0 1.5rem 0 1.5rem;
         font-style: italic;
       }
     }
@@ -84,14 +77,20 @@ const CardStyle = styled.div`
   
 `;
 
+const logoStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "40%",
+  opacity: "0.15",
+};
+
 class Card extends React.Component {
 
-  render() {
-
+  getBackgroundImg = () => {
     let logo = logo_sales_kit;
-    let opacity = 0.15;
-
-    switch (this.props.Offering_Type) {
+    switch (this.props.offering_type) {
       case "Align Offering":
       case "V1 Align Offering":
         logo = logo_1_align;
@@ -124,23 +123,26 @@ class Card extends React.Component {
     }
 
     return (
+      <img alt="icon-background" src={logo} style={logoStyle} />
+    );
+  }
+
+  wrapToNumCharCeil(str, maxLen, separator = ' ') {
+    if (str.length <= maxLen)
+      return str;
+    return str.substr(0, str.lastIndexOf(separator, maxLen)) + "...";
+  }
+
+  render() {
+
+    return (
       <CardStyle style={{ background: 'white' }}>
 
         <div className="card-wrapper">
-          <img alt="icon-background" className="card-img" src={logo} style={{ opacity }} />
-          {/* <Tags>
-            <div className="type">
-              <div data-tip='Offering Type' data-for='offering_type'><span>{this.props.offering_type}</span></div>
-              <ReactTooltip id='offering_type' place='top' type='dark' effect='solid' />
-            </div>
-            <div className="maturity">
-              <div data-tip='Maturity Level' data-for='offering_maturity_level'><span>{this.props.offering_maturity_level}</span></div>
-              <ReactTooltip id='offering_maturity_level' place='top' type='dark' effect='solid' />
-            </div>
-          </Tags> */}
-          <Tags offering_type={this.props.offering_type} offering_maturity_level={this.props.offering_maturity_level} />
+          {this.getBackgroundImg()}
+          <Tags offering_type={this.props.offering_type} offering_maturity_level={this.props.offering_maturity_level} place={"top"} />
           <div className="text">
-            <div className="offering-name">{this.props.offering_name}</div>
+            <div className="offering-name">{this.wrapToNumCharCeil(this.props.offering_name, 30)}</div>
             <div className="practice-group">
               <div data-tip='Practice Group' data-for='practice_group'>{this.props.practice_group}</div>
               <ReactTooltip id='practice_group' place='bottom' type='dark' effect='solid' />

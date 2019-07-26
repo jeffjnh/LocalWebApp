@@ -144,16 +144,19 @@ class AutoField extends React.Component{
 
 
         return(
-            <AutoSuggest
-                suggestions={suggestions}
-                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                getSuggestionValue={getSuggestionValue}
-                onSuggestionSelected={this.onSuggestionSelected}
-                // renderSuggestionsContainer={renderSuggestionsContainer}
-                renderSuggestion={renderSuggestion}
-                inputProps={inputProps}
-            />
+            <div>
+                <link type={'text/scss'} rel={"stylesheet"} href={autofield}/>
+                <AutoSuggest
+                    suggestions={suggestions}
+                    onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                    onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                    getSuggestionValue={getSuggestionValue}
+                    onSuggestionSelected={this.onSuggestionSelected}
+                    // renderSuggestionsContainer={renderSuggestionsContainer}
+                    renderSuggestion={renderSuggestion}
+                    inputProps={inputProps}
+                />
+            </div>
         );
     }
 
