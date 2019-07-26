@@ -2,27 +2,18 @@ import React, { Component } from "react";
 import NavBar from "./Global/NavBar";
 // import Table from "react-bootstrap/Table";
 import { AWS as AWSCOLORS } from "../constants/Colors";
-import Toggles from "./Toggles";
+// import Toggles from "./Toggles";
 import AutoField from "./AutoField";
 import "./CustomerStyles.css";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-// import { SkillTreeGroup, SkillTree, SkillProvider, SkillType } from 'beautiful-skill-tree';
-import CardSmall from "./Global/Card/CardSmall";
+// import CardSmall from "./Global/Card/CardSmall";
 
 
 const match_predict_url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/customer/match";
 
 
-// const tempData: SkillType[];
-
-
-// const data: Skills
-
-
-
 class Customer extends Component {
-
 
 
 	state = {
@@ -101,17 +92,19 @@ class Customer extends Component {
 
 	render() {
 		let titles = ["name", "idNum"];
-		const container_style = {
-			border: "3px solid white",
-			borderLeft: "3px solid red",
-			borderRight: "3px solid green",
-			width: "25%"
-		};
+		// const container_style = {
+		// 	border: "3px solid white",
+		// 	borderLeft: "3px solid red",
+		// 	borderRight: "3px solid green",
+		// 	width: "25%"
+		// };
 		console.log(titles[0]);
 		return (
 			<div>
 				{/*Navigation Bar*/}
 				<NavBar />
+
+
 
 				{/*AutoField Search bar for Customer Data*/}
 				<div style={{ color: AWSCOLORS.DARK_SQUID_INK }}>

@@ -147,7 +147,7 @@ class CardLarge extends React.Component {
 
   setTextIfEmpty = (data) => {
     // console.log(data);
-    if (data != undefined || data != null) {
+    if (data !== undefined || data != null) {
       // console.log("data is not null: " + data);
       return(
         <a href={data} target={"_blank"}>&nbsp;{data}</a>
