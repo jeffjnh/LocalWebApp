@@ -88,6 +88,13 @@ const logoStyle = {
 
 class Card extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      color: "white",
+    };
+  }
+
   getBackgroundImg = () => {
     let logo = logo_sales_kit;
     switch (this.props.offering_type) {
@@ -127,22 +134,29 @@ class Card extends React.Component {
     );
   }
 
-  wrapToNumCharCeil(str, maxLen, separator = ' ') {
+  wrapToNumCharCeil = (str, maxLen, separator = ' ') => {
     if (str.length <= maxLen)
       return str;
     return str.substr(0, str.lastIndexOf(separator, maxLen)) + "...";
   }
 
+  changeColor = () => {
+    var newColor = this.state.color === "white" ? "black" : "white";
+    this.setState({ color: newColor });
+  };
+
   render() {
 
     return (
-      <CardStyle style={{ background: 'white' }}>
+      // <CardStyle>
+      <CardStyle style={{background: this.state.color}} onClick={this.changeColor}>
 
         <div className="card-wrapper">
           {this.getBackgroundImg()}
           <Tags offering_type={this.props.offering_type} offering_maturity_level={this.props.offering_maturity_level} place={"top"} />
           <div className="text">
-            <div className="offering-name">{this.wrapToNumCharCeil(this.props.offering_name, 30)}</div>
+          {/* <div className="offering-name">{this.wrapToNumCharCeil(this.props.offering_name, 30)}</div> */}
+          <div className="offering-name">{this.props.offering_name}</div>
             <div className="practice-group">
               <div data-tip='Practice Group' data-for='practice_group'>{this.props.practice_group}</div>
               <ReactTooltip id='practice_group' place='bottom' type='dark' effect='solid' />

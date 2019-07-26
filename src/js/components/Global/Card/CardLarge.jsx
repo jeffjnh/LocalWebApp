@@ -56,8 +56,8 @@ class CardLarge extends React.Component {
     this.state = {
       data: {},
       modalIsOpen: false,
-      offering_type: 'Align Offering',
-      offering_name: 'AWS CAF Align workshop',
+      offering_type: "Align Offering",
+      offering_name: "AWS CAF Align workshop",
     };
   }
 
@@ -138,22 +138,18 @@ class CardLarge extends React.Component {
 
   openModal = () => {
     this.setState({ modalIsOpen: true });
+    // console.log("openModal");
   }
 
   afterOpenModal = () => {
-    // references are now sync'd and can be accessed.
+    // references are now sync'd and can be accessed
     this.subtitle.style.color = AWSCOLORS.SMILE_ORANGE;
   }
 
   closeModal = () => {
     this.setState({ modalIsOpen: false });
+    // console.log("closeModal");
   }
-
-  // changeColor = () => {
-  //   var newColor = this.state.color === "white" ? "black" : "white";
-  //   this.setState({ color: newColor });
-  //   // filter: blur(8px);
-  // };
 
   setTextIfNull = (data) => {
     // console.log(data);
@@ -175,8 +171,12 @@ class CardLarge extends React.Component {
       <div style={{color: AWSCOLORS.DARK_SQUID_INK}}>
         
         <button onClick={this.openModal} style={buttonStyle}>
-          Open Expanded Card
+          Button: Open Expanded Card
         </button>
+
+        <div onClick={this.openModal} style={{color: AWSCOLORS.SMILE_ORANGE, margin: "5rem"}}>
+          div: Open Expanded Card
+        </div>
 
         <Modal
           isOpen={this.state.modalIsOpen}
