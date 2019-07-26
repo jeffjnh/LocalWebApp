@@ -9,18 +9,17 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 import CardSmall from "./Global/Card/CardSmall";
 
-
-const match_predict_url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/customer/match";
-
+const match_predict_url =
+	"https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/customer/match";
 
 class Customer extends Component {
-
 	state = {
 		customer_name: "",
 		customer_sales: [],
-		matches:[],
-		suggestions:[],
-		visible: new Set()
+		matches: [],
+		suggestions: [],
+		visible: new Set(),
+		row_selected: -1
 	};
 
 	customerStateUpdate = (response_object, name) => {
@@ -30,65 +29,95 @@ class Customer extends Component {
 		});
 
 		this.findPredictions(response_object);
-
 	};
 
-
-
-	findPredictions = (sales) => {
+	findPredictions = sales => {
 		fetch(match_predict_url, {
-				method: 'GET',
-				mode: 'cors',
-				headers: {
-					'Access-Control-Allow-Origin':'*',
-					'access-control-allow-headers':'*',
-					'Content-Type':'application/json',
-					'sales': JSON.stringify(sales),
-				},
+			method: "GET",
+			mode: "cors",
+			headers: {
+				"Access-Control-Allow-Origin": "*",
+				"access-control-allow-headers": "*",
+				"Content-Type": "application/json",
+				sales: JSON.stringify(sales)
 			}
-		).then(response => {
-			if (!response.ok) {
-				this.setState({ err_api_fetch: true });
-				throw response;
-			} else {
-				this.setState({ err_api_fetch: false });
-				console.log("Success: API fetched");
-				return response.json();
-			}
-		}).then(response => {
-			console.log("storing response to state");
-			console.log(response);
-			this.setState({
-				matches: response['matches'],
-				suggestions: response['suggestions'].flat()
+		})
+			.then(response => {
+				if (!response.ok) {
+					this.setState({ err_api_fetch: true });
+					throw response;
+				} else {
+					this.setState({ err_api_fetch: false });
+					console.log("Success: API fetched");
+					return response.json();
+				}
+			})
+			.then(response => {
+				console.log("storing response to state");
+				console.log(response);
+				this.setState({
+					matches: response["matches"],
+					suggestions: response["suggestions"].flat()
+				});
+			})
+			.catch(err => {
+				console.log("Error: API fetch error");
+				console.log(err.message);
+				console.log(this.state.err_api_fetch);
 			});
-		}).catch(err => {
-			console.log("Error: API fetch error");
-			console.log(err.message);
-			console.log(this.state.err_api_fetch);
-		});
-
 	};
 
-
-
-	onRowClick=(state, rowInfo, column, instance) => {
+	onRowClick = (state, rowInfo, column, instance) => {
 		return {
 			onClick: (e, handleOriginal) => {
 				// console.log(rowInfo + " " + column + " " + state);
-				console.log("This row clicked:", rowInfo);
+				console.log("This row clicked:", rowInfo.row);
 				console.log("This State clicked:", state);
 				console.log("This column clicked:", column);
-				if(handleOriginal){
-					handleOriginal()
+				if (handleOriginal) {
+					handleOriginal();
 				}
 			}
 			// style
-
-		}
+		};
 	};
 
-
+	onColorClick = (state, rowInfo, column) => {
+		if (typeof rowInfo !== "undefined") {
+			return {
+				onClick: (e, handleOriginal) => {
+					this.setState({
+						row_selected: rowInfo.index
+					});
+					if (handleOriginal) {
+						handleOriginal();
+					}
+				},
+				style: {
+					background:
+						rowInfo.index === this.state.row_selected
+							? "green"
+							: "white",
+					color:
+						rowInfo.index === this.state.row_selected
+							? "white"
+							: "black"
+				}
+			};
+		} else {
+			return {
+				onClick: (e, handleOriginal) => {
+					if (handleOriginal) {
+						handleOriginal();
+					}
+				},
+				style: {
+					background: "white",
+					color: "black"
+				}
+			};
+		}
+	};
 	render() {
 		let titles = ["name", "idNum"];
 		const container_style = {
@@ -108,11 +137,12 @@ class Customer extends Component {
 					<AutoField stateSetter={this.customerStateUpdate} />
 				</div>
 
-				
 				<div
-					style={{
-						// backgroundColor: AWSCOLORS.DARK_SQUID_INK
-					}}
+					style={
+						{
+							// backgroundColor: AWSCOLORS.DARK_SQUID_INK
+						}
+					}
 				>
 					{/* <Toggles /> */}
 					{/*<div*/}
@@ -155,6 +185,8 @@ class Customer extends Component {
 					>
 						<ReactTable
 							data={this.state.suggestions} // add data
+							getTdProps={this.onRowClick}
+							getTrProps={this.onColorClick}
 							columns={[
 								{
 									Header: "Offering Information",
@@ -204,13 +236,12 @@ class Customer extends Component {
 							]}
 							defaultPageSize={5}
 							style={{
-								height: "800px" // This will force the table body to overflow and scroll, since there is not enough room
+								height: "500px" // This will force the table body to overflow and scroll, since there is not enough room
 							}}
 							className="-striped -highlight"
 						/>
 						<br />
-						<br/>
-
+						<br />
 					</div>
 
 					<h2
@@ -270,7 +301,7 @@ class Customer extends Component {
 							]}
 							defaultPageSize={5}
 							style={{
-								height: "300px" // This will force the table body to overflow and scroll, since there is not enough room
+								height: "500px" // This will force the table body to overflow and scroll, since there is not enough room
 							}}
 							className="-striped -highlight"
 						/>
