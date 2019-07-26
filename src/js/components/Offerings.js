@@ -128,6 +128,7 @@ class Offerings extends React.Component {
         <CardSmall
           key={`${offering.offering_name} + ${offering.offering_type}`}
           {...offering}
+          url={url}
         />
       )
     });

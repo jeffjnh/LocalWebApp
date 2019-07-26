@@ -26,7 +26,9 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     // backgroundColor: "purple",
-
+    
+    maxHeight: '80%',
+    maxWidth: '80%',
     borderRadius: "12px",
     color: AWSCOLORS.DARK_SQUID_INK,
   },
