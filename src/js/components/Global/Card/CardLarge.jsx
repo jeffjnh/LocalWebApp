@@ -2,8 +2,6 @@ import React from "react";
 // import styled from "styled-components";
 import Modal from "react-modal";
 import { AWS as AWSCOLORS } from "../../../constants/Colors";
-import { OFFERINGSDATA } from "../../../constants/OFFERINGSDATA";
-import NavBar from "../NavBar";
 import Tags from "./Tags";
 import logo_1_align from "../../../../assets/img/logo/proserve/1_align_gray.png";
 import logo_2_launch from "../../../../assets/img/logo/proserve/2_launch_gray.png";
@@ -16,6 +14,8 @@ import logo_sales_kit from "../../../../assets/img/logo/proserve/sales_kit.svg";
 // import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 // import Modal from "react-bootstrap/Modal";
 // import ModalDialog from "react-bootstrap/ModalDialog";
+
+const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
 
 const customStyles = {
   content: {
@@ -49,26 +49,53 @@ const logoStyle = {
   opacity: "0.10",
 };
 
-// const modalContentStyle = {
-//     display: "block",
-// };
-
 class CardLarge extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   color: "white",
-    //   showModal: true
-    // };
 
     this.state = {
-      modalIsOpen: false
+      data: {},
+      modalIsOpen: false,
+      offering_type: 'Align Offering',
+      offering_name: 'AWS CAF Align workshop',
     };
-
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
   }
+
+  componentWillMount() {
+    this.fetchAPI(url);
+  }
+
+  fetchAPI = (url) => {
+    fetch(url, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+          'table_name': 'Offerings',
+          'offering_type': this.state.offering_type,
+          'offering_name': this.state.offering_name,
+        }
+      }
+    ).then(response => {
+        if (!response.ok) {
+          this.setState({ err_api_fetch: true });
+          throw response;
+        } else {
+          this.setState({ err_api_fetch: false });
+          console.log("Success: API fetched");
+          // console.log(response.body);
+          return response.json();
+        }
+      }).then(response => {
+        console.log("storing response to state");
+        this.setState({data: response[0]});
+      }).catch(err => {
+        console.log("Error: API fetch error");
+        console.log(err.message)
+        console.log(this.state.err_api_fetch);
+      });
+  };
 
   getBackgroundImg = (offering_type) => {
     let logo = logo_sales_kit;
@@ -109,35 +136,18 @@ class CardLarge extends React.Component {
     );
   }
 
-  openModal() {
+  openModal = () => {
     this.setState({ modalIsOpen: true });
   }
 
-  afterOpenModal() {
+  afterOpenModal = () => {
     // references are now sync'd and can be accessed.
     this.subtitle.style.color = AWSCOLORS.SMILE_ORANGE;
   }
 
-  closeModal() {
+  closeModal = () => {
     this.setState({ modalIsOpen: false });
   }
-
-  // func createCheckboxes = (pass in optional param to JSX) = > (JSX element[] to be returned)
-  // Iterates over OPTIONS array and calls this.creatCheckbox function for each item in that array
-  // If we want to do this as arrays:
-  // createCheckboxes = () => (OPTIONS.map(this.createCheckbox));
-  // createCheckboxes = () => (Object.keys(this.state.checkboxes).map(this.createCheckbox));
-
-  // func createCheckbox = (single option from OPTIONS.map) => (JSX element[] to be returned)
-  // Returns an array of OPTIONS.length instances of Checkbox components
-  // createCheckbox = option => (
-  //   <Checkbox
-  //     label={option}
-  //     isSelected={this.state.checkboxes[option]}
-  //     onCheckboxChange={this.handleCheckboxChange}
-  //     key={option}
-  //   />
-  // );
 
   // changeColor = () => {
   //   var newColor = this.state.color === "white" ? "black" : "white";
@@ -145,7 +155,7 @@ class CardLarge extends React.Component {
   //   // filter: blur(8px);
   // };
 
-  setTextIfEmpty = (data) => {
+  setTextIfNull = (data) => {
     // console.log(data);
     if (data !== undefined || data != null) {
       // console.log("data is not null: " + data);
@@ -159,35 +169,11 @@ class CardLarge extends React.Component {
   }
 
   render() {
-    const data = OFFERINGSDATA[0];
-
-    // console.log(data);
-
+    
     return (
-      // <div>
-      //   <NavBar />
 
-      //   <div style={{ background: this.state.color }} onClick={this.changeColor}>
-      //     hi
-      //     <Button
-      //       variant="primary"
-      //       onClick={this.setState({showModal: true})}
-      //     >
-
-      //     </Button>
-      //     {/* <Button variant="primary" onClick={ this.setState({ modalShow: true }) }>
-      //         Launch vertically centered modal
-      //       </Button> */}
-      //     {/* <MyVerticallyCenteredModal
-      //         show={modalShow}
-      //         onHide={ this.setState({ modalShow: true }) }
-      //       /> */}
-      //   </div>
-      // </div>
-
-      <div>
-        <NavBar />
-
+      <div style={{color: AWSCOLORS.DARK_SQUID_INK}}>
+        
         <button onClick={this.openModal} style={buttonStyle}>
           Open Expanded Card
         </button>
@@ -199,47 +185,47 @@ class CardLarge extends React.Component {
           style={customStyles}
           contentLabel="Offering Info Expanded"
         >
-          {this.getBackgroundImg(data.offering_type)}
+          {this.getBackgroundImg(this.state.data.offering_type)}
 
           <Tags
-            offering_type={data.offering_type}
-            offering_maturity_level={data.offering_maturity_level}
+            offering_type={this.state.data.offering_type}
+            offering_maturity_level={this.state.data.offering_maturity_level}
             place={"bottom"}
           />
 
           <h1 ref={subtitle => (this.subtitle = subtitle)}>
-            {data.offering_type} - {data.offering_name}
+            {this.state.data.offering_type} - {this.state.data.offering_name}
           </h1>
           <p />
 
-          <div>{data.offering_description}</div>
+          <div>{this.state.data.offering_description}</div>
           <p />
 
           <div>
-            Capability: {data.capability}
+            Capability: {this.state.data.capability}
           </div>
           <p />
 
           <div>
-            GSP / Industry Vertical: {data.gsp_vertical}
+            GSP / Industry Vertical: {this.state.data.gsp_vertical}
           </div>
           <p />
 
           <div>
             Owner:&nbsp;
-            <a href={`https://phonetool.amazon.com/search?query=${data.owner}&filter_type=All+fields`} target={"_blank"}>
-              {data.owner}
+            <a href={`https://phonetool.amazon.com/search?query=${this.state.data.owner}&filter_type=All+fields`} target={"_blank"}>
+              {this.state.data.owner}
             </a>
           </div>
           <p />
 
           <div>
-            Practice Group: {data.practice_group}
+            Practice Group: {this.state.data.practice_group}
           </div>
           <p />
 
           <div>
-            CAF Perspective: {data.caf_perspective}
+            CAF Perspective: {this.state.data.caf_perspective}
           </div>
           <p />
 
@@ -251,19 +237,19 @@ class CardLarge extends React.Component {
 
           <div>
             Delivery Kit:
-            {this.setTextIfEmpty(data.delivery_kit)}
+            {this.setTextIfNull(this.state.data.delivery_kit)}
           </div>
           <p />
 
           <div>
             Sales Kit:
-            {this.setTextIfEmpty(data.sales_kit)}
+            {this.setTextIfNull(this.state.data.sales_kit)}
           </div>
           <p />
 
           <div>
             Wiki Link:
-            {this.setTextIfEmpty(data.wiki_link)}
+            {this.setTextIfNull(this.state.data.wiki_link)}
           </div>
 
         </Modal>
