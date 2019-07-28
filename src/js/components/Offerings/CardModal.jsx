@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 import { AWS as AWSCOLORS } from "../../constants/Colors";
-import { getLoadingSpinner_Left } from '../../utility/LoadingSpinner';
+import { getLoadingSpinner_Left } from "../../utility/LoadingSpinner";
 import CardTags from "./CardTags";
 import logo_1_align from "../../../assets/img/logo/proserve/1_align_gray.png";
 import logo_2_launch from "../../../assets/img/logo/proserve/2_launch_gray.png";
@@ -21,7 +21,7 @@ const modalStyle = {
     maxHeight: "80%",
     maxWidth: "80%",
     borderRadius: "12px",
-    color: AWSCOLORS.DARK_SQUID_INK,
+    color: AWSCOLORS.DARK_SQUID_INK
   },
   overlay: {}
 };
@@ -32,7 +32,7 @@ const logoStyle = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "30%",
-  opacity: "0.10",
+  opacity: "0.10"
 };
 
 class CardModal extends React.Component {
@@ -40,7 +40,7 @@ class CardModal extends React.Component {
     super(props);
     this.state = {
       isPageLoading: true,
-      data: [],
+      data: []
     };
   }
 
@@ -87,7 +87,7 @@ class CardModal extends React.Component {
         "Content-Type": "application/json",
         table_name: "Offerings",
         offering_type: offering.offering_type,
-        offering_name: offering.offering_name,
+        offering_name: offering.offering_name
       }
     })
       .then(response => {
@@ -162,16 +162,39 @@ class CardModal extends React.Component {
     }
   };
 
+  getMultipleOwners = () => {
+    let arr = this.state.data.owner.split(", ");
+    return (
+      <div style={{ display: "inline-block" }}>
+        {arr.map((owner, index) => (
+          <div style={{ display: "inline-block" }} key={owner}>
+            <a
+              href={`https://phonetool.amazon.com/search?query=${owner}&filter_type=All+fields`}
+              target={"_blank"}
+            >
+              {owner}
+            </a>
+            {index !== arr.length - 1 ? (
+              <div style={{ display: "inline-block" }}>,&nbsp;</div>
+            ) : (
+              ""
+            )}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   getModalContent = () => {
     return (
-      <div style={{color: AWSCOLORS.DARK_SQUID_INK}}>
+      <div style={{ color: AWSCOLORS.DARK_SQUID_INK }}>
         {this.getBackgroundImg(this.state.data.offering_type)}
         <CardTags
           offering_type={this.state.data.offering_type}
           offering_maturity_level={this.state.data.offering_maturity_level}
           place={"bottom"}
         />
-        <h1 style={{color: AWSCOLORS.SMILE_ORANGE}}>
+        <h1 style={{ color: AWSCOLORS.SMILE_ORANGE }}>
           {this.state.data.offering_type} - {this.state.data.offering_name}
         </h1>
         <p />
@@ -183,12 +206,18 @@ class CardModal extends React.Component {
         <p />
         <div>
           Owner:&nbsp;
-          <a
-            href={`https://phonetool.amazon.com/search?query=${this.state.data.owner}&filter_type=All+fields`}
-            target={"_blank"}
-          >
-            {this.state.data.owner}
-          </a>
+          {!this.state.data.owner.includes(", ") ? (
+            <a
+              href={`https://phonetool.amazon.com/search?query=${
+                this.state.data.owner
+              }&filter_type=All+fields`}
+              target={"_blank"}
+            >
+              {this.state.data.owner}
+            </a>
+          ) : (
+            this.getMultipleOwners()
+          )}
         </div>
         <p />
         <div>Practice Group: {this.state.data.practice_group}</div>
@@ -226,13 +255,9 @@ class CardModal extends React.Component {
         style={modalStyle}
         contentLabel="Offering Info Expanded"
       >
-        {
-          this.state.isPageLoading
-           ? 
-           getLoadingSpinner_Left()
-           : 
-          this.getModalContent()
-        }
+        {this.state.isPageLoading
+          ? getLoadingSpinner_Left()
+          : this.getModalContent()}
       </Modal>
     );
   }

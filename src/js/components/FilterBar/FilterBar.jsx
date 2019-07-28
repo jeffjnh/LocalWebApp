@@ -47,7 +47,7 @@ class FilterBar extends React.Component {
           color: AWSCOLORS.DARK_SQUID_INK,
         }}
       >
-        <Accordion defaultActiveKey="accd-0">
+        <Accordion defaultActiveKey="accd-1">
           <Card>
             <Accordion.Toggle as={Card.Header} eventKey="accd-0">
               Offering Type

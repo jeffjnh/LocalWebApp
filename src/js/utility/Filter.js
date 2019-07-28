@@ -56,14 +56,46 @@ export function isOfferingMatchOfAnyFilters(offering, filters) {
  *  - true: offering matches ALL checkboxes in ALL filtering categories
  *  - false: offering is NOT a perfect match of ALL checkboxes in ALL filtering categories
  */
+// export function isOfferingMatchOfAllFilters(testingOffering, testingFilters) {
 export function isOfferingMatchOfAllFilters(offering, filters) {
 
-  if (filters.OFFERING_TYPE[offering.offering_maturity_level] === true
-    && filters.MATURITY_LEVEL[offering.offering_type] === true
+  // console.log(offering.offering_maturity_level + ' ' + offering.gsp_vertical + ' ' + offering.offering_type);
+  // console.log(filters);
+
+  if (filters.MATURITY_LEVEL[offering.offering_maturity_level] === true
+    && filters.OFFERING_TYPE[offering.offering_type] === true
     && filters.GSP_INDUSTRYVERTICALS[offering.gsp_vertical] === true) {
+    // console.log('true');
     return true;
   }
 
+  // console.log('false');
   return false;
 
 }
+
+// const testingOffering = {
+//   "offering_name": "Summarization, Keywords and Classification of Documents using Deep Learning on AWS",
+//   "delivery_kit": "https://w.amazon.com/bin/view/AWS_CAF/Platform/KnowledgeSummary/",
+//   "wiki_link": "https://w.amazon.com/bin/view/AWS/Teams/Proserve/ETIP/AI",
+//   "practice_group": "ETIP",
+//   "offering_description": "This engagement describes how to build a production-ready serverless document management system utilizing custom Machine Learning algorithms and AWS Machine Learning services. Key information is analyzed, summarized and displayed so that the time it takes users to review or search documents is significantly reduced and productivity increases as a result.",
+//   "offering_maturity_level": "3",
+//   "capability": "AI/ML",
+//   "offering_type": "Launch Offering",
+//   "gsp_vertical": "AI",
+//   "owner": "Charles Frenzel, Josiah Davis",
+//   "caf_perspective": "Platform"
+// }
+
+// const testingFilters = {
+//   OFFERING_TYPE: {
+//     "Launch Offering": true,
+//   },
+//   MATURITY_LEVEL: {
+//     "3": true,
+//   },
+//   GSP_INDUSTRYVERTICALS: {
+//     "AI": true,
+//   }
+// }

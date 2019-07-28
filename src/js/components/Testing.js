@@ -1,6 +1,7 @@
 import React from 'react';
 // import styled from 'styled-components';
 import NavBar from '../utility/NavBar';
+import {isOfferingMatchOfAllFilters} from '../utility/Filter';
 
 class Testing extends React.Component {
 
@@ -17,6 +18,8 @@ class Testing extends React.Component {
     return (
       <React.Fragment>
         <NavBar></NavBar>
+
+        {isOfferingMatchOfAllFilters()}
       </React.Fragment>
     );
   }
