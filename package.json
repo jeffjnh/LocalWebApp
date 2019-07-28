@@ -1,7 +1,7 @@
 {
   "name": "proserve-portfolio-project",
   "projectname": "proserveportfolio",
-  "version": "0.2.2",
+  "version": "0.2.9",
   "description": "AWS Proserve Portfolio",
   "keywords": [],
   "private": true,
@@ -52,8 +52,6 @@
     "webpack-dev-server": "^3.1.5"
   },
   "scripts": {
-    "styleguide": "styleguidist server",
-    "styleguide:build": "styleguidist build",
     "start": "react-scripts start",
     "startlocal": "open index.html",
     "build": "react-scripts build",
@@ -62,7 +60,9 @@
     "webpack-start": "webpack && webpack-dev-server --mode development",
     "webpack-build": "webpack",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build"
   },
   "eslintConfig": {
     "extends": "react-app"

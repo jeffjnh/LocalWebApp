@@ -1,49 +1,27 @@
-// const OFFERING_TYPE = ["Align", "Launch", "Scale", "Optimize"];
-
-// const MATURITY_LEVEL = ["5", "4", "3", "2", "1", "0"];
-
-// const GSP_INDUSTRYVERTICALS = [
-//   "Advisory",
-//   "AI",
-//   "Amazon Connect",
-//   "Analytics Big Data",
-//   "CAF",
-//   "Database",
-//   "DevOps",
-//   "Elemental",
-//   "End User Compute",
-//   "HPC",
-//   "IoT",
-//   "Microsoft",
-//   "Migrations",
-//   "Operational Integration",
-//   "SAP",
-//   "SAS (Security Assurance Services)",
-//   "Security",
-//   "Automotive",
-//   "FinServ (Financial Services)",
-//   "Healthcare & Life Sciences",
-//   "Manufacturing",
-//   "Media & Entertainment",
-//   "Oil & Gas",
-//   "Retail",
-//   "Telecom"
-// ];
-
 export const OFFERING_TYPE = {
-  "Align": false,
-  "Launch": false,
-  "Scale": false,
-  "Optimize": false
+  "Align Offering": false,
+  "Launch Offering": false,
+  "Scale Offering": false,
+  "Optimize Offering": false,
+  "V1 Align Offering": false,
+  "V1 Launch Offering": false,
+  "V1 Scale Offering": false,
+  "V1 Optimize Offering": false,
+  "Foundation Launch": false,
+  "DK": false,
+  "DK Only": false,
+  "SK": false,
+  "SK Only": false,
+  "TBD": false,
 };
 
 export const MATURITY_LEVEL = {
-  "5": false,
-  "4": false,
-  "3": false,
-  "2": false,
+  "5": true,
+  "4": true,
+  "3": true,
+  "2": true,
   "1": false,
-  "0": false
+  "0": false,
 };
 
 export const GSP_INDUSTRYVERTICALS = {
@@ -72,5 +50,5 @@ export const GSP_INDUSTRYVERTICALS = {
   "Media & Entertainment": false,
   "Oil & Gas": false,
   "Retail": false,
-  "Telecom": false
+  "Telecom": false,
 };
