@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { AWS as AWSCOLORS } from "../../constants/Colors";
-import { RETAIL } from "../../constants/Colors";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import FilterForm from "./FilterForm";
@@ -26,12 +25,26 @@ class FilterBar extends React.Component {
     };
   }
 
+  // takes the category_name (which filter category), and
+  // checkboxes within that filter category has been changed as param
+  handleDataChange = (category_name, checkboxStates) => {
+    // stores current state in currentFilters
+    let currentFilters = this.state.filters;
+    // push new changes of the checkboxes only into that category_name
+    currentFilters[category_name] = checkboxStates;
+    // set the state to currentFilters, updating everything
+    this.setState({ filters: currentFilters }, () => {
+      // parent function that sets the state of filters in parent component
+      this.props.onHandleFilterChange(this.state.filters);
+    });
+  };
+
   render() {
     return (
       <FilteringBar
         style={{
           display: "inline-block",
-          color: RETAIL.DARK_SQUID_INK
+          color: AWSCOLORS.DARK_SQUID_INK,
         }}
       >
         <Accordion defaultActiveKey="accd-0">
@@ -41,7 +54,11 @@ class FilterBar extends React.Component {
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="accd-0">
               <Card.Body>
-                <FilterForm filters={this.state.filters["OFFERING_TYPE"]}/>
+                <FilterForm
+                  category_name="OFFERING_TYPE"
+                  filters={this.state.filters["OFFERING_TYPE"]}
+                  onDataChange={this.handleDataChange}
+                />
               </Card.Body>
             </Accordion.Collapse>
           </Card>
@@ -51,9 +68,11 @@ class FilterBar extends React.Component {
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="accd-1">
               <Card.Body>
-              
-                <FilterForm filters={this.state.filters["MATURITY_LEVEL"]}/>
-              
+                <FilterForm
+                  category_name="MATURITY_LEVEL"
+                  filters={this.state.filters["MATURITY_LEVEL"]}
+                  onDataChange={this.handleDataChange}
+                />
               </Card.Body>
             </Accordion.Collapse>
           </Card>
@@ -63,7 +82,11 @@ class FilterBar extends React.Component {
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="accd-2">
               <Card.Body>
-                <FilterForm filters={this.state.filters["GSP_INDUSTRYVERTICALS"]}/>
+                <FilterForm
+                  category_name="GSP_INDUSTRYVERTICALS"
+                  filters={this.state.filters["GSP_INDUSTRYVERTICALS"]}
+                  onDataChange={this.handleDataChange}
+                />
               </Card.Body>
             </Accordion.Collapse>
           </Card>

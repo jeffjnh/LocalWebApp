@@ -1,7 +1,7 @@
 import React from "react";
-// import styled from "styled-components";
 import Modal from "react-modal";
 import { AWS as AWSCOLORS } from "../../../constants/Colors";
+import { getLoadingSpinner_Left } from '../../../utility/LoadingSpinner';
 import Tags from "./Tags";
 import logo_1_align from "../../../../assets/img/logo/proserve/1_align_gray.png";
 import logo_2_launch from "../../../../assets/img/logo/proserve/2_launch_gray.png";
@@ -10,14 +10,7 @@ import logo_4_optimize from "../../../../assets/img/logo/proserve/4_optimize_gra
 import logo_delivery_kit from "../../../../assets/img/logo/proserve/delivery_kit.svg";
 import logo_sales_kit from "../../../../assets/img/logo/proserve/sales_kit.svg";
 
-// import Button from "react-bootstrap/Button";
-// import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-// import Modal from "react-bootstrap/Modal";
-// import ModalDialog from "react-bootstrap/ModalDialog";
-
-const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
-
-const customStyles = {
+const modalStyle = {
   content: {
     top: "50%",
     left: "50%",
@@ -25,21 +18,12 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    // backgroundColor: "purple",
-    
-    maxHeight: '80%',
-    maxWidth: '80%',
+    maxHeight: "80%",
+    maxWidth: "80%",
     borderRadius: "12px",
     color: AWSCOLORS.DARK_SQUID_INK,
   },
-  overlay: {
-    // backgroundColor: "purple",
-    // filter: "blur(8px)",
-  }
-};
-
-const buttonStyle = {
-  margin: "5rem",
+  overlay: {}
 };
 
 const logoStyle = {
@@ -54,52 +38,79 @@ const logoStyle = {
 class CardLarge extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      data: {},
-      modalIsOpen: false,
-      offering_type: "Align Offering",
-      offering_name: "AWS CAF Align workshop",
+      isPageLoading: true,
+      data: [],
     };
   }
 
-  componentWillMount() {
-    this.fetchAPI(url);
+  // async componentDidMount() {
+  //   let response = await fetch('https://jsonplaceholder.typicode.com/todos/');
+  //   let json = await response.json();
+  // }
+
+  // async componentWillMount() {
+  //   await this.fetchAPI();
+  //   this.setState({ isPageLoading: false });
+  // }
+
+  // when parent component 'Offerings' updates which offering
+  // has been clicked on in its state
+  async componentDidUpdate(prevProps) {
+    // if no offering has been clicked (null in parent state),
+    // or if offering clicked is the same as previously clicked
+    if (!this.props.offering) {
+      return;
+    }
+    // if a new offering was clicked
+    // while fetching API, render spinner
+    // after fetching is done, render modal content
+    if (this.props.offering !== prevProps.offering) {
+      this.setState({ isPageLoading: true });
+      await this.fetchAPI(this.props.url, this.props.offering);
+      this.setState({ isPageLoading: false });
+    }
   }
 
-  fetchAPI = (url) => {
-    fetch(url, {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-          'table_name': 'Offerings',
-          'offering_type': this.state.offering_type,
-          'offering_name': this.state.offering_name,
-        }
+  /*
+   * Fetches 1 offering from API, stores data in state:data[].
+   * Param:
+   *  - url: address to fetch from
+   *  - offering: used in header for .offering_type & .offering_name
+   */
+  fetchAPI = (url, offering) => {
+    return fetch(url, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+        table_name: "Offerings",
+        offering_type: offering.offering_type,
+        offering_name: offering.offering_name,
       }
-    ).then(response => {
+    })
+      .then(response => {
         if (!response.ok) {
-          this.setState({ err_api_fetch: true });
           throw response;
         } else {
-          this.setState({ err_api_fetch: false });
-          console.log("Success: API fetched");
+          // console.log("Success: API fetched");
           // console.log(response.body);
           return response.json();
         }
-      }).then(response => {
-        console.log("storing response to state");
-        this.setState({data: response[0]});
-      }).catch(err => {
-        console.log("Error: API fetch error");
-        console.log(err.message)
-        console.log(this.state.err_api_fetch);
+      })
+      .then(response => {
+        // console.log("storing response to state");
+        // take first one, there will only be one
+        this.setState({ data: response[0] });
+      })
+      .catch(err => {
+        // console.log("Error: API fetch error");
+        // console.log(err.message);
       });
   };
 
-  getBackgroundImg = (offering_type) => {
+  getBackgroundImg = offering_type => {
     let logo = logo_sales_kit;
     switch (offering_type) {
       case "Align Offering":
@@ -130,132 +141,99 @@ class CardLarge extends React.Component {
       // TODO : make a mystery logo??
       case "TBD":
       default:
-        logo = logo_1_align;
+        logo = logo_sales_kit;
     }
 
-    return (
-      <img alt="icon-background" src={logo} style={logoStyle} />
-    );
-  }
+    return <img alt="icon-background" src={logo} style={logoStyle} />;
+  };
 
-  openModal = () => {
-    this.setState({ modalIsOpen: true });
-    // console.log("openModal");
-  }
-
-  afterOpenModal = () => {
-    // references are now sync'd and can be accessed
-    this.subtitle.style.color = AWSCOLORS.SMILE_ORANGE;
-  }
-
-  closeModal = () => {
-    this.setState({ modalIsOpen: false });
-    // console.log("closeModal");
-  }
-
-  setTextIfNull = (data) => {
+  setTextIfNull = data => {
     // console.log(data);
     if (data !== undefined || data != null) {
       // console.log("data is not null: " + data);
-      return(
-        <a href={data} target={"_blank"}>&nbsp;{data}</a>
+      return (
+        <a href={data} target={"_blank"}>
+          &nbsp;{data}
+        </a>
       );
     } else {
       // console.log("data IS null: " + data);
       return " (N/A)";
     }
-  }
+  };
+
+  getModalContent = () => {
+    return (
+      <div style={{color: AWSCOLORS.DARK_SQUID_INK}}>
+        {this.getBackgroundImg(this.state.data.offering_type)}
+        <Tags
+          offering_type={this.state.data.offering_type}
+          offering_maturity_level={this.state.data.offering_maturity_level}
+          place={"bottom"}
+        />
+        <h1 style={{color: AWSCOLORS.SMILE_ORANGE}}>
+          {this.state.data.offering_type} - {this.state.data.offering_name}
+        </h1>
+        <p />
+        <div>{this.state.data.offering_description}</div>
+        <p />
+        <div>Capability: {this.state.data.capability}</div>
+        <p />
+        <div>GSP / Industry Vertical: {this.state.data.gsp_vertical}</div>
+        <p />
+        <div>
+          Owner:&nbsp;
+          <a
+            href={`https://phonetool.amazon.com/search?query=${this.state.data.owner}&filter_type=All+fields`}
+            target={"_blank"}
+          >
+            {this.state.data.owner}
+          </a>
+        </div>
+        <p />
+        <div>Practice Group: {this.state.data.practice_group}</div>
+        <p />
+        <div>CAF Perspective: {this.state.data.caf_perspective}</div>
+        <p />
+        <div>
+          {/* {ProgressBar} */}
+          (ProgressBar)
+        </div>
+        <p />
+        <div>
+          Delivery Kit:
+          {this.setTextIfNull(this.state.data.delivery_kit)}
+        </div>
+        <p />
+        <div>
+          Sales Kit:
+          {this.setTextIfNull(this.state.data.sales_kit)}
+        </div>
+        <p />
+        <div>
+          Wiki Link:
+          {this.setTextIfNull(this.state.data.wiki_link)}
+        </div>
+      </div>
+    );
+  };
 
   render() {
-    
     return (
-
-      <div style={{color: AWSCOLORS.DARK_SQUID_INK}}>
-        
-        <button onClick={this.openModal} style={buttonStyle}>
-          Button: Open Expanded Card
-        </button>
-
-        <div onClick={this.openModal} style={{color: AWSCOLORS.SMILE_ORANGE, margin: "5rem"}}>
-          div: Open Expanded Card
-        </div>
-
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-          contentLabel="Offering Info Expanded"
-        >
-          {this.getBackgroundImg(this.state.data.offering_type)}
-
-          <Tags
-            offering_type={this.state.data.offering_type}
-            offering_maturity_level={this.state.data.offering_maturity_level}
-            place={"bottom"}
-          />
-
-          <h1 ref={subtitle => (this.subtitle = subtitle)}>
-            {this.state.data.offering_type} - {this.state.data.offering_name}
-          </h1>
-          <p />
-
-          <div>{this.state.data.offering_description}</div>
-          <p />
-
-          <div>
-            Capability: {this.state.data.capability}
-          </div>
-          <p />
-
-          <div>
-            GSP / Industry Vertical: {this.state.data.gsp_vertical}
-          </div>
-          <p />
-
-          <div>
-            Owner:&nbsp;
-            <a href={`https://phonetool.amazon.com/search?query=${this.state.data.owner}&filter_type=All+fields`} target={"_blank"}>
-              {this.state.data.owner}
-            </a>
-          </div>
-          <p />
-
-          <div>
-            Practice Group: {this.state.data.practice_group}
-          </div>
-          <p />
-
-          <div>
-            CAF Perspective: {this.state.data.caf_perspective}
-          </div>
-          <p />
-
-          <div>
-            {/* {ProgressBar} */}
-            (ProgressBar)
-          </div>
-          <p />
-
-          <div>
-            Delivery Kit:
-            {this.setTextIfNull(this.state.data.delivery_kit)}
-          </div>
-          <p />
-
-          <div>
-            Sales Kit:
-            {this.setTextIfNull(this.state.data.sales_kit)}
-          </div>
-          <p />
-
-          <div>
-            Wiki Link:
-            {this.setTextIfNull(this.state.data.wiki_link)}
-          </div>
-
-        </Modal>
-      </div>
+      <Modal
+        isOpen={this.props.offering ? true : false}
+        onRequestClose={this.props.onCloseModal}
+        style={modalStyle}
+        contentLabel="Offering Info Expanded"
+      >
+        {
+          this.state.isPageLoading
+           ? 
+           getLoadingSpinner_Left()
+           : 
+          this.getModalContent()
+        }
+      </Modal>
     );
   }
 }

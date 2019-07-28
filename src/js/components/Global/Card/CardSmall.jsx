@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Modal from "react-modal";
 import { AWS as AWSCOLORS } from "../../../constants/Colors";
 import ReactTooltip from 'react-tooltip';
 import Tags from "./Tags";
@@ -87,35 +86,12 @@ const logoStyle = {
   opacity: "0.15",
 };
 
-const modalStyle = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    // backgroundColor: "purple",
-
-    maxHeight: '80%',
-    maxWidth: '80%',
-    borderRadius: "12px",
-    color: AWSCOLORS.DARK_SQUID_INK,
-  },
-  overlay: {
-    // backgroundColor: "purple",
-    // filter: "blur(8px)",
-  }
-};
-
 class Card extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      color: "white",
       data: {},
-      modalIsOpen: false,
+      // color: "white",
     };
   }
 
@@ -164,161 +140,17 @@ class Card extends React.Component {
     return str.substr(0, str.lastIndexOf(separator, maxLen)) + "...";
   }
 
-  changeColor = () => {
-    var newColor = this.state.color === "white" ? "black" : "white";
-    this.setState({ color: newColor });
-  };
-
-  fetchAPI = (url) => {
-    fetch(url, {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-          'table_name': 'Offerings',
-          'offering_type': this.props.offering_type,
-          'offering_name': this.props.offering_name,
-        }
-      }
-    ).then(response => {
-        if (!response.ok) {
-          this.setState({ err_api_fetch: true });
-          throw response;
-        } else {
-          this.setState({ err_api_fetch: false });
-          console.log("Success: API fetched");
-          // console.log(response.body);
-          return response.json();
-        }
-      }).then(response => {
-        console.log("storing response to state");
-        this.setState({ data: response[0]} );
-      }).catch(err => {
-        console.log("Error: API fetch error");
-        console.log(err.message)
-        console.log(this.state.err_api_fetch);
-      });
-  };
-
-  openModal = () => {
-    this.fetchAPI(this.props.url);
-    this.setState({ modalIsOpen: true });
-    // console.log("openModal");
-  }
-
-  afterOpenModal = () => {
-    // references are now sync'd and can be accessed
-    this.subtitle.style.color = AWSCOLORS.SMILE_ORANGE;
-  }
-
-  closeModal = () => {
-    this.setState({ modalIsOpen: false });
-    // console.log("closeModal");
-  }
-
-  setTextIfNull = (data) => {
-    // console.log(data);
-    if (data !== undefined || data != null) {
-      // console.log("data is not null: " + data);
-      return(
-        <a href={data} target={"_blank"}>&nbsp;{data}</a>
-      );
-    } else {
-      // console.log("data IS null: " + data);
-      return " (N/A)";
-    }
-  }
-
-  getModalContent = () => {
-    return (
-      <Modal
-        isOpen={this.state.modalIsOpen}
-        onAfterOpen={this.afterOpenModal}
-        onRequestClose={this.closeModal}
-        style={modalStyle}
-        contentLabel="Offering Info Expanded"
-      >
-        {this.getBackgroundImg()}
-
-        <Tags
-          offering_type={this.state.data.offering_type}
-          offering_maturity_level={this.state.data.offering_maturity_level}
-          place={"bottom"}
-        />
-
-        <h1 ref={subtitle => (this.subtitle = subtitle)}>
-          {this.state.data.offering_type} - {this.state.data.offering_name}
-        </h1>
-        <p />
-
-        <div>{this.state.data.offering_description}</div>
-        <p />
-
-        <div>
-          Capability: {this.state.data.capability}
-        </div>
-        <p />
-
-        <div>
-          GSP / Industry Vertical: {this.state.data.gsp_vertical}
-        </div>
-        <p />
-
-        <div>
-          Owner:&nbsp;
-          <a href={`https://phonetool.amazon.com/search?query=${this.state.data.owner}&filter_type=All+fields`} target={"_blank"}>
-            {this.state.data.owner}
-          </a>
-        </div>
-        <p />
-
-        <div>
-          Practice Group: {this.state.data.practice_group}
-        </div>
-        <p />
-
-        <div>
-          CAF Perspective: {this.state.data.caf_perspective}
-        </div>
-        <p />
-
-        <div>
-          {/* {ProgressBar} */}
-          (ProgressBar)
-        </div>
-        <p />
-
-        <div>
-          Delivery Kit:
-          {this.setTextIfNull(this.state.data.delivery_kit)}
-        </div>
-        <p />
-
-        <div>
-          Sales Kit:
-          {this.setTextIfNull(this.state.data.sales_kit)}
-        </div>
-        <p />
-
-        <div>
-          Wiki Link:
-          {this.setTextIfNull(this.state.data.wiki_link)}
-        </div>
-
-      </Modal>
-    );
-  }
+  // changeColor = () => {
+  //   var newColor = this.state.color === "white" ? "black" : "white";
+  //   this.setState({ color: newColor });
+  // };
 
   render() {
 
-    // trying to display an empty div before data for modal is fetched, doesn't work
-    const offeringModal = (this.state.modalIsOpen) ? this.getModalContent() : <div/> ;
-
     return (
       // <CardStyle style={{background: this.state.color}} onClick={this.changeColor}>
-      <CardStyle>
-        <div className="card-wrapper" onClick={this.openModal}>
+      <CardStyle onClick={this.props.onClick}>
+        <div className="card-wrapper">
           {this.getBackgroundImg()}
           <Tags offering_type={this.props.offering_type} offering_maturity_level={this.props.offering_maturity_level} place={"top"} />
           <div className="text">
@@ -329,15 +161,9 @@ class Card extends React.Component {
             </div>
           </div>
         </div>
-
-
-        {/* {this.getModalContent()} */}
-        {offeringModal}
-
       </CardStyle>
     )
   }
 }
 
-Modal.setAppElement(document.getElementById("root"));
 export default Card;
