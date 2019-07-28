@@ -1,5 +1,5 @@
 import React from 'react'
-import NavBar from './Global/NavBar';
+import NavBar from '../utility/NavBar';
 import pecisage_sad_tiny from '../../assets/img/notfound/peciSage.sad.png';
 
 // modeled after: https://answers.amazon.com/

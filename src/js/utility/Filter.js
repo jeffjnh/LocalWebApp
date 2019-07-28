@@ -10,7 +10,7 @@
  *  - data[] of all offerings fetched from API,
  *  - filters = this.state.filters containing all filtering categories.
  * For each offering, check in isOfferingMatchFilter()
- * Returns .
+ * Returns [] of objects that matches with the filter.
  */
 export function filterOfferings(data, filters) {
   return data.filter((offering) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from './js/components/Global/NavBar';
+import NavBar from './js/utility/NavBar';
 import logo from './assets/img/logo/AWS_logo_RGB_REV.svg';
 // import { Route } from 'react-router-dom';
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import NavBar from './Global/NavBar';
+import NavBar from '../utility/NavBar';
 import logo from '../../assets/img/logo/AWS_logo_RGB_REV.svg';
 
 function Login() {

@@ -1,14 +1,14 @@
 import React from "react";
 import Modal from "react-modal";
-import { AWS as AWSCOLORS } from "../../../constants/Colors";
-import { getLoadingSpinner_Left } from '../../../utility/LoadingSpinner';
-import Tags from "./Tags";
-import logo_1_align from "../../../../assets/img/logo/proserve/1_align_gray.png";
-import logo_2_launch from "../../../../assets/img/logo/proserve/2_launch_gray.png";
-import logo_3_scale from "../../../../assets/img/logo/proserve/3_scale_gray.png";
-import logo_4_optimize from "../../../../assets/img/logo/proserve/4_optimize_gray.png";
-import logo_delivery_kit from "../../../../assets/img/logo/proserve/delivery_kit.svg";
-import logo_sales_kit from "../../../../assets/img/logo/proserve/sales_kit.svg";
+import { AWS as AWSCOLORS } from "../../constants/Colors";
+import { getLoadingSpinner_Left } from '../../utility/LoadingSpinner';
+import CardTags from "./CardTags";
+import logo_1_align from "../../../assets/img/logo/proserve/1_align_gray.png";
+import logo_2_launch from "../../../assets/img/logo/proserve/2_launch_gray.png";
+import logo_3_scale from "../../../assets/img/logo/proserve/3_scale_gray.png";
+import logo_4_optimize from "../../../assets/img/logo/proserve/4_optimize_gray.png";
+import logo_delivery_kit from "../../../assets/img/logo/proserve/delivery_kit.svg";
+import logo_sales_kit from "../../../assets/img/logo/proserve/sales_kit.svg";
 
 const modalStyle = {
   content: {
@@ -35,7 +35,7 @@ const logoStyle = {
   opacity: "0.10",
 };
 
-class CardLarge extends React.Component {
+class CardModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -166,7 +166,7 @@ class CardLarge extends React.Component {
     return (
       <div style={{color: AWSCOLORS.DARK_SQUID_INK}}>
         {this.getBackgroundImg(this.state.data.offering_type)}
-        <Tags
+        <CardTags
           offering_type={this.state.data.offering_type}
           offering_maturity_level={this.state.data.offering_maturity_level}
           place={"bottom"}
@@ -239,4 +239,4 @@ class CardLarge extends React.Component {
 }
 
 Modal.setAppElement(document.getElementById("root"));
-export default CardLarge;
+export default CardModal;

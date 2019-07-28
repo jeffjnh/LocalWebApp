@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { AWS as AWSCOLORS } from "../../../constants/Colors";
+import { AWS as AWSCOLORS } from "../../constants/Colors";
 import ReactTooltip from 'react-tooltip';
-import Tags from "./Tags";
-import logo_1_align from "../../../../assets/img/logo/proserve/1_align_gray.png";
-import logo_2_launch from "../../../../assets/img/logo/proserve/2_launch_gray.png";
-import logo_3_scale from "../../../../assets/img/logo/proserve/3_scale_gray.png";
-import logo_4_optimize from "../../../../assets/img/logo/proserve/4_optimize_gray.png";
-import logo_delivery_kit from "../../../../assets/img/logo/proserve/delivery_kit.svg";
-import logo_sales_kit from "../../../../assets/img/logo/proserve/sales_kit.svg";
+import CardTags from "./CardTags";
+import logo_1_align from "../../../assets/img/logo/proserve/1_align_gray.png";
+import logo_2_launch from "../../../assets/img/logo/proserve/2_launch_gray.png";
+import logo_3_scale from "../../../assets/img/logo/proserve/3_scale_gray.png";
+import logo_4_optimize from "../../../assets/img/logo/proserve/4_optimize_gray.png";
+import logo_delivery_kit from "../../../assets/img/logo/proserve/delivery_kit.svg";
+import logo_sales_kit from "../../../assets/img/logo/proserve/sales_kit.svg";
 
 const CardStyle = styled.div`
   margin: 1rem;
@@ -152,7 +152,7 @@ class Card extends React.Component {
       <CardStyle onClick={this.props.onClick}>
         <div className="card-wrapper">
           {this.getBackgroundImg()}
-          <Tags offering_type={this.props.offering_type} offering_maturity_level={this.props.offering_maturity_level} place={"top"} />
+          <CardTags offering_type={this.props.offering_type} offering_maturity_level={this.props.offering_maturity_level} place={"top"} />
           <div className="text">
           <div className="offering-name">{this.wrapToNumCharCeil(this.props.offering_name, 30)}</div>
             <div className="practice-group">

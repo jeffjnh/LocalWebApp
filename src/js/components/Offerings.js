@@ -1,20 +1,20 @@
 import React from "react";
 import styled from 'styled-components';
-import NavBar from './Global/NavBar';
+import NavBar from '../utility/NavBar';
 import Button from "react-bootstrap/Button";
 import Collapse from "react-bootstrap/Collapse";
 import { firstBy } from "thenby";
 import FilterBar from './FilterBar/FilterBar';
-import { OFFERING_TYPE } from './../constants/FILTERS';
-import { MATURITY_LEVEL } from './../constants/FILTERS';
-import { GSP_INDUSTRYVERTICALS } from './../constants/FILTERS';
+import { OFFERING_TYPE } from '../constants/Filters';
+import { MATURITY_LEVEL } from '../constants/Filters';
+import { GSP_INDUSTRYVERTICALS } from '../constants/Filters';
 import { filterOfferings } from '../utility/Filter';
-import CardSmall from "./Global/Card/CardSmall";
-import CardLarge from "../components/Global/Card/CardLarge";
+import Card from "./Offerings/Card";
+import CardModal from "./Offerings/CardModal";
 import { getLoadingSpinner_Left } from "../utility/LoadingSpinner";
 
 const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
-// import { OFFERINGSDATA_SHORT } from "../constants/OFFERINGSDATA_SHORT";
+// import { OFFERINGSDATA_SHORT } from "../constants/OfferingsData_Short";
 
 const ButtonText = styled.div`
   display: inline-block;
@@ -140,7 +140,7 @@ class Offerings extends React.Component {
 
     let cards = data.map((offering) => {
       return (
-        <CardSmall
+        <Card
           key={`${offering.offering_name} + ${offering.offering_type}`}
           {...offering}
           url={url}
@@ -181,7 +181,7 @@ class Offerings extends React.Component {
   // }
 
   /* 
-   * Modal isOpen={this.props.offering ? true : false},
+   * CardModal isOpen={this.props.offering ? true : false},
    *   if a card was clicked, the offering of that card is stored to state: currentOfferingClicked,
    *   and offering is passed to the modal for modal to fetch from API.
    * onModalClose, currentOfferingClicked is reset to null.
@@ -202,7 +202,7 @@ class Offerings extends React.Component {
       <div>
         <NavBar></NavBar>
 
-        <CardLarge
+        <CardModal
           offering={this.state.currentOfferingClicked}
           onCloseModal={() => {
             this.setState({ currentOfferingClicked: null });

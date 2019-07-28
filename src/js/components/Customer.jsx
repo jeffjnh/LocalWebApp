@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import NavBar from "./Global/NavBar";
+import NavBar from "../utility/NavBar";
 // import Table from "react-bootstrap/Table";
 import { AWS as AWSCOLORS } from "../constants/Colors";
 // import Toggles from "./Toggles";
@@ -7,7 +7,8 @@ import AutoField from "./AutoField";
 import "./CustomerStyles.css";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-// import CardSmall from "./Global/Card/CardSmall";
+// import Card from "./Offerings/Card";
+// import CardModal from "./Offerings/CardModal";
 
 const match_predict_url =
 	"https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/customer/match";

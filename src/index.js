@@ -11,7 +11,7 @@ import Login from "./js/components/Login";
 import Offerings from "./js/components/Offerings";
 import Customer from "./js/components/Customer";
 import Testing from "./js/components/Testing";
-import CardLarge from "./js/components/Global/Card/CardLarge";
+import Template from "./js/components/Template";
 
 const routing = (
 
@@ -27,8 +27,8 @@ const routing = (
       <Route path="/login" component={Login} />
       <Route path="/offerings" component={Offerings} />
       <Route path="/testing" component={Testing} />
+      <Route path="/template" component={Template} />
       <Route path="/customer" component={Customer} />
-      <Route path="/card" component={CardLarge} />
       <Route component={Notfound} />
     </Switch>
   </Router>

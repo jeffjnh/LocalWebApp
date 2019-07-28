@@ -1,6 +1,6 @@
 import React from 'react';
 // import styled from 'styled-components';
-import NavBar from './Global/NavBar';
+import NavBar from '../utility/NavBar';
 
 class Template extends React.Component {
 
