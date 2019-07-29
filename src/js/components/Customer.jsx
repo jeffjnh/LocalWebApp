@@ -57,8 +57,11 @@ class Customer extends Component {
 				console.log(response);
 				this.setState({
 					matches: response["matches"],
-					suggestions: response["suggestions"].flat()
+					suggestions: response["suggestions"]
 				});
+				console.log("here");
+				console.log(this.state.matches);
+				console.log(this.state.suggestions);
 			})
 			.catch(err => {
 				console.log("Error: API fetch error");
@@ -67,31 +70,75 @@ class Customer extends Component {
 			});
 	};
 
-	onRowClick = (state, rowInfo, column, instance) => {
-		return {
-			onClick: (e, handleOriginal) => {
-				// console.log(rowInfo + " " + column + " " + state);
-				console.log("This row clicked:", rowInfo.row);
-				console.log("This State clicked:", state);
-				console.log("This column clicked:", column);
-				if (handleOriginal) {
-					handleOriginal();
-				}
-			}
-			// style
-		};
-	};
+	// onRowClick = (state, rowInfo, column, instance) => {
+	// 	return {
+	// 		onClick: (e, handleOriginal) => {
+	// 			// console.log(rowInfo + " " + column + " " + state);
+	// 			console.log("This row clicked:", rowInfo.row);
+	// 			console.log("This State clicked:", state);
+	// 			console.log("This column clicked:", column);
+	// 			if (handleOriginal) {
+	// 				handleOriginal();
+	// 			}
+	// 		}
+	// 		// style
+	// 	};
+	// };
 
+	makeSelections = data => {
+		var selections = [];
+		var select = false;
+		console.log("Making selections");
+		for (var i = 0; i < data.length; i++) {
+			if (i === this.row_selected) {
+				select = true;
+			} else {
+				select = false;
+			}
+			for (var j = 0; j < data[i].length; j++) {
+				var next = data[i][j];
+				next.selected = select;
+				selections.push(next);
+			}
+		}
+
+		return selections;
+	};
+	offeringStyling = (state, rowInfo, column) => {
+		if (typeof rowInfo !== "undefined") {
+			return {
+				style: {
+					background: rowInfo.selected ? "green" : "white",
+					color: rowInfo.selected ? "white" : "black"
+				}
+			};
+		} else {
+			return {
+				style: {
+					background: "white",
+					color: "black"
+				}
+			};
+		}
+	};
 	onColorClick = (state, rowInfo, column) => {
 		if (typeof rowInfo !== "undefined") {
 			return {
 				onClick: (e, handleOriginal) => {
-					this.setState({
-						row_selected: rowInfo.index
-					});
+					if (this.state.row_selected === rowInfo.index) {
+						this.setState({
+							row_selected: -1
+						});
+					} else {
+						this.setState({
+							row_selected: rowInfo.index
+						});
+					}
 					if (handleOriginal) {
 						handleOriginal();
 					}
+					this.forceUpdate();
+					// this.setState({ suggestions: this.state.suggestions });
 				},
 				style: {
 					background:
@@ -155,8 +202,10 @@ class Customer extends Component {
 					>
 						<ReactTable
 							data={this.state.suggestions} // add data
-							getTdProps={this.onRowClick}
-							getTrProps={this.onColorClick}
+							resolveData={data => this.makeSelections(data)}
+							// data={this.state.suggestions.flat()}
+							getTrProps={this.offeringStyling}
+							// getTdProps={this.onRowClick}
 							columns={[
 								{
 									Header: "Offering Information",
@@ -247,7 +296,8 @@ class Customer extends Component {
 					>
 						<ReactTable
 							data={this.state.customer_sales}
-							getTdProps={this.onRowClick}
+							// getTdProps={this.onRowClick}
+							getTrProps={this.onColorClick}
 							columns={[
 								{
 									Header: "Customer Information",
