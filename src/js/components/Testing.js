@@ -1,7 +1,7 @@
 import React from 'react';
 // import styled from 'styled-components';
 import NavBar from '../utility/NavBar';
-import {isOfferingMatchOfAllFilters} from '../utility/Filter';
+import {isOfferingMatchOfAllFilters} from '../utility/Filtering';
 
 class Testing extends React.Component {
 
