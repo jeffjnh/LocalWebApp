@@ -340,8 +340,11 @@ class Customer extends Component {
 										{
 											id: "total_opportunity",
 											Header: "Total Opportunity",
-											accessor: value =>
-												"$" + value.total_opportunity
+											accessor: value => {
+												console.log(parseInt(value.total_opportunity).toLocaleString(value.list_price_currency));
+												return parseInt(value.total_opportunity).toLocaleString(undefined, {style:"currency", currency:value.list_price_currency});
+											}
+												// "$" + value.total_opportunity
 										}
 									]
 								}
