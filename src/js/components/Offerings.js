@@ -8,7 +8,7 @@ import FilterBar from './FilterBar/FilterBar';
 import { OFFERING_TYPE } from '../constants/Filters';
 import { MATURITY_LEVEL } from '../constants/Filters';
 import { GSP_INDUSTRYVERTICALS } from '../constants/Filters';
-import { filterOfferings } from '../utility/Filter';
+import { filterOfferings } from '../utility/Filtering';
 import Card from "./Offerings/Card";
 import CardModal from "./Offerings/CardModal";
 import { getLoadingSpinner_Left } from "../utility/LoadingSpinner";

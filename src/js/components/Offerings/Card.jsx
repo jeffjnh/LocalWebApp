@@ -156,8 +156,8 @@ class Card extends React.Component {
           <div className="text">
           <div className="offering-name">{this.wrapToNumCharCeil(this.props.offering_name, 30)}</div>
             <div className="practice-group">
-              <div data-tip='Practice Group' data-for='practice_group'>{this.props.practice_group}</div>
-              <ReactTooltip id='practice_group' place='bottom' type='dark' effect='solid' />
+              <div data-tip='GSP / Industry Vertical' data-for='gsp_vertical'>{this.props.gsp_vertical}</div>
+              <ReactTooltip id='gsp_vertical' place='bottom' type='dark' effect='solid' />
             </div>
           </div>
         </div>
