@@ -67,10 +67,10 @@ class Offerings extends React.Component {
         method: 'GET',
         mode: 'cors',
         headers: {
-          'Access-Control-Allow-Origin':'*',
-          'Content-Type':'application/json',
-          'table_name':'Offerings',
-          'index_name':'short-index'
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+          'table_name': 'Offerings',
+          'index_name': 'short-index'
         }
       }
     ).then(response => {
@@ -128,6 +128,7 @@ class Offerings extends React.Component {
         <CardSmall
           key={`${offering.offering_name} + ${offering.offering_type}`}
           {...offering}
+          url={url}
         />
       )
     });
