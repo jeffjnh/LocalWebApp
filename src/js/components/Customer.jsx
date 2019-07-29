@@ -7,6 +7,9 @@ import AutoField from "./AutoField";
 import "./CustomerStyles.css";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 // import CardSmall from "./Global/Card/CardSmall";
 
 const match_predict_url =
@@ -59,6 +62,7 @@ class Customer extends Component {
 					matches: response["matches"],
 					suggestions: response["suggestions"].flat()
 				});
+				response['matches'].length > 0 ? toast.success(response['matches'].length + " matches and " + response['suggestions'].flat().length + " suggestions found!" ) : toast.error("No offering matches found for current customer!");
 			})
 			.catch(err => {
 				console.log("Error: API fetch error");
@@ -131,6 +135,14 @@ class Customer extends Component {
 			<div>
 				{/*Navigation Bar*/}
 				<NavBar />
+
+
+				<ToastContainer
+					draggable={false}
+					autoClose={5000}
+
+
+				/>
 
 				{/*AutoField Search bar for Customer Data*/}
 				<div style={{ color: AWSCOLORS.DARK_SQUID_INK }}>
