@@ -1,7 +1,7 @@
 /*
- * TODO :
- * Decide how we want to do filter,
- *   (A && B && C) or (A || B || C)
+ * Two ways to filter: 
+ *  - (A && B && C) -> isOfferingMatchOfAllFilters (default)
+ *  - (A || B || C) -> isOfferingMatchOfAnyFilters (optional)
  */
 
 /*
@@ -14,8 +14,32 @@
  */
 export function filterOfferings(data, filters) {
   return data.filter((offering) => {
-    return isOfferingMatchOfAllFilters(offering, filters);
+    return isOfferingMatchOfAnyFilters(offering, filters);
   });
+}
+
+/*
+ * Offerings are filtered by (A && B && C),
+ * Returns:
+ *  - true: offering matches ALL checkboxes in ALL filtering categories
+ *  - false: offering is NOT a perfect match of ALL checkboxes in ALL filtering categories
+ */
+// export function isOfferingMatchOfAllFilters(testingOffering, testingFilters) {
+export function isOfferingMatchOfAllFilters(offering, filters) {
+
+  // console.log(offering.offering_maturity_level + ' ' + offering.gsp_vertical + ' ' + offering.offering_type);
+  // console.log(filters);
+
+  if (filters.MATURITY_LEVEL[offering.offering_maturity_level] === true
+    && filters.OFFERING_TYPE[offering.offering_type] === true
+    && filters.GSP_INDUSTRYVERTICALS[offering.gsp_vertical] === true) {
+    // console.log('true');
+    return true;
+  }
+
+  // console.log('false');
+  return false;
+
 }
 
 /*
@@ -41,30 +65,6 @@ export function isOfferingMatchOfAnyFilters(offering, filters) {
   }
 
   if (filters.GSP_INDUSTRYVERTICALS[offering.gsp_vertical] === true) {
-    // console.log('true');
-    return true;
-  }
-
-  // console.log('false');
-  return false;
-
-}
-
-/*
- * Offerings are filtered by (A && B && C),
- * Returns:
- *  - true: offering matches ALL checkboxes in ALL filtering categories
- *  - false: offering is NOT a perfect match of ALL checkboxes in ALL filtering categories
- */
-// export function isOfferingMatchOfAllFilters(testingOffering, testingFilters) {
-export function isOfferingMatchOfAllFilters(offering, filters) {
-
-  // console.log(offering.offering_maturity_level + ' ' + offering.gsp_vertical + ' ' + offering.offering_type);
-  // console.log(filters);
-
-  if (filters.MATURITY_LEVEL[offering.offering_maturity_level] === true
-    && filters.OFFERING_TYPE[offering.offering_type] === true
-    && filters.GSP_INDUSTRYVERTICALS[offering.gsp_vertical] === true) {
     // console.log('true');
     return true;
   }
