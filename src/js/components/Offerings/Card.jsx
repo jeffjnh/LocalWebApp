@@ -9,6 +9,7 @@ import logo_3_scale from "../../../assets/img/logo/proserve/3_scale_gray.png";
 import logo_4_optimize from "../../../assets/img/logo/proserve/4_optimize_gray.png";
 import logo_delivery_kit from "../../../assets/img/logo/proserve/delivery_kit.svg";
 import logo_sales_kit from "../../../assets/img/logo/proserve/sales_kit.svg";
+import logo_TBD from "../../../assets/img/logo/proserve/TBD.svg";
 
 const CardStyle = styled.div`
   margin: 1rem;
@@ -96,7 +97,7 @@ class Card extends React.Component {
   }
 
   getBackgroundImg = () => {
-    let logo = logo_sales_kit;
+    let logo = logo_TBD;
     switch (this.props.offering_type) {
       case "Align Offering":
       case "V1 Align Offering":
@@ -123,10 +124,9 @@ class Card extends React.Component {
       case "SK Only":
         logo = logo_sales_kit;
         break;
-      // TODO : make a mystery logo??
       case "TBD":
       default:
-        logo = logo_sales_kit;
+        logo = logo_TBD;
     }
 
     return (
