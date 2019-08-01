@@ -1,16 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import { AWS as AWSCOLORS } from "../../constants/Colors";
-import Accordion from "react-bootstrap/Accordion";
-import Card from "react-bootstrap/Card";
 import FilterForm from "./FilterForm";
+import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 
-// https://react-bootstrap.github.io/components/accordion/
-
-const FilteringBar = styled.div`
-  display: inline-block;
-  position: relative;
-  background-color: ${AWSCOLORS.SMILE_ORANGE};
+const FilterBarText = styled.div`
+  margin: auto 0;
+  padding-right: 1rem;
+  font-size: 1.2rem;
+  color: ${AWSCOLORS.WHITE};
 `;
 
 class FilterBar extends React.Component {
@@ -20,8 +21,9 @@ class FilterBar extends React.Component {
       filters: {
         OFFERING_TYPE: this.props.filters["OFFERING_TYPE"],
         MATURITY_LEVEL: this.props.filters["MATURITY_LEVEL"],
-        GSP_INDUSTRYVERTICALS: this.props.filters["GSP_INDUSTRYVERTICALS"],
-      }
+        GSP_INDUSTRYVERTICALS: this.props.filters["GSP_INDUSTRYVERTICALS"]
+      },
+      dropdownIsActive: null
     };
   }
 
@@ -39,59 +41,88 @@ class FilterBar extends React.Component {
     });
   };
 
+  handleChange = eventKey => {
+    console.log("key: " + eventKey);
+    this.setState({ dropdownIsActive: eventKey }, () => {
+      console.log("state after change: " + this.state.dropdownIsActive);
+    });
+  };
+
+  resetFilters = (event) => {
+    console.log(event.target.value);
+  }
+
   render() {
     return (
-      <FilteringBar
-        style={{
-          display: "inline-block",
-          color: AWSCOLORS.DARK_SQUID_INK,
-        }}
+      <div
+        className={"container"}
+        // style={{ position: "fixed", marginTop: "1rem", marginLeft: "5rem", marginBottom: "3rem"}}
+        style={{ marginTop: "1rem", marginLeft: "5rem" }}
       >
-        <Accordion defaultActiveKey="accd-1">
-          <Card>
-            <Accordion.Toggle as={Card.Header} eventKey="accd-0">
-              Offering Type
-            </Accordion.Toggle>
-            <Accordion.Collapse eventKey="accd-0">
-              <Card.Body>
-                <FilterForm
-                  category_name="OFFERING_TYPE"
-                  filters={this.state.filters["OFFERING_TYPE"]}
-                  onDataChange={this.handleDataChange}
-                />
-              </Card.Body>
-            </Accordion.Collapse>
-          </Card>
-          <Card>
-            <Accordion.Toggle as={Card.Header} eventKey="accd-1">
-              Maturity Level
-            </Accordion.Toggle>
-            <Accordion.Collapse eventKey="accd-1">
-              <Card.Body>
-                <FilterForm
-                  category_name="MATURITY_LEVEL"
-                  filters={this.state.filters["MATURITY_LEVEL"]}
-                  onDataChange={this.handleDataChange}
-                />
-              </Card.Body>
-            </Accordion.Collapse>
-          </Card>
-          <Card>
-            <Accordion.Toggle as={Card.Header} eventKey="accd-2">
-              GSP / Industry Verticals
-            </Accordion.Toggle>
-            <Accordion.Collapse eventKey="accd-2">
-              <Card.Body>
-                <FilterForm
-                  category_name="GSP_INDUSTRYVERTICALS"
-                  filters={this.state.filters["GSP_INDUSTRYVERTICALS"]}
-                  onDataChange={this.handleDataChange}
-                />
-              </Card.Body>
-            </Accordion.Collapse>
-          </Card>
-        </Accordion>
-      </FilteringBar>
+        <div className={"row"} style={{ marginTop: "1rem" }}>
+          {/* <div className={"col-xl-2"} style={{ margin: "auto 0" }}> */}
+          <FilterBarText>Filter by: </FilterBarText>
+          {/* </div> */}
+
+          {/* <div className={"col-xl"}> */}
+          <FilterForm
+            formName="Offering Type"
+            category_name="OFFERING_TYPE"
+            filters={this.state.filters["OFFERING_TYPE"]}
+            onDataChange={this.handleDataChange}
+          />
+          {/* </div> */}
+
+          {/* <div className={"col-xl"}> */}
+          <FilterForm
+            formName="Maturity Level"
+            category_name="MATURITY_LEVEL"
+            filters={this.state.filters["MATURITY_LEVEL"]}
+            onDataChange={this.handleDataChange}
+          />
+          {/* </div> */}
+
+          {/* <div className={"col-xl"}> */}
+          <FilterForm
+            formName="GSP / Industry Verticals"
+            category_name="GSP_INDUSTRYVERTICALS"
+            filters={this.state.filters["GSP_INDUSTRYVERTICALS"]}
+            onDataChange={this.handleDataChange}
+          />
+          {/* </div> */}
+
+          {/* <div className="col">
+            <DropdownButton as={ButtonGroup} title="Filtering Type">
+              <Dropdown.Item
+                eventKey="Filter by All"
+                onSelect={this.handleChange}
+                active={
+                  this.state.dropdownIsActive === this.eventKey ? true : false
+                }
+              >
+                Filter by All Criteria
+              </Dropdown.Item>
+              <Dropdown.Item
+                eventKey="Filter by Any"
+                onSelect={this.handleChange}
+                active={
+                  this.state.dropdownIsActive === this.eventKey ? true : false
+                }
+              >
+                Filter by Any Criteria
+              </Dropdown.Item>
+            </DropdownButton>
+          </div>
+
+          <div className="col">
+            <Button variant="primary"
+              value={"reset filters"}
+              onClick={this.resetFilters}>
+            Reset All Filters</Button>
+          </div> */}
+          
+        </div>
+      </div>
     );
   }
 }

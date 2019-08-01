@@ -14,7 +14,7 @@
  */
 export function filterOfferings(data, filters) {
   return data.filter((offering) => {
-    return isOfferingMatchOfAnyFilters(offering, filters);
+    return isOfferingMatchOfAllFilters(offering, filters);
   });
 }
 

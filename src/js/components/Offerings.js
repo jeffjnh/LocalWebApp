@@ -1,8 +1,6 @@
 import React from "react";
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import NavBar from '../utility/NavBar';
-import Button from "react-bootstrap/Button";
-import Collapse from "react-bootstrap/Collapse";
 import { firstBy } from "thenby";
 import FilterBar from './FilterBar/FilterBar';
 import { OFFERING_TYPE } from '../constants/Filters';
@@ -12,20 +10,10 @@ import { filterOfferings } from '../utility/Filtering';
 import Card from "./Offerings/Card";
 import CardModal from "./Offerings/CardModal";
 import { getLoadingSpinner_Left } from "../utility/LoadingSpinner";
+import { scrollToTop } from "../utility/ScrollToTop";
 
 const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
 // import { OFFERINGSDATA_SHORT } from "../constants/OfferingsData_Short";
-
-const ButtonText = styled.div`
-  display: inline-block;
-  font-size: inherit;
-  
-  &::after {
-    margin-left: 6px;
-    font-size: 10px;
-    content: "\u25BC";
-  }
-`;
 
 class Offerings extends React.Component {
   constructor(props) {
@@ -34,7 +22,6 @@ class Offerings extends React.Component {
       isPageLoading: true,
       currentOfferingClicked: null,
       data: [],
-      showFilterBar: false,
       filters: {
         OFFERING_TYPE,
         MATURITY_LEVEL,
@@ -154,32 +141,6 @@ class Offerings extends React.Component {
     return cards;
   };
 
-  // printAllFilteringStates = () => {
-  //   const allData = [];
-  //   for (let [key, value] of Object.entries(this.state.filters["OFFERING_TYPE"])) {
-  //     allData.push(
-  //       <div>
-  //         {key} : {value.toString()}
-  //       </div>
-  //     )
-  //   }
-  //   for (let [key, value] of Object.entries(this.state.filters["MATURITY_LEVEL"])) {
-  //     allData.push(
-  //       <div>
-  //         {key} : {value.toString()}
-  //       </div>
-  //     )
-  //   }
-  //   for (let [key, value] of Object.entries(this.state.filters["GSP_INDUSTRYVERTICALS"])) {
-  //     allData.push(
-  //       <div>
-  //         {key} : {value.toString()}
-  //       </div>
-  //     )
-  //   }
-  //   return allData;
-  // }
-
   /* 
    * CardModal isOpen={this.props.offering ? true : false},
    *   if a card was clicked, the offering of that card is stored to state: currentOfferingClicked,
@@ -200,6 +161,7 @@ class Offerings extends React.Component {
 
     return (
       <div>
+        
         <NavBar></NavBar>
 
         <CardModal
@@ -211,27 +173,18 @@ class Offerings extends React.Component {
         />
 
         <div id="root-offerings">
-          <Button
-            variant="info"
-            onClick={() => this.setState({ showFilterBar: !this.state.showFilterBar })}
-            aria-controls="filter-bar"
-            aria-expanded={this.state.showFilterBar}
-          >
-            <ButtonText>Filter</ButtonText>
-          </Button>
-          <Collapse in={this.state.showFilterBar}>
-            <div id="filter-bar">
-              {/* {this.printAllFilteringStates()} */}
-              <FilterBar
-                filters={this.state.filters}
-                onHandleFilterChange={this.onHandleFilterChange}
-              />
-            </div>
-          </Collapse>
+
+          <FilterBar
+            filters={this.state.filters}
+            onHandleFilterChange={this.onHandleFilterChange}
+          />
 
           <div className="offerings-card-container">
             {this.appendDataToCard()}
           </div>
+
+          {scrollToTop()}
+
         </div>
 
       </div>

@@ -1,5 +1,51 @@
 import React, { Component } from "react";
+import styled from "styled-components";
+import { AWS as AWSCOLORS } from "../../constants/Colors";
+import Accordion from "react-bootstrap/Accordion";
+import Card from "react-bootstrap/Card";
 import Checkbox from "./Checkbox";
+
+// https://react-bootstrap.github.io/components/accordion/
+
+const accordionStyle = {
+  paddingRight: "0.8rem",
+};
+
+const cardStyle = {
+  margin: "0.3rem auto",
+  border: "none",
+  // backgroundColor: "transparent",
+  backgroundColor: AWSCOLORS.SMILE_ORANGE,
+  // color: AWSCOLORS.SQUID_INK,
+  color: AWSCOLORS.WHITE,
+  fontFamily: "AmazonEmberMono_Rg",
+};
+
+const cardHeaderStyle = {
+  padding: "0.4rem 0.75rem",
+  // backgroundColor: AWSCOLORS.SMILE_ORANGE,
+  // color: AWSCOLORS.SQUID_INK,
+  // color: AWSCOLORS.WHITE,
+  // fontFamily: "AmazonEmberMono_Rg",
+};
+
+const CardTitle = styled.div`
+  padding-right: 20px;
+
+  &::after {
+    position: absolute;
+    right: 0;
+    padding-top: 6px;
+    margin-right: 8px;
+    font-size: 10px;
+    content: "\u25BC";
+  }
+`;
+
+const cardBodyStyle = {
+  backgroundColor: AWSCOLORS.WHITE,
+  color: AWSCOLORS.SQUID_INK,
+}
 
 class FilterForm extends Component {
   constructor(props) {
@@ -8,13 +54,6 @@ class FilterForm extends Component {
       checkboxes: this.props.filters,
     };
   }
-
-  // func createCheckboxes = (pass in optional param to JSX) = > (JSX element[] to be returned)
-  // Iterates over OPTIONS array and calls this.creatCheckbox function for each item in that array
-  // If we want to do this as arrays:
-  // createCheckboxes = () => (OPTIONS.map(this.createCheckbox));
-  createCheckboxes = () =>
-    Object.keys(this.state.checkboxes).map(this.createCheckbox);
 
   // func createCheckbox = (single option from OPTIONS.map) => (JSX element[] to be returned)
   // Returns an array of OPTIONS.length instances of Checkbox components
@@ -26,6 +65,46 @@ class FilterForm extends Component {
       onCheckboxChange={this.handleCheckboxChange}
     />
   );
+
+  // func createCheckboxes = (pass in optional param to JSX) = > (JSX element[] to be returned)
+  // Iterates over OPTIONS array and calls this.creatCheckbox function for each item in that array
+  // If we want to do this as arrays:
+  // createCheckboxes = () => (OPTIONS.map(this.createCheckbox));
+  createCheckboxes = () => (
+    Object.keys(this.state.checkboxes).map(this.createCheckbox)
+  );
+
+  createButtons = () => {
+    return (
+      <div
+        className="form-group mt-3 mb-1"
+        style={{ display: "flex", flexDirection: "row" }}
+      >
+        <button
+          type="button"
+          className="btn btn-outline-primary mr-2 py-1"
+          // style={{fontSize: "13px"}}
+          onClick={this.selectAll}
+        >
+          Select All
+        </button>
+        <button
+          type="button"
+          className="btn btn-outline-primary mr-2 py-1"
+          onClick={this.unselectAll}
+        >
+          Unselect All
+        </button>
+        <Accordion.Toggle
+          className="btn btn-outline-primary mr-2 py-1"
+          onClick={this.applyClicked}
+          eventKey={this.props.formName}
+        >
+          Apply
+        </Accordion.Toggle>
+      </div>
+    );
+  };
 
   // handles change event of a checkbox
   handleCheckboxChange = changeEvent => {
@@ -91,40 +170,32 @@ class FilterForm extends Component {
 
   render() {
     return (
-      <div className="container_filter_form">
-        <div className="row">
-          <div className="col-sm-12 m-2">
-            {/* onFormSubmit */}
-            <form onSubmit={this.handleFormSubmit}>
-              {/* JSX element[] */}
-              {this.createCheckboxes()}
-              <div className="form-group mt-3 mb-1">
-                <button
-                  type="button"
-                  className="btn btn-outline-primary mr-2"
-                  onClick={this.selectAll}
-                >
-                  Select All
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-outline-primary mr-2"
-                  onClick={this.unselectAll}
-                >
-                  Unselect All
-                </button>
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  onClick={this.applyClicked}
-                >
-                  Apply
-                </button>
+      <Accordion style={accordionStyle}>
+        <Card style={cardStyle}>
+          <Accordion.Toggle
+            as={Card.Header}
+            eventKey={this.props.formName}
+            style={cardHeaderStyle}
+          >
+            <CardTitle>{this.props.formName}</CardTitle>
+          </Accordion.Toggle>
+
+          <Accordion.Collapse eventKey={this.props.formName}>
+            <Card.Body style={cardBodyStyle}>
+              <div className="row pl-2">
+                <div className="col-sm mt-2">
+                  {/* onFormSubmit */}
+                  <form onSubmit={this.handleFormSubmit}>
+                    {/* JSX element[] */}
+                    {this.createCheckboxes()}
+                    {this.createButtons()}
+                  </form>
+                </div>
               </div>
-            </form>
-          </div>
-        </div>
-      </div>
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+      </Accordion>
     );
   }
 }
