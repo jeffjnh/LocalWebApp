@@ -54,7 +54,7 @@ const CardStyle = styled.div`
         // flex-wrap: wrap;
       }
   
-      .practice-group {
+      .gsp-vertical {
         position: absolute;
         bottom: 12%;
         margin: 0;
@@ -83,7 +83,7 @@ const logoStyle = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "40%",
+  height: "70%",
   opacity: "0.15",
 };
 
@@ -137,7 +137,7 @@ class Card extends React.Component {
   wrapToNumCharCeil = (str, maxLen, separator = ' ') => {
     if (str.length <= maxLen)
       return str;
-    return str.substr(0, str.lastIndexOf(separator, maxLen)) + "...";
+    return str.substr(0, str.lastIndexOf(separator, maxLen)) + " (...)";
   }
 
   // changeColor = () => {
@@ -155,7 +155,7 @@ class Card extends React.Component {
           <CardTags offering_type={this.props.offering_type} offering_maturity_level={this.props.offering_maturity_level} place={"top"} />
           <div className="text">
           <div className="offering-name">{this.wrapToNumCharCeil(this.props.offering_name, 30)}</div>
-            <div className="practice-group">
+            <div className="gsp-vertical">
               <div data-tip='GSP / Industry Vertical' data-for='gsp_vertical'>{this.props.gsp_vertical}</div>
               <ReactTooltip id='gsp_vertical' place='bottom' type='dark' effect='solid' />
             </div>

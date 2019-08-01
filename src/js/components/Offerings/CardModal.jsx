@@ -32,7 +32,7 @@ const logoStyle = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "30%",
+  height: "80%",
   opacity: "0.10"
 };
 
