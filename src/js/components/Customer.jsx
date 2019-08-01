@@ -62,7 +62,7 @@ class Customer extends Component {
 					matches: response["matches"],
 					suggestions: response["suggestions"]
 				});
-				response['matches'].length > 0 ? toast.success(response['matches'].length + " matches and " + response['suggestions'].flat().length + " suggestions found!" ) : toast.error("No offering matches found for current customer!");
+				response['matches'].filter(match => match !== {}).length > 0 ? toast.success(response['matches'].filter(match=>match!=={}).length + " matches and " + response['suggestions'].flat().length + " suggestions found!" ) : toast.error("No offering matches found for current customer!");
 			})
 			.catch(err => {
 				console.log("Error: API fetch error");
@@ -189,7 +189,7 @@ class Customer extends Component {
 				/>
 
 				{/*AutoField Search bar for Customer Data*/}
-				<div style={{ color: AWSCOLORS.DARK_SQUID_INK }}>
+				<div style={{color: AWSCOLORS.DARK_SQUID_INK}}>
 					<AutoField stateSetter={this.customerStateUpdate} />
 				</div>
 
@@ -206,12 +206,14 @@ class Customer extends Component {
 							margin: "40px",
 							color: AWSCOLORS.BLACK,
 							backgroundColor: AWSCOLORS.WHITE,
-							borderRadius: "10px"
+							borderRadius: "10px",
+							whiteSpace: 'unset'
+
 						}}
 					>
 						<ReactTable
 							data={this.state.suggestions} // add data
-							resolveData={data => this.makeSelections(data)}
+							// resolveData={data => this.makeSelections(data)}
 							// data={this.state.suggestions.flat()}
 							getTrProps={this.offeringStyling}
 							// getTdProps={this.onRowClick}
