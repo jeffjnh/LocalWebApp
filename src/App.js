@@ -17,8 +17,8 @@ function App() {
           <div className="App-nav">
             <a className="App-link" href="/login" style={{marginRight: "20px"}}>Login</a>
             <a className="App-link" href="/offerings" style={{marginRight: "20px"}}>Offerings</a>
-            <a className="App-link" href="/testing" style={{marginRight: "20px"}}>Testing</a>
             <a className="App-link" href="/customer" style={{marginRight: "20px"}}>Customer</a>
+            <a className="App-link" href="/testing" style={{marginRight: "20px"}}>Testing</a>
             <a className="App-link" href="/404">(404)</a>
           </div>
 
