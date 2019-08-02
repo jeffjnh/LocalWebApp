@@ -170,6 +170,7 @@ class Offerings extends React.Component {
             this.setState({ currentOfferingClicked: null });
           }}
           url={url}
+          fetch={true}
         />
 
         <div id="root-offerings">

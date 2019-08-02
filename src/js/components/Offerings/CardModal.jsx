@@ -40,8 +40,8 @@ class CardModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isPageLoading: true,
-      data: []
+        isPageLoading: true,
+        data: []
     };
   }
 
@@ -60,9 +60,16 @@ class CardModal extends React.Component {
   async componentDidUpdate(prevProps) {
     // if no offering has been clicked (null in parent state),
     // or if offering clicked is the same as previously clicked
+
     if (!this.props.offering) {
       return;
     }
+
+    else if(this.props.offering !== prevProps.offering && !this.props.fetch){
+        await this.setState({data:this.props.offering});
+        console.log( this.props.offering );
+    }
+
     // if a new offering was clicked
     // while fetching API, render spinner
     // after fetching is done, render modal content
@@ -103,6 +110,8 @@ class CardModal extends React.Component {
       .then(response => {
         // console.log("storing response to state");
         // take first one, there will only be one
+        console.log( response);
+
         this.setState({ data: response[0] });
       })
       .catch(err => {

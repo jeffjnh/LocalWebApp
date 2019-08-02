@@ -8,7 +8,7 @@ import "./CustomerStyles.css";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 // import Card from "./Offerings/Card";
-// import CardModal from "./Offerings/CardModal";
+import CardModal from "./Offerings/CardModal";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -22,7 +22,8 @@ class Customer extends Component {
 		matches: [],
 		suggestions: [],
 		visible: new Set(),
-		row_selected: -1
+		row_selected: -1,
+		currentOfferingClicked: null
 	};
 
 	customerStateUpdate = (response_object, name) => {
@@ -106,23 +107,35 @@ class Customer extends Component {
 		return selections;
 	};
 	offeringStyling = (state, rowInfo, column) => {
+
 		if (typeof rowInfo !== "undefined") {
 			return {
-				style: {
-					background: rowInfo.selected ? "green" : "white",
-					color: rowInfo.selected ? "white" : "black"
-				}
+				onClick: (e, t) => {
+					console.log(e);
+					console.log(rowInfo);
+					console.log(t);
+					this.setState({currentOfferingClicked: rowInfo.original});
+				},
+				// style: {
+				// 	background: rowInfo.selected ? "green" : "white",
+				// 	color: rowInfo.selected ? "white" : "black"
+				// }
 			};
 		} else {
 			return {
-				style: {
-					background: "white",
-					color: "black"
-				}
+				onHover: {
+					background:"green"
+				},
+				// style: {
+				// 	background: "white",
+				// 	color: "black"
+				// }
 			};
 		}
 	};
 	onColorClick = (state, rowInfo, column) => {
+
+
 		if (typeof rowInfo !== "undefined") {
 			return {
 				onClick: (e, handleOriginal) => {
@@ -180,6 +193,16 @@ class Customer extends Component {
 				{/*Navigation Bar*/}
 				<NavBar />
 
+
+				<CardModal
+					offering={this.state.currentOfferingClicked}
+					onCloseModal={ () => {
+						this.setState({currentOfferingClicked:null});
+					}}
+					fetch={false}
+					url={"https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query"}
+
+				/>
 
 				<ToastContainer
 					draggable={false}
