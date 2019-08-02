@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { AWS as AWSCOLORS } from "../../constants/Colors";
 import FilterForm from "./FilterForm";
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
+// import Button from "react-bootstrap/Button";
+// import ButtonGroup from "react-bootstrap/ButtonGroup";
+// import Dropdown from "react-bootstrap/Dropdown";
+// import DropdownButton from "react-bootstrap/DropdownButton";
 
 const FilterBarText = styled.div`
   margin: auto 0;
@@ -41,16 +41,16 @@ class FilterBar extends React.Component {
     });
   };
 
-  handleChange = eventKey => {
-    console.log("key: " + eventKey);
-    this.setState({ dropdownIsActive: eventKey }, () => {
-      console.log("state after change: " + this.state.dropdownIsActive);
-    });
-  };
+  // handleChange = eventKey => {
+  //   console.log("key: " + eventKey);
+  //   this.setState({ dropdownIsActive: eventKey }, () => {
+  //     console.log("state after change: " + this.state.dropdownIsActive);
+  //   });
+  // };
 
-  resetFilters = (event) => {
-    console.log(event.target.value);
-  }
+  // resetFilters = (event) => {
+  //   console.log(event.target.value);
+  // }
 
   render() {
     return (
