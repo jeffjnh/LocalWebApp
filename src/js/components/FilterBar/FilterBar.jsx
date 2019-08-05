@@ -9,6 +9,7 @@ import FilterForm from "./FilterForm";
 
 const FilterBarText = styled.div`
   margin: auto 0;
+  padding-top: 5px;
   padding-right: 1rem;
   font-size: 1.2rem;
   color: ${AWSCOLORS.WHITE};
@@ -55,41 +56,41 @@ class FilterBar extends React.Component {
   render() {
     return (
       <div
-        className={"container"}
+        className={"container-fluid no-gutters"}
         // style={{ position: "fixed", marginTop: "1rem", marginLeft: "5rem", marginBottom: "3rem"}}
-        style={{ marginTop: "1rem", marginLeft: "5rem" }}
+        style={{ marginTop: "1.5rem", marginLeft: "5rem" }}
       >
-        <div className={"row"} style={{ marginTop: "1rem" }}>
-          {/* <div className={"col-xl-2"} style={{ margin: "auto 0" }}> */}
-          <FilterBarText>Filter by: </FilterBarText>
-          {/* </div> */}
+        <div className={"row justify-content-start"}>
+          <div className={"col-auto m-1 p-0"} >
+            <FilterBarText>Filters: </FilterBarText>
+          </div>
 
-          {/* <div className={"col-xl"}> */}
-          <FilterForm
-            formName="Offering Type"
-            category_name="OFFERING_TYPE"
-            filters={this.state.filters["OFFERING_TYPE"]}
-            onDataChange={this.handleDataChange}
-          />
-          {/* </div> */}
+          <div className={"col-auto m-1 p-0"}>
+            <FilterForm
+              formName="Offering Type"
+              category_name="OFFERING_TYPE"
+              filters={this.state.filters["OFFERING_TYPE"]}
+              onDataChange={this.handleDataChange}
+            />
+          </div>
 
-          {/* <div className={"col-xl"}> */}
-          <FilterForm
-            formName="Maturity Level"
-            category_name="MATURITY_LEVEL"
-            filters={this.state.filters["MATURITY_LEVEL"]}
-            onDataChange={this.handleDataChange}
-          />
-          {/* </div> */}
+          <div className={"col-auto m-1 p-0"}>
+            <FilterForm
+              formName="Maturity Level"
+              category_name="MATURITY_LEVEL"
+              filters={this.state.filters["MATURITY_LEVEL"]}
+              onDataChange={this.handleDataChange}
+            />
+          </div>
 
-          {/* <div className={"col-xl"}> */}
-          <FilterForm
-            formName="GSP / Industry Verticals"
-            category_name="GSP_INDUSTRYVERTICALS"
-            filters={this.state.filters["GSP_INDUSTRYVERTICALS"]}
-            onDataChange={this.handleDataChange}
-          />
-          {/* </div> */}
+          <div className={"col-auto m-1 p-0"}>
+            <FilterForm
+              formName="GSP / Industry Verticals"
+              category_name="GSP_INDUSTRYVERTICALS"
+              filters={this.state.filters["GSP_INDUSTRYVERTICALS"]}
+              onDataChange={this.handleDataChange}
+            />
+          </div>
 
           {/* <div className="col">
             <DropdownButton as={ButtonGroup} title="Filtering Type">
