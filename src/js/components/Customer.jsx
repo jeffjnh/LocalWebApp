@@ -9,8 +9,8 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 // import Card from "./Offerings/Card";
 import CardModal from "./Offerings/CardModal";
-import {ToastContainer, toast} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const match_predict_url =
 	"https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/customer/match";
@@ -63,7 +63,17 @@ class Customer extends Component {
 					matches: response["matches"],
 					suggestions: response["suggestions"]
 				});
-				response['matches'].filter(match => match !== {}).length > 0 ? toast.success(response['matches'].filter(match=>match!=={}).length + " matches and " + response['suggestions'].flat().length + " suggestions found!" ) : toast.error("No offering matches found for current customer!");
+				response["matches"].filter(match => match !== {}).length > 0
+					? toast.success(
+							response["matches"].filter(match => match !== {})
+								.length +
+								" matches and " +
+								response["suggestions"].flat().length +
+								" suggestions found!"
+					  )
+					: toast.error(
+							"No offering matches found for current customer!"
+					  );
 			})
 			.catch(err => {
 				console.log("Error: API fetch error");
@@ -107,25 +117,31 @@ class Customer extends Component {
 		return selections;
 	};
 	offeringStyling = (state, rowInfo, column) => {
-
 		if (typeof rowInfo !== "undefined") {
 			return {
 				onClick: (e, t) => {
 					console.log(e);
+					console.log("here");
 					console.log(rowInfo);
 					console.log(t);
-					this.setState({currentOfferingClicked: rowInfo.original});
+					this.setState({ currentOfferingClicked: rowInfo.original });
 				},
-				// style: {
-				// 	background: rowInfo.selected ? "green" : "white",
-				// 	color: rowInfo.selected ? "white" : "black"
-				// }
+				style: {
+					background: rowInfo.original.salesIndices.includes(
+						this.state.row_selected
+					)
+						? "LawnGreen"
+						: "white"
+				},
+				onHover: {
+					background: "green"
+				}
 			};
 		} else {
 			return {
 				onHover: {
-					background:"green"
-				},
+					background: "green"
+				}
 				// style: {
 				// 	background: "white",
 				// 	color: "black"
@@ -134,8 +150,6 @@ class Customer extends Component {
 		}
 	};
 	onColorClick = (state, rowInfo, column) => {
-
-
 		if (typeof rowInfo !== "undefined") {
 			return {
 				onClick: (e, handleOriginal) => {
@@ -158,7 +172,15 @@ class Customer extends Component {
 					background:
 						rowInfo.index === this.state.row_selected
 							? "green"
-							: "white",
+							: typeof this.state.matches[rowInfo.index] !==
+									"undefined" &&
+							  typeof this.state.matches[rowInfo.index] !==
+									null &&
+							  Object.keys(this.state.matches[rowInfo.index])
+									.length !== 0
+							? //   true
+							  "white"
+							: "LightGray",
 					color:
 						rowInfo.index === this.state.row_selected
 							? "white"
@@ -193,30 +215,98 @@ class Customer extends Component {
 				{/*Navigation Bar*/}
 				<NavBar />
 
-
 				<CardModal
 					offering={this.state.currentOfferingClicked}
-					onCloseModal={ () => {
-						this.setState({currentOfferingClicked:null});
+					onCloseModal={() => {
+						this.setState({ currentOfferingClicked: null });
 					}}
 					fetch={false}
-					url={"https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query"}
-
+					url={
+						"https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query"
+					}
 				/>
 
-				<ToastContainer
-					draggable={false}
-					autoClose={5000}
-
-
-				/>
+				<ToastContainer draggable={false} autoClose={5000} />
 
 				{/*AutoField Search bar for Customer Data*/}
-				<div style={{color: AWSCOLORS.DARK_SQUID_INK}}>
+				<div style={{ color: AWSCOLORS.DARK_SQUID_INK }}>
 					<AutoField stateSetter={this.customerStateUpdate} />
 				</div>
 
 				<div>
+					<br />
+					<h2
+						style={{ color: AWSCOLORS.SMILE_ORANGE }}
+						className="text-center"
+					>
+						Offerings from SalesForce
+					</h2>
+
+					<div
+						style={{
+							margin: "40px",
+							color: AWSCOLORS.BLACK,
+							backgroundColor: AWSCOLORS.WHITE,
+							borderRadius: "10px"
+						}}
+					>
+						<ReactTable
+							data={this.state.customer_sales}
+							// getTdProps={this.onRowClick}
+							getTrProps={this.onColorClick}
+							columns={[
+								{
+									Header: "Customer Information",
+									columns: [
+										{
+											Header: "Product Name",
+											accessor: "product_name"
+										},
+										{
+											Header: "Owner Name",
+											accessor: "owner_name"
+										},
+										{
+											Header: "Practice",
+											accessor:
+												"practice_lookup-practice_name"
+										}
+									]
+								},
+								{
+									Header: "General Information",
+									columns: [
+										{
+											Header: "Date",
+											accessor: "close_date"
+										},
+										{
+											Header: "Stage",
+											accessor: "stage"
+										},
+										{
+											id: "total_opportunity",
+											Header: "Total Opportunity",
+											accessor: value =>
+												parseInt(
+													value.total_opportunity
+												).toLocaleString(undefined, {
+													style: "currency",
+													currency:
+														value.list_price_currency
+												})
+										}
+									]
+								}
+							]}
+							defaultPageSize={10}
+							style={{
+								height: "500px" // This will force the table body to overflow and scroll, since there is not enough room
+							}}
+							className="-striped -highlight"
+						/>
+						<br />
+					</div>
 					<h2
 						style={{ color: AWSCOLORS.SMILE_ORANGE }}
 						className="text-center"
@@ -230,11 +320,11 @@ class Customer extends Component {
 							color: AWSCOLORS.BLACK,
 							backgroundColor: AWSCOLORS.WHITE,
 							borderRadius: "10px",
-							whiteSpace: 'unset'
-
+							whiteSpace: "unset"
 						}}
 					>
 						<ReactTable
+							className="highlight"
 							data={this.state.suggestions} // add data
 							// resolveData={data => this.makeSelections(data)}
 							// data={this.state.suggestions.flat()}
@@ -303,80 +393,13 @@ class Customer extends Component {
 									]
 								}
 							]}
-							defaultPageSize={5}
+							defaultPageSize={10}
 							style={{
 								height: "500px" // This will force the table body to overflow and scroll, since there is not enough room
 							}}
 							className="-striped -highlight"
 						/>
 						<br />
-						<br />
-					</div>
-
-					<h2
-						style={{ color: AWSCOLORS.SMILE_ORANGE }}
-						className="text-center"
-					>
-						Offerings from SalesForce
-					</h2>
-
-					<div
-						style={{
-							margin: "40px",
-							color: AWSCOLORS.BLACK,
-							backgroundColor: AWSCOLORS.WHITE,
-							borderRadius: "10px"
-						}}
-					>
-						<ReactTable
-							data={this.state.customer_sales}
-							// getTdProps={this.onRowClick}
-							getTrProps={this.onColorClick}
-							columns={[
-								{
-									Header: "Customer Information",
-									columns: [
-										{
-											Header: "Product Name",
-											accessor: "product_name"
-										},
-										{
-											Header: "Owner Name",
-											accessor: "owner_name"
-										},
-										{
-											Header: "Practice",
-											accessor:
-												"practice_lookup-practice_name"
-										}
-									]
-								},
-								{
-									Header: "General Information",
-									columns: [
-										{
-											Header: "Date",
-											accessor: "close_date"
-										},
-										{
-											Header: "Stage",
-											accessor: "stage"
-										},
-										{
-											id: "total_opportunity",
-											Header: "Total Opportunity",
-											accessor: value =>
-												parseInt(value.total_opportunity).toLocaleString(undefined, {style:"currency", currency:value.list_price_currency})
-										}
-									]
-								}
-							]}
-							defaultPageSize={5}
-							style={{
-								height: "500px" // This will force the table body to overflow and scroll, since there is not enough room
-							}}
-							className="-striped -highlight"
-						/>
 						<br />
 					</div>
 				</div>
