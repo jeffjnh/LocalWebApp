@@ -132,9 +132,6 @@ class Customer extends Component {
 					)
 						? "LawnGreen"
 						: "white"
-				},
-				onHover: {
-					background: "green"
 				}
 			};
 		} else {
