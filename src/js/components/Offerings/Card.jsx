@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 import { AWS as AWSCOLORS } from "../../constants/Colors";
-import ReactTooltip from 'react-tooltip';
 import CardTags from "./CardTags";
 import logo_1_align from "../../../assets/img/logo/proserve/1_align_gray.png";
 import logo_2_launch from "../../../assets/img/logo/proserve/2_launch_gray.png";
@@ -59,7 +60,7 @@ const CardStyle = styled.div`
         bottom: 12%;
         margin: 0;
         padding: 0 1.5rem 0 1.5rem;
-        font-style: italic;
+        // font-style: italic;
       }
     }
 
@@ -154,10 +155,13 @@ class Card extends React.Component {
           {this.getBackgroundImg()}
           <CardTags offering_type={this.props.offering_type} offering_maturity_level={this.props.offering_maturity_level} place={"top"} />
           <div className="text">
-          <div className="offering-name">{this.wrapToNumCharCeil(this.props.offering_name, 30)}</div>
+            <div className="offering-name">{this.wrapToNumCharCeil(this.props.offering_name, 30)}</div>
             <div className="gsp-vertical">
-              <div data-tip='GSP / Industry Vertical' data-for='gsp_vertical'>{this.props.gsp_vertical}</div>
-              <ReactTooltip id='gsp_vertical' place='bottom' type='dark' effect='solid' />
+              <OverlayTrigger placement="bottom"
+                overlay={<Tooltip id="gsp_vertical"> GSP / Industry Vertical </Tooltip>}
+              >
+                <div>{this.props.gsp_vertical}</div>
+              </OverlayTrigger>
             </div>
           </div>
         </div>
