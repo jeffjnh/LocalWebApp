@@ -63,16 +63,13 @@ class Customer extends Component {
 					matches: response["matches"],
 					suggestions: response["suggestions"]
 				});
-				response["matches"].filter(match => match !== {}).length > 0
+				response['suggestions'].length > 0
 					? toast.success(
-							response["matches"].filter(match => match !== {})
-								.length +
-								" matches and " +
 								response["suggestions"].flat().length +
 								" suggestions found!"
 					  )
 					: toast.error(
-							"No offering matches found for current customer!"
+							"No offering suggestions found for current customer!"
 					  );
 			})
 			.catch(err => {
@@ -81,21 +78,6 @@ class Customer extends Component {
 				console.log(this.state.err_api_fetch);
 			});
 	};
-
-	// onRowClick = (state, rowInfo, column, instance) => {
-	// 	return {
-	// 		onClick: (e, handleOriginal) => {
-	// 			// console.log(rowInfo + " " + column + " " + state);
-	// 			console.log("This row clicked:", rowInfo.row);
-	// 			console.log("This State clicked:", state);
-	// 			console.log("This column clicked:", column);
-	// 			if (handleOriginal) {
-	// 				handleOriginal();
-	// 			}
-	// 		}
-	// 		// style
-	// 	};
-	// };
 
 	makeSelections = data => {
 		var selections = [];
@@ -132,9 +114,6 @@ class Customer extends Component {
 					)
 						? "LawnGreen"
 						: "white"
-				},
-				onHover: {
-					background: "green"
 				}
 			};
 		} else {
