@@ -43,35 +43,39 @@ const renderSuggestion = suggestion => (
 
 
 
-async function genData() {
-    fetch(url, {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-          'Access-Control-Allow-Origin':'*',
-            'Content-Type':'application/json',
-          'table_name':'OfferingSales',
-          "index_name":"customer_name-index"
-        }
-      }
-    ).then(response => {
-        if (!response.ok) {
-          throw response;
-        } else {
-            console.log("Success: API fetched");
-            return response.json();
-        }
-      }).then(response =>{
-        customerNames = response.map( obj => obj.customer_name);
-      }).catch(err => {
-        console.log("Error: API fetch error");
-        console.log(err.message)
-      });
-}
 
 
 
 class AutoField extends React.Component{
+
+
+
+    async genData() {
+        fetch(url, {
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                    'Access-Control-Allow-Origin':'*',
+                    'Content-Type':'application/json',
+                    'table_name':this.props.table,
+                    "index_name":this.props.index
+                }
+            }
+        ).then(response => {
+            if (!response.ok) {
+                throw response;
+            } else {
+                console.log("Success: API fetched");
+                return response.json();
+            }
+        }).then(response =>{
+            customerNames = response.map( obj => obj[this.props.indexedType]);
+        }).catch(err => {
+            console.log("Error: API fetch error");
+            console.log(err.message)
+        });
+    }
+
 
     constructor(props){
         super(props);
@@ -79,7 +83,7 @@ class AutoField extends React.Component{
             value:'',
             suggestions:[],
         };
-        genData();
+        this.genData();
     }
 
     onChangeHandler = (event, {newValue}) => {
@@ -107,7 +111,7 @@ class AutoField extends React.Component{
                 headers: {
                     'Access-Control-Allow-Origin':'*',
                     'Content-Type':'application/json',
-                    'table_name':'OfferingSales',
+                    'table_name':this.props.table,
                     // "index_name":"customer_name-index"
                     'customer_name': suggestionValue,
                 }

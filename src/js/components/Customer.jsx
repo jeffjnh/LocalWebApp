@@ -209,7 +209,11 @@ class Customer extends Component {
 
 				{/*AutoField Search bar for Customer Data*/}
 				<div style={{ color: AWSCOLORS.DARK_SQUID_INK }}>
-					<AutoField stateSetter={this.customerStateUpdate} />
+					<AutoField stateSetter={this.customerStateUpdate}
+						table={'OfferingSales'}
+					   	index={'customer_name-index'}
+					   	indexedType={'customer_name'}
+					/>
 				</div>
 
 				<div>
