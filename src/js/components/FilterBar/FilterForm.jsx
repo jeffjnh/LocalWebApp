@@ -19,6 +19,7 @@ const cardStyle = {
   // color: AWSCOLORS.SQUID_INK,
   color: AWSCOLORS.WHITE,
   fontFamily: "AmazonEmberMono_Rg",
+  fontSize: "15px"
 };
 
 const cardHeaderStyle = {
@@ -82,21 +83,23 @@ class FilterForm extends Component {
       >
         <button
           type="button"
-          className="btn btn-outline-primary mr-2 py-1"
-          // style={{fontSize: "13px"}}
+          className="btn-sm mr-2 py-1"
+          style={{fontSize: "13px", backgroundColor: AWSCOLORS.SMILE_ORANGE, color: AWSCOLORS.WHITE }}
           onClick={this.selectAll}
         >
           Select All
         </button>
         <button
           type="button"
-          className="btn btn-outline-primary mr-2 py-1"
+          className="btn-sm mr-2 py-1"
+          style={{fontSize: "13px", backgroundColor: AWSCOLORS.SMILE_ORANGE, color: AWSCOLORS.WHITE }}
           onClick={this.unselectAll}
         >
           Unselect All
         </button>
         <Accordion.Toggle
-          className="btn btn-outline-primary mr-2 py-1"
+          className="btn-sm mr-2 py-1"
+          style={{fontSize: "13px", backgroundColor: AWSCOLORS.SMILE_ORANGE, color: AWSCOLORS.WHITE }}
           onClick={this.applyClicked}
           eventKey={this.props.formName}
         >
