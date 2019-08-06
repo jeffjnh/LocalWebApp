@@ -33,7 +33,8 @@ const logoStyle = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   height: "80%",
-  opacity: "0.10"
+  opacity: "0.10",
+  zIndex: "-1",
 };
 
 class CardModal extends React.Component {
@@ -153,7 +154,7 @@ class CardModal extends React.Component {
         logo = logo_TBD;
     }
 
-    return <img alt="icon-background" src={logo} style={logoStyle} />;
+    return <img alt="icon-background" src={logo} style={logoStyle} draggable="false" />;
   };
 
   setTextIfNull = data => {

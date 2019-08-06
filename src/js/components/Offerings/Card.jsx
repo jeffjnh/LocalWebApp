@@ -86,6 +86,7 @@ const logoStyle = {
   transform: "translate(-50%, -50%)",
   height: "70%",
   opacity: "0.15",
+  zIndex: "-1",
 };
 
 class Card extends React.Component {
@@ -131,7 +132,7 @@ class Card extends React.Component {
     }
 
     return (
-      <img alt="icon-background" src={logo} style={logoStyle} />
+      <img alt="icon-background" src={logo} style={logoStyle} draggable="false" />
     );
   }
 
