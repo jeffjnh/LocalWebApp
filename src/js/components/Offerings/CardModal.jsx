@@ -34,15 +34,19 @@ const logoStyle = {
   transform: "translate(-50%, -50%)",
   height: "80%",
   opacity: "0.10",
-  zIndex: "-1",
+  zIndex: "-1"
+};
+
+const modalContentStyle = {
+  color: AWSCOLORS.DARK_SQUID_INK
 };
 
 class CardModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        isPageLoading: true,
-        data: []
+      isPageLoading: true,
+      data: []
     };
   }
 
@@ -64,11 +68,9 @@ class CardModal extends React.Component {
 
     if (!this.props.offering) {
       return;
-    }
-
-    else if(this.props.offering !== prevProps.offering && !this.props.fetch){
-        await this.setState({data:this.props.offering});
-        console.log( this.props.offering );
+    } else if (this.props.offering !== prevProps.offering && !this.props.fetch) {
+      await this.setState({ data: this.props.offering });
+      console.log(this.props.offering);
     }
 
     // if a new offering was clicked
@@ -111,7 +113,7 @@ class CardModal extends React.Component {
       .then(response => {
         // console.log("storing response to state");
         // take first one, there will only be one
-        console.log( response);
+        console.log(response);
 
         this.setState({ data: response[0] });
       })
@@ -154,7 +156,14 @@ class CardModal extends React.Component {
         logo = logo_TBD;
     }
 
-    return <img alt="icon-background" src={logo} style={logoStyle} draggable="false" />;
+    return (
+      <img
+        alt="icon-background"
+        src={logo}
+        style={logoStyle}
+        draggable="false"
+      />
+    );
   };
 
   setTextIfNull = data => {
@@ -197,23 +206,28 @@ class CardModal extends React.Component {
 
   getModalContent = () => {
     return (
-      <div style={{ color: AWSCOLORS.DARK_SQUID_INK }}>
+      <div class={modalContentStyle}>
         {this.getBackgroundImg(this.state.data.offering_type)}
         <CardTags
           offering_type={this.state.data.offering_type}
           offering_maturity_level={this.state.data.offering_maturity_level}
           place={"bottom"}
         />
+
         <h1 style={{ color: AWSCOLORS.SMILE_ORANGE }}>
           {this.state.data.offering_type} - {this.state.data.offering_name}
         </h1>
         <p />
+
         <div>{this.state.data.offering_description}</div>
         <p />
+
         <div>Capability: {this.state.data.capability}</div>
         <p />
+
         <div>GSP / Industry Vertical: {this.state.data.gsp_vertical}</div>
         <p />
+
         <div>
           Owner:&nbsp;
           {!this.state.data.owner.includes(", ") ? (
@@ -230,25 +244,25 @@ class CardModal extends React.Component {
           )}
         </div>
         <p />
+
         <div>Practice Group: {this.state.data.practice_group}</div>
         <p />
+
         <div>CAF Perspective: {this.state.data.caf_perspective}</div>
         <p />
-        <div>
-          {/* {ProgressBar} */}
-          (ProgressBar)
-        </div>
-        <p />
+
         <div>
           Delivery Kit:
           {this.setTextIfNull(this.state.data.delivery_kit)}
         </div>
         <p />
+
         <div>
           Sales Kit:
           {this.setTextIfNull(this.state.data.sales_kit)}
         </div>
         <p />
+
         <div>
           Wiki Link:
           {this.setTextIfNull(this.state.data.wiki_link)}
