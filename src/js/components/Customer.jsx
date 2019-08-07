@@ -213,6 +213,7 @@ class Customer extends Component {
 						table={'OfferingSales'}
 					   	index={'customer_name-index'}
 					   	indexedType={'customer_name'}
+					   	placeText={"Company Name"}
 					/>
 				</div>
 

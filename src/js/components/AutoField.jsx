@@ -18,7 +18,7 @@ const getSuggestions = value => {
         customerNames = tempData;
         mappedFlag = true;
     }
-
+    // console.log( customerNames);
 
     return(
         [...new Set(
@@ -69,6 +69,7 @@ class AutoField extends React.Component{
                 return response.json();
             }
         }).then(response =>{
+            console.log( response);
             customerNames = response.map( obj => obj[this.props.indexedType]);
         }).catch(err => {
             console.log("Error: API fetch error");
@@ -140,7 +141,7 @@ class AutoField extends React.Component{
         const {value, suggestions} = this.state;
 
         const inputProps={
-            placeholder:"Company Name",
+            placeholder:this.props.placeText,
             value,
             onChange:this.onChangeHandler
 
