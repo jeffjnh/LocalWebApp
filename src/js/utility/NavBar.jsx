@@ -24,8 +24,6 @@ class NavBar extends React.Component {
     this.state = {};
   }
 
-  func = () => {};
-
   render() {
     return (
       <Navbar style={NavbarStyle} expand="lg" sticky="top">
@@ -45,6 +43,7 @@ class NavBar extends React.Component {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/offerings">Offerings</Nav.Link>
             <Nav.Link href="/customer">Customer</Nav.Link>
+            <Nav.Link href="/editor">Relations Editor</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

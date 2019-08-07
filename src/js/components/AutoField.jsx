@@ -71,8 +71,8 @@ class AutoField extends React.Component{
                 return response.json();
             }
         }).then(response =>{
-            console.log( response);
-            customerNames = response.map( obj => obj[this.props.indexedType]);
+            console.log(response);
+            customerNames = response.map(obj => obj[this.props.indexedType]);
         }).catch(err => {
             console.log("Error: API fetch error");
             console.log(err.message)
