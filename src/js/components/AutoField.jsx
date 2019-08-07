@@ -51,6 +51,8 @@ class AutoField extends React.Component{
 
 
     async genData() {
+        console.log(this.props.table);
+        console.log(this.props.index);
         fetch(url, {
                 method: 'GET',
                 mode: 'cors',
