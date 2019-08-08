@@ -214,6 +214,7 @@ class Customer extends Component {
 					   	index={'customer_name-index'}
 					   	indexedType={'customer_name'}
 					   	placeText={"Company Name"}
+						jointData={false}
 					/>
 				</div>
 

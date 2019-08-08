@@ -3,7 +3,7 @@ import AutoField from "./AutoField";
 import { AWS as AWSCOLORS } from "../constants/Colors";
 import NavBar from "../utility/NavBar";
 
-const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/predictions/";
+const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/predict";
 
 class Editor extends Component {
   constructor(props) {
@@ -66,6 +66,8 @@ class Editor extends Component {
               index={"offering_name-index"}
               indexedType={"offering_name"}
               placeText={"Offering Name"}
+			  secondType={"offering_type"}
+			  jointData={true}
               stateSetter={this.onChangePredictor}
             />
           </div>
@@ -76,6 +78,8 @@ class Editor extends Component {
               index={"offering_name-index"}
               indexedType={"offering_name"}
               placeText={"Offering Name"}
+			  secondType={"offering_type"}
+			  jointData={true}
               stateSetter={this.onChangePredictee}
             />
           </div>

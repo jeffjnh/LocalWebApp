@@ -72,7 +72,10 @@ class AutoField extends React.Component{
             }
         }).then(response =>{
             console.log(response);
-            customerNames = response.map(obj => obj[this.props.indexedType]);
+            if( !this.props.jointData )
+                customerNames = response.map(obj => obj[this.props.indexedType]);
+            else
+                customerNames = response.map(obj => (obj[this.props.indexedType] + "-" + obj[this.props.secondType]));
         }).catch(err => {
             console.log("Error: API fetch error");
             console.log(err.message)
