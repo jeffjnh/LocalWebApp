@@ -50,6 +50,9 @@ class AutoField extends React.Component{
 
 
 
+
+
+
     async genData() {
         console.log(this.props.table);
         console.log(this.props.index);
@@ -89,7 +92,8 @@ class AutoField extends React.Component{
             value:'',
             suggestions:[],
         };
-        this.genData();
+        if( customerNames.length === 0)
+            this.genData();
     }
 
     onChangeHandler = (event, {newValue}) => {
