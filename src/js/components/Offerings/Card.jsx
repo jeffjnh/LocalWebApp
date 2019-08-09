@@ -85,8 +85,7 @@ const logoStyle = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   height: "70%",
-  opacity: "0.15",
-  zIndex: "-1",
+  opacity: "0.15"
 };
 
 class Card extends React.Component {
