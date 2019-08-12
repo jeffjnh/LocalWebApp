@@ -154,7 +154,7 @@ class Customer extends Component {
 							: typeof this.state.matches[rowInfo.index] !==
 									"undefined" &&
 							  typeof this.state.matches[rowInfo.index] !==
-									null &&
+									void 0 &&
 							  Object.keys(this.state.matches[rowInfo.index])
 									.length !== 0
 							? //   true

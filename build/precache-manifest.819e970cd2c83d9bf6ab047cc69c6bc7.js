@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "dff9f58c8496e97312aab746422c7a59",
+    "revision": "a6caad6654800a67d4a3d0f22e56c804",
     "url": "/index.html"
   },
   {
-    "revision": "b79182e73dd5ad06241e",
+    "revision": "0e96e8b11ded2ce266d5",
     "url": "/static/css/2.3e040552.chunk.css"
   },
   {
-    "revision": "66f5fa32366d7021eaaf",
-    "url": "/static/css/main.5f5aa88d.chunk.css"
+    "revision": "976a9ed38f6b9ab6c2bb",
+    "url": "/static/css/main.ad84c2af.chunk.css"
   },
   {
-    "revision": "b79182e73dd5ad06241e",
-    "url": "/static/js/2.50de98cb.chunk.js"
+    "revision": "0e96e8b11ded2ce266d5",
+    "url": "/static/js/2.9ed2333e.chunk.js"
   },
   {
-    "revision": "66f5fa32366d7021eaaf",
-    "url": "/static/js/main.737d4bb5.chunk.js"
+    "revision": "976a9ed38f6b9ab6c2bb",
+    "url": "/static/js/main.fa9c18c2.chunk.js"
   },
   {
     "revision": "42ac5946195a7306e2a5",
@@ -48,8 +48,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/AWS_logo_RGB_REV.0ef4572e.svg"
   },
   {
+    "revision": "255ab342aeb60b8adf425bb92877f39f",
+    "url": "/static/media/AmazonEmberMono_Bd.255ab342.ttf"
+  },
+  {
     "revision": "1ecf1ae090c4add6e06334ebe3fde824",
     "url": "/static/media/AmazonEmberMono_Rg.1ecf1ae0.ttf"
+  },
+  {
+    "revision": "b9e92b64bf376bbecdeb92d638b78a41",
+    "url": "/static/media/AmazonEmber_Bd.b9e92b64.ttf"
   },
   {
     "revision": "76666a38ff1cda13e51186b795623090",
