@@ -23,8 +23,7 @@ class FilterBar extends React.Component {
         OFFERING_TYPE: this.props.filters["OFFERING_TYPE"],
         MATURITY_LEVEL: this.props.filters["MATURITY_LEVEL"],
         GSP_INDUSTRYVERTICALS: this.props.filters["GSP_INDUSTRYVERTICALS"]
-      },
-      dropdownIsActive: null
+      }
     };
   }
 
@@ -42,23 +41,24 @@ class FilterBar extends React.Component {
     });
   };
 
-  // handleChange = eventKey => {
-  //   console.log("key: " + eventKey);
-  //   this.setState({ dropdownIsActive: eventKey }, () => {
-  //     console.log("state after change: " + this.state.dropdownIsActive);
-  //   });
-  // };
-
-  // resetFilters = (event) => {
-  //   console.log(event.target.value);
-  // }
+  handleFilterBarDropdown = (name) => {
+    this.setState(
+      prevState => ({
+        dropdownIsOpen: {
+          ...prevState.dropdownIsOpen,
+          [name]: !prevState.dropdownIsOpen[name]
+        }
+      }), () => {
+        console.log(this.state.dropdownIsOpen[name]);
+      }
+    );
+  };
 
   render() {
     return (
       <div
         className={"container-fluid no-gutters"}
-        // style={{ position: "fixed", marginTop: "1rem", marginLeft: "5rem", marginBottom: "3rem"}}
-        style={{ marginTop: "1.5rem", marginLeft: "5rem" }}
+        style={{ position: "fixed", zIndex: "1", margin: "1.5rem 0rem 3rem 5rem"}}
       >
         <div className={"row justify-content-start"}>
           <div className={"col-auto m-1 p-0"} >
@@ -67,60 +67,33 @@ class FilterBar extends React.Component {
 
           <div className={"col-auto m-1 p-0"}>
             <FilterForm
-              formName="Offering Type"
-              category_name="OFFERING_TYPE"
+              formName={"Offering Type"}
+              category_name={"OFFERING_TYPE"}
               filters={this.state.filters["OFFERING_TYPE"]}
               onDataChange={this.handleDataChange}
+              onFilterButtonClick={() => {this.props.onFilterButtonClick("OFFERING_TYPE")}}
             />
           </div>
 
           <div className={"col-auto m-1 p-0"}>
             <FilterForm
-              formName="Maturity Level"
-              category_name="MATURITY_LEVEL"
+              formName={"Maturity Level"}
+              category_name={"MATURITY_LEVEL"}
               filters={this.state.filters["MATURITY_LEVEL"]}
               onDataChange={this.handleDataChange}
+              onFilterButtonClick={() => {this.props.onFilterButtonClick("MATURITY_LEVEL")}}
             />
           </div>
 
           <div className={"col-auto m-1 p-0"}>
             <FilterForm
-              formName="GSP / Industry Verticals"
-              category_name="GSP_INDUSTRYVERTICALS"
+              formName={"GSP / Industry Verticals"}
+              category_name={"GSP_INDUSTRYVERTICALS"}
               filters={this.state.filters["GSP_INDUSTRYVERTICALS"]}
               onDataChange={this.handleDataChange}
+              onFilterButtonClick={() => {this.props.onFilterButtonClick("GSP_INDUSTRYVERTICALS")}}
             />
           </div>
-
-          {/* <div className="col">
-            <DropdownButton as={ButtonGroup} title="Filtering Type">
-              <Dropdown.Item
-                eventKey="Filter by All"
-                onSelect={this.handleChange}
-                active={
-                  this.state.dropdownIsActive === this.eventKey ? true : false
-                }
-              >
-                Filter by All Criteria
-              </Dropdown.Item>
-              <Dropdown.Item
-                eventKey="Filter by Any"
-                onSelect={this.handleChange}
-                active={
-                  this.state.dropdownIsActive === this.eventKey ? true : false
-                }
-              >
-                Filter by Any Criteria
-              </Dropdown.Item>
-            </DropdownButton>
-          </div>
-
-          <div className="col">
-            <Button variant="primary"
-              value={"reset filters"}
-              onClick={this.resetFilters}>
-            Reset All Filters</Button>
-          </div> */}
           
         </div>
       </div>

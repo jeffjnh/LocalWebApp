@@ -24,7 +24,9 @@ const modalStyle = {
     maxWidth: "80%",
     borderRadius: "12px"
   },
-  overlay: {}
+  overlay: {
+    zIndex: "1000"
+  }
 };
 
 const logoStyle = {

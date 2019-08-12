@@ -1,5 +1,6 @@
 #root-offerings {
-  margin: 0 auto;
+  margin: 5rem auto 0 auto;
+  height: 80vh;
   box-sizing: border-box;
   color: $squid_ink;
   line-height: 1.6;
@@ -7,7 +8,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   .offerings-card-container {
-    margin: 1rem auto;
+    margin: 0 auto;
     max-width: 92%;
     display: flex;
     flex-wrap: wrap;
