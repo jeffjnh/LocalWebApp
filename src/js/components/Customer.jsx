@@ -63,9 +63,9 @@ class Customer extends Component {
 					matches: response["matches"],
 					suggestions: response["suggestions"]
 				});
-				response['suggestions'].length > 0
+				response["suggestions"].length > 0
 					? toast.success(
-								response["suggestions"].flat().length +
+							response["suggestions"].flat().length +
 								" suggestions found!"
 					  )
 					: toast.error(
@@ -112,7 +112,7 @@ class Customer extends Component {
 					background: rowInfo.original.salesIndices.includes(
 						this.state.row_selected
 					)
-						? "LawnGreen"
+						? AWSCOLORS.SMILE_ORANGE
 						: "white"
 				}
 			};
@@ -130,16 +130,38 @@ class Customer extends Component {
 	};
 	onColorClick = (state, rowInfo, column) => {
 		if (typeof rowInfo !== "undefined") {
+			var rowStyle;
+			var txtColor;
+			var grayed = false;
+			if (rowInfo.index === this.state.row_selected) {
+				rowStyle = AWSCOLORS.SMILE_ORANGE;
+				txtColor = "black";
+			} else {
+				if (
+					typeof this.state.matches[rowInfo.index] !== "undefined" &&
+					typeof this.state.matches[rowInfo.index] !== null &&
+					Object.keys(this.state.matches[rowInfo.index]).length !== 0
+				) {
+					rowStyle = "white";
+					txtColor = "black";
+				} else {
+					rowStyle = "LightGray";
+					txtColor = "DarkGray";
+					grayed = true;
+				}
+			}
 			return {
 				onClick: (e, handleOriginal) => {
-					if (this.state.row_selected === rowInfo.index) {
-						this.setState({
-							row_selected: -1
-						});
-					} else {
-						this.setState({
-							row_selected: rowInfo.index
-						});
+					if (!grayed) {
+						if (this.state.row_selected === rowInfo.index) {
+							this.setState({
+								row_selected: -1
+							});
+						} else {
+							this.setState({
+								row_selected: rowInfo.index
+							});
+						}
 					}
 					if (handleOriginal) {
 						handleOriginal();
@@ -148,22 +170,19 @@ class Customer extends Component {
 					// this.setState({ suggestions: this.state.suggestions });
 				},
 				style: {
-					background:
-						rowInfo.index === this.state.row_selected
-							? "green"
-							: typeof this.state.matches[rowInfo.index] !==
-									"undefined" &&
-							  typeof this.state.matches[rowInfo.index] !==
-									null &&
-							  Object.keys(this.state.matches[rowInfo.index])
-									.length !== 0
-							? //   true
-							  "white"
-							: "LightGray",
-					color:
-						rowInfo.index === this.state.row_selected
-							? "white"
-							: "black"
+					background: rowStyle,
+					// rowInfo.index === this.state.row_selected
+					// 	? "green"
+					// 	: typeof this.state.matches[rowInfo.index] !==
+					// 			"undefined" &&
+					// 	  typeof this.state.matches[rowInfo.index] !==
+					// 			null &&
+					// 	  Object.keys(this.state.matches[rowInfo.index])
+					// 			.length !== 0
+					// 	? //   true
+					// 	  "white"
+					// 	: "LightGray",
+					color: txtColor
 				}
 			};
 		} else {
@@ -209,10 +228,11 @@ class Customer extends Component {
 
 				{/*AutoField Search bar for Customer Data*/}
 				<div style={{ color: AWSCOLORS.DARK_SQUID_INK }}>
-					<AutoField stateSetter={this.customerStateUpdate}
-						table={'OfferingSales'}
-					   	index={'customer_name-index'}
-					   	indexedType={'customer_name'}
+					<AutoField
+						stateSetter={this.customerStateUpdate}
+						table={"OfferingSales"}
+						index={"customer_name-index"}
+						indexedType={"customer_name"}
 					/>
 				</div>
 
