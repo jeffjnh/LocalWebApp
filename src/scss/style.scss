@@ -1,21 +1,13 @@
 // Global settings
 @import "global/colors";
-// @import "global/common";
 // @import "global/global";
-// @import "global/keyframes";
 @import "global/theme";
 @import "global/typography";
-@import "global/variables";
-
-// Mixins
-// @import "mixin/shadow";
-// @import "mixin/button";
-// @import "mixin/page";
-// @import "mixin/titlebar";
 
 // Page specifices
 @import "ui/app";
-@import "ui/notfound";
+@import "ui/autofield";
 @import "ui/login";
+@import "ui/notfound";
 @import "ui/offerings";
-@import "ui/testing.scss"
+@import "ui/testing"
