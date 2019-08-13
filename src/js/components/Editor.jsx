@@ -10,8 +10,11 @@ class Editor extends Component {
     super(props);
     this.state = {
       predictor: "",
-      predictee: "",
+      predictee: ""
     };
+
+    this.onChangePredictor = this.onChangePredictor.bind(this);
+    this.onChangePredictee = this.onChangePredictee.bind(this);
   }
 
   handleSubmit = event => {
@@ -43,14 +46,14 @@ class Editor extends Component {
       });
   };
 
-  onChangePredictor = (response_object, name) => {
+  async onChangePredictor(response_object, name) {
     console.log(name);
-    this.setState({ predictor: name });
+    await this.setState({ predictor: name });
   };
 
-  onChangePredictee = (response_object, name) => {
+  async onChangePredictee(response_object, name) {
     console.log(name);
-    this.setState({ predictee: name });
+    await this.setState({ predictee: name });
   };
 
   render() {
@@ -66,8 +69,8 @@ class Editor extends Component {
               index={"offering_name-index"}
               indexedType={"offering_name"}
               placeText={"Offering Name"}
-			  secondType={"offering_type"}
-			  jointData={true}
+              secondType={"offering_type"}
+              jointData={true}
               stateSetter={this.onChangePredictor}
             />
           </div>
@@ -78,8 +81,8 @@ class Editor extends Component {
               index={"offering_name-index"}
               indexedType={"offering_name"}
               placeText={"Offering Name"}
-			  secondType={"offering_type"}
-			  jointData={true}
+              secondType={"offering_type"}
+              jointData={true}
               stateSetter={this.onChangePredictee}
             />
           </div>
