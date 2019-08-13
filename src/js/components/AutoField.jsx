@@ -3,32 +3,11 @@ import AutoSuggest from 'react-autosuggest';
 
 const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
 
-let customerNames = [];
+var customerNames = [];
 let mappedFlag = false;
 
 
 
-const getSuggestions = value => {
-    if( !mappedFlag ){
-        customerNames = [...new Set(customerNames)].sort();
-        let tempData = customerNames.map( customer => {
-            return ({name:customer})
-        });
-        customerNames = tempData;
-        mappedFlag = true;
-    }
-    // console.log( customerNames);
-
-    return(
-        [...new Set(
-            customerNames.filter(
-                sug => sug.name.toLowerCase().startsWith(value.toLowerCase())).concat(
-            customerNames.filter(
-                obj => obj.name.toLowerCase().includes(value.toLowerCase())
-            ))
-        )]
-    );
-};
 
 
 
@@ -48,7 +27,38 @@ const renderSuggestion = suggestion => (
 class AutoField extends React.Component{
 
 
+     getSuggestions = value => {
 
+
+        if( !mappedFlag ){
+            customerNames = [...new Set(customerNames)].sort();
+            customerNames = customerNames.map(customer => {
+                return ({name: customer})
+            });
+            mappedFlag = true;
+        }
+        // console.log( customerNames);
+        let cnam = customerNames;
+        try {
+            console.log(cnam.length);
+            console.log(value.toLowerCase());
+            return (
+                [...new Set(
+                    cnam.filter(
+                        sug => sug.name.toLowerCase().startsWith(value.toLowerCase())).concat(
+                        cnam.filter(
+                            obj => obj.name.toLowerCase().includes(value.toLowerCase())
+                        ))
+                )]
+            );
+        }
+        catch (e) {
+            mappedFlag = false;
+            this.genData();
+            console.log(e);
+            return [];
+        }
+    };
 
 
 
@@ -78,6 +88,8 @@ class AutoField extends React.Component{
                 customerNames = response.map(obj => obj[this.props.indexedType]);
             else
                 customerNames = response.map(obj => (obj[this.props.indexedType] + "-" + obj[this.props.secondType]));
+
+            this.setState({waiting:false});
         }).catch(err => {
             console.log("Error: API fetch error");
             console.log(err.message)
@@ -90,9 +102,13 @@ class AutoField extends React.Component{
         this.state = {
             value:'',
             suggestions:[],
+            waiting:true,
+            customerNames: []
         };
-        if( customerNames.length === 0)
+        if( customerNames.length === 0) {
+            console.log("REGENDATAAAAAAAAAA");
             this.genData();
+        }
     }
 
     onChangeHandler = (event, {newValue}) => {
@@ -103,7 +119,7 @@ class AutoField extends React.Component{
     
     onSuggestionsFetchRequested = ({value}) => {
         this.setState({
-            suggestions: getSuggestions(value)
+            suggestions: this.getSuggestions(value)
         });
     };
 
@@ -153,7 +169,7 @@ class AutoField extends React.Component{
             value,
             onChange:this.onChangeHandler
 
-        }
+        };
 
 
         return(
