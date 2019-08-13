@@ -173,6 +173,7 @@ class FilterForm extends Component {
 
   applyClicked = () => {
     this.props.onDataChange(this.props.category_name, this.state.checkboxes);
+    this.props.onFilterButtonClick();
   };
 
   render() {

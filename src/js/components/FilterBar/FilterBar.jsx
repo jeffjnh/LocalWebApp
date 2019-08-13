@@ -71,7 +71,7 @@ class FilterBar extends React.Component {
               category_name={"OFFERING_TYPE"}
               filters={this.state.filters["OFFERING_TYPE"]}
               onDataChange={this.handleDataChange}
-              onFilterButtonClick={() => {this.props.onFilterButtonClick("OFFERING_TYPE")}}
+              onFilterButtonClick={() => {this.props.onFilterButtonClick("Offering Type")}}
             />
           </div>
 
@@ -81,7 +81,7 @@ class FilterBar extends React.Component {
               category_name={"MATURITY_LEVEL"}
               filters={this.state.filters["MATURITY_LEVEL"]}
               onDataChange={this.handleDataChange}
-              onFilterButtonClick={() => {this.props.onFilterButtonClick("MATURITY_LEVEL")}}
+              onFilterButtonClick={() => {this.props.onFilterButtonClick("Maturity Level")}}
             />
           </div>
 
@@ -91,7 +91,7 @@ class FilterBar extends React.Component {
               category_name={"GSP_INDUSTRYVERTICALS"}
               filters={this.state.filters["GSP_INDUSTRYVERTICALS"]}
               onDataChange={this.handleDataChange}
-              onFilterButtonClick={() => {this.props.onFilterButtonClick("GSP_INDUSTRYVERTICALS")}}
+              onFilterButtonClick={() => {this.props.onFilterButtonClick("GSP / Industry Verticals")}}
             />
           </div>
           

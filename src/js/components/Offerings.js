@@ -26,11 +26,10 @@ class Offerings extends React.Component {
     super(props);
     this.state = {
       isPageLoading: true,
-      isBlur: false,
       isFilterBarExpanded: {
-        OFFERING_TYPE: false,
-        MATURITY_LEVEL: false,
-        GSP_INDUSTRYVERTICALS: false,
+        "Offering Type": false,
+        "Maturity Level": false,
+        "GSP / Industry Verticals": false,
       },
       currentOfferingClicked: null,
       data: [],
@@ -153,22 +152,14 @@ class Offerings extends React.Component {
     return cards;
   };
 
-  onHandleFilterClick = (name) => {
+  onHandleFilterClick = (filter_name) => {
     this.setState(
       prevState => ({
         isFilterBarExpanded: {
           ...prevState.isFilterBarExpanded,
-          [name]: !prevState.isFilterBarExpanded[name]
+          [filter_name]: !prevState.isFilterBarExpanded[filter_name]
         }
-      }), () => {
-        // console.log(name + " : " + this.state.isFilterBarExpanded[name]);
-        // if one filter is open
-        if (this.state.isFilterBarExpanded["OFFERING_TYPE"] || this.state.isFilterBarExpanded["MATURITY_LEVEL"] || this.state.isFilterBarExpanded["GSP_INDUSTRYVERTICALS"]) {
-          this.setState({isBlur: true});
-        } else {
-          this.setState({isBlur: false});
-        }
-      }
+      })
     );
   };
 
@@ -190,9 +181,15 @@ class Offerings extends React.Component {
       return getLoadingSpinner_Left();
     }
 
+    let blurStyle = (this.state.isFilterBarExpanded["Offering Type"]
+      || this.state.isFilterBarExpanded["Maturity Level"]
+      || this.state.isFilterBarExpanded["GSP / Industry Verticals"])
+      ?
+      blurEffect : {} ;
+
     return (
       <div>
-        
+
         <NavBar></NavBar>
 
         <CardModal
@@ -210,8 +207,8 @@ class Offerings extends React.Component {
           onFilterButtonClick={this.onHandleFilterClick}
         />
 
-        <div id="root-offerings" style={this.state.isBlur ? blurEffect : {}}>
-          <div className="offerings-card-container" style={{display: "absolute", height: "100%", overflowY: "scroll"}}>
+        <div id="root-offerings" style={blurStyle}>
+          <div className="offerings-card-container" style={{ display: "absolute", height: "100%", overflowY: "scroll" }}>
             <spam id="back-to-top" />
             {this.appendDataToCard()}
           </div>
