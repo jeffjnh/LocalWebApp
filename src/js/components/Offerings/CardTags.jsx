@@ -2,12 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { AWS as AWSCOLORS } from "../../constants/Colors";
 
 const Tags = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0.2rem 0.5rem;
   padding: 10px;
+  color: ${AWSCOLORS.DARK_SQUID_INK};
 `;
 
 const Text = styled.div`

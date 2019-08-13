@@ -21,7 +21,7 @@ export function scrollToTop() {
   return (
     <ScrollToTop
       onClick={() => {
-        document.getElementById("root").scrollIntoView(true);
+        document.getElementById("back-to-top").scrollIntoView(true);
       }}
     >
       <div style={{ fontSize: "10px" }}>&#x25b2;</div>

@@ -7,27 +7,17 @@ import Checkbox from "./Checkbox";
 
 // https://react-bootstrap.github.io/components/accordion/
 
-const accordionStyle = {
-  paddingRight: "0.8rem",
-};
-
 const cardStyle = {
   margin: "0.3rem auto",
   border: "none",
-  // backgroundColor: "transparent",
   backgroundColor: AWSCOLORS.SMILE_ORANGE,
-  // color: AWSCOLORS.SQUID_INK,
   color: AWSCOLORS.WHITE,
   fontFamily: "AmazonEmberMono_Rg",
   fontSize: "15px"
 };
 
 const cardHeaderStyle = {
-  padding: "0.4rem 0.75rem",
-  // backgroundColor: AWSCOLORS.SMILE_ORANGE,
-  // color: AWSCOLORS.SQUID_INK,
-  // color: AWSCOLORS.WHITE,
-  // fontFamily: "AmazonEmberMono_Rg",
+  padding: "0.4rem 0.75rem"
 };
 
 const CardTitle = styled.div`
@@ -46,7 +36,9 @@ const CardTitle = styled.div`
 const cardBodyStyle = {
   backgroundColor: AWSCOLORS.WHITE,
   color: AWSCOLORS.SQUID_INK,
-}
+  maxHeight: "70vh",
+  overflowY: "scroll"
+};
 
 class FilterForm extends Component {
   constructor(props) {
@@ -84,7 +76,11 @@ class FilterForm extends Component {
         <button
           type="button"
           className="btn-sm mr-2 py-1"
-          style={{fontSize: "13px", backgroundColor: AWSCOLORS.SMILE_ORANGE, color: AWSCOLORS.WHITE }}
+          style={{
+            fontSize: "13px",
+            backgroundColor: AWSCOLORS.SMILE_ORANGE,
+            color: AWSCOLORS.WHITE
+          }}
           onClick={this.selectAll}
         >
           Select All
@@ -92,14 +88,22 @@ class FilterForm extends Component {
         <button
           type="button"
           className="btn-sm mr-2 py-1"
-          style={{fontSize: "13px", backgroundColor: AWSCOLORS.SMILE_ORANGE, color: AWSCOLORS.WHITE }}
+          style={{
+            fontSize: "13px",
+            backgroundColor: AWSCOLORS.SMILE_ORANGE,
+            color: AWSCOLORS.WHITE
+          }}
           onClick={this.unselectAll}
         >
           Unselect All
         </button>
         <Accordion.Toggle
           className="btn-sm mr-2 py-1"
-          style={{fontSize: "13px", backgroundColor: AWSCOLORS.SMILE_ORANGE, color: AWSCOLORS.WHITE }}
+          style={{
+            fontSize: "13px",
+            backgroundColor: AWSCOLORS.SMILE_ORANGE,
+            color: AWSCOLORS.WHITE
+          }}
           onClick={this.applyClicked}
           eventKey={this.props.formName}
         >
@@ -169,18 +173,21 @@ class FilterForm extends Component {
 
   applyClicked = () => {
     this.props.onDataChange(this.props.category_name, this.state.checkboxes);
+    this.props.onFilterButtonClick();
   };
 
   render() {
     return (
-      <Accordion style={accordionStyle}>
+      <Accordion style={{ paddingRight: "0.8rem" }}>
         <Card style={cardStyle}>
           <Accordion.Toggle
             as={Card.Header}
             eventKey={this.props.formName}
             style={cardHeaderStyle}
           >
-            <CardTitle>{this.props.formName}</CardTitle>
+            <CardTitle onClick={this.props.onFilterButtonClick}>
+              {this.props.formName}
+            </CardTitle>
           </Accordion.Toggle>
 
           <Accordion.Collapse eventKey={this.props.formName}>

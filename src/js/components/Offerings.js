@@ -11,15 +11,26 @@ import Card from "./Offerings/Card";
 import CardModal from "./Offerings/CardModal";
 import { getLoadingSpinner_Left } from "../utility/LoadingSpinner";
 import { scrollToTop } from "../utility/ScrollToTop";
+import { AWS as AWSCOLORS } from "../constants/Colors";
 
 const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
 // import { OFFERINGSDATA_SHORT } from "../constants/OfferingsData_Short";
+
+const blurEffect = {
+  backgroundColor: `rgba(${AWSCOLORS.DARK_SQUID_INK}, 0.5)`,
+  filter: "blur(4px)"
+}
 
 class Offerings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isPageLoading: true,
+      isFilterBarExpanded: {
+        "Offering Type": false,
+        "Maturity Level": false,
+        "GSP / Industry Verticals": false,
+      },
       currentOfferingClicked: null,
       data: [],
       filters: {
@@ -141,6 +152,17 @@ class Offerings extends React.Component {
     return cards;
   };
 
+  onHandleFilterClick = (filter_name) => {
+    this.setState(
+      prevState => ({
+        isFilterBarExpanded: {
+          ...prevState.isFilterBarExpanded,
+          [filter_name]: !prevState.isFilterBarExpanded[filter_name]
+        }
+      })
+    );
+  };
+
   /* 
    * CardModal isOpen={this.props.offering ? true : false},
    *   if a card was clicked, the offering of that card is stored to state: currentOfferingClicked,
@@ -159,9 +181,15 @@ class Offerings extends React.Component {
       return getLoadingSpinner_Left();
     }
 
+    let blurStyle = (this.state.isFilterBarExpanded["Offering Type"]
+      || this.state.isFilterBarExpanded["Maturity Level"]
+      || this.state.isFilterBarExpanded["GSP / Industry Verticals"])
+      ?
+      blurEffect : {} ;
+
     return (
       <div>
-        
+
         <NavBar></NavBar>
 
         <CardModal
@@ -173,19 +201,18 @@ class Offerings extends React.Component {
           fetch={true}
         />
 
-        <div id="root-offerings">
+        <FilterBar
+          filters={this.state.filters}
+          onHandleFilterChange={this.onHandleFilterChange}
+          onFilterButtonClick={this.onHandleFilterClick}
+        />
 
-          <FilterBar
-            filters={this.state.filters}
-            onHandleFilterChange={this.onHandleFilterChange}
-          />
-
-          <div className="offerings-card-container">
+        <div id="root-offerings" style={blurStyle}>
+          <div className="offerings-card-container" style={{ display: "absolute", height: "100%", overflowY: "scroll" }}>
+            <spam id="back-to-top" />
             {this.appendDataToCard()}
           </div>
-
           {scrollToTop()}
-
         </div>
 
       </div>
