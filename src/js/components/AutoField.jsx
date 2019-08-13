@@ -42,6 +42,7 @@ class AutoField extends React.Component{
         let cnam = customerNames;
         try {
             console.log(cnam.length);
+            console.log(value.toLowerCase());
             return (
                 [...new Set(
                     cnam.filter(
@@ -53,7 +54,9 @@ class AutoField extends React.Component{
             );
         }
         catch (e) {
+            mappedFlag = false;
             this.genData();
+            console.log(e);
             return [];
         }
     };
@@ -100,7 +103,8 @@ class AutoField extends React.Component{
         this.state = {
             value:'',
             suggestions:[],
-            waiting:true
+            waiting:true,
+            customerNames: []
         };
         if( customerNames.length === 0) {
             console.log("REGENDATAAAAAAAAAA");
