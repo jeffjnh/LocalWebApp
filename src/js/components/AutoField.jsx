@@ -1,35 +1,13 @@
 import React from 'react';
 import AutoSuggest from 'react-autosuggest';
-import autofield from '../../scss/ui/autofield.scss';
 
 const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
 
-let customerNames = [];
+var customerNames = [];
 let mappedFlag = false;
 
 
 
-const getSuggestions = value => {
-    if( !mappedFlag ){
-        customerNames = [...new Set(customerNames)].sort();
-        let tempData = customerNames.map( customer => {
-            return ({name:customer})
-        });
-        customerNames = tempData;
-        mappedFlag = true;
-    }
-
-
-    return(
-        [...new Set(
-            customerNames.filter(
-                sug => sug.name.toLowerCase().startsWith(value.toLowerCase())).concat(
-            customerNames.filter(
-                obj => obj.name.toLowerCase().includes(value.toLowerCase())
-            ))
-        )]
-    );
-};
 
 
 
@@ -49,8 +27,44 @@ const renderSuggestion = suggestion => (
 class AutoField extends React.Component{
 
 
+     getSuggestions = value => {
+
+
+        if( !mappedFlag ){
+            customerNames = [...new Set(customerNames)].sort();
+            customerNames = customerNames.map(customer => {
+                return ({name: customer})
+            });
+            mappedFlag = true;
+        }
+        // console.log( customerNames);
+        let cnam = customerNames;
+        try {
+            console.log(cnam.length);
+            console.log(value.toLowerCase());
+            return (
+                [...new Set(
+                    cnam.filter(
+                        sug => sug.name.toLowerCase().startsWith(value.toLowerCase())).concat(
+                        cnam.filter(
+                            obj => obj.name.toLowerCase().includes(value.toLowerCase())
+                        ))
+                )]
+            );
+        }
+        catch (e) {
+            mappedFlag = false;
+            this.genData();
+            console.log(e);
+            return [];
+        }
+    };
+
+
 
     async genData() {
+        console.log(this.props.table);
+        console.log(this.props.index);
         fetch(url, {
                 method: 'GET',
                 mode: 'cors',
@@ -69,7 +83,13 @@ class AutoField extends React.Component{
                 return response.json();
             }
         }).then(response =>{
-            customerNames = response.map( obj => obj[this.props.indexedType]);
+            console.log(response);
+            if( !this.props.jointData )
+                customerNames = response.map(obj => obj[this.props.indexedType]);
+            else
+                customerNames = response.map(obj => (obj[this.props.indexedType] + "-" + obj[this.props.secondType]));
+
+            this.setState({waiting:false});
         }).catch(err => {
             console.log("Error: API fetch error");
             console.log(err.message)
@@ -82,8 +102,13 @@ class AutoField extends React.Component{
         this.state = {
             value:'',
             suggestions:[],
+            waiting:true,
+            customerNames: []
         };
-        this.genData();
+        if( customerNames.length === 0) {
+            console.log("REGENDATAAAAAAAAAA");
+            this.genData();
+        }
     }
 
     onChangeHandler = (event, {newValue}) => {
@@ -94,7 +119,7 @@ class AutoField extends React.Component{
     
     onSuggestionsFetchRequested = ({value}) => {
         this.setState({
-            suggestions: getSuggestions(value)
+            suggestions: this.getSuggestions(value)
         });
     };
 
@@ -140,16 +165,15 @@ class AutoField extends React.Component{
         const {value, suggestions} = this.state;
 
         const inputProps={
-            placeholder:"Company Name",
+            placeholder:this.props.placeText,
             value,
             onChange:this.onChangeHandler
 
-        }
+        };
 
 
         return(
             <div>
-                <link type={'text/scss'} rel={"stylesheet"} href={autofield}/>
                 <AutoSuggest
                     suggestions={suggestions}
                     onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}

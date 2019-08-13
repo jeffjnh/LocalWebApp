@@ -233,6 +233,8 @@ class Customer extends Component {
 						table={"OfferingSales"}
 						index={"customer_name-index"}
 						indexedType={"customer_name"}
+						placeText={"Company Name"}
+						jointData={false}
 					/>
 				</div>
 
@@ -400,7 +402,6 @@ class Customer extends Component {
 							style={{
 								height: "500px" // This will force the table body to overflow and scroll, since there is not enough room
 							}}
-							className="-striped -highlight"
 						/>
 						<br />
 						<br />

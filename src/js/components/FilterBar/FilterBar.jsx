@@ -2,13 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { AWS as AWSCOLORS } from "../../constants/Colors";
 import FilterForm from "./FilterForm";
-// import Button from "react-bootstrap/Button";
-// import ButtonGroup from "react-bootstrap/ButtonGroup";
-// import Dropdown from "react-bootstrap/Dropdown";
-// import DropdownButton from "react-bootstrap/DropdownButton";
 
 const FilterBarText = styled.div`
   margin: auto 0;
+  padding-top: 5px;
   padding-right: 1rem;
   font-size: 1.2rem;
   color: ${AWSCOLORS.WHITE};
@@ -23,7 +20,11 @@ class FilterBar extends React.Component {
         MATURITY_LEVEL: this.props.filters["MATURITY_LEVEL"],
         GSP_INDUSTRYVERTICALS: this.props.filters["GSP_INDUSTRYVERTICALS"]
       },
-      dropdownIsActive: null
+      dropdownIsOpen: {
+        OFFERING_TYPE: this.props.dropdownIsOpen["OFFERING_TYPE"],
+        MATURITY_LEVEL: this.props.dropdownIsOpen["MATURITY_LEVEL"],
+        GSP_INDUSTRYVERTICALS: this.props.dropdownIsOpen["GSP_INDUSTRYVERTICALS"],
+      }
     };
   }
 
@@ -41,85 +42,58 @@ class FilterBar extends React.Component {
     });
   };
 
-  // handleChange = eventKey => {
-  //   console.log("key: " + eventKey);
-  //   this.setState({ dropdownIsActive: eventKey }, () => {
-  //     console.log("state after change: " + this.state.dropdownIsActive);
-  //   });
-  // };
-
-  // resetFilters = (event) => {
-  //   console.log(event.target.value);
-  // }
+  handleFilterDropdown = (category_name) => {
+    let currentDrops = this.state.dropdownIsOpen;
+    currentDrops[category_name] = !this.state.dropdownIsOpen[category_name];
+    // force parent state update
+    this.setState({ dropdownIsOpen: currentDrops }, () => {
+      this.props.onFilterDropdown(this.state.dropdownIsOpen);
+    });
+  };
 
   render() {
     return (
       <div
-        className={"container"}
-        // style={{ position: "fixed", marginTop: "1rem", marginLeft: "5rem", marginBottom: "3rem"}}
-        style={{ marginTop: "1rem", marginLeft: "5rem" }}
+        className={"container-fluid no-gutters"}
+        style={{ position: "fixed", zIndex: "1", margin: "1.5rem 0rem 3rem 5rem"}}
       >
-        <div className={"row"} style={{ marginTop: "1rem" }}>
-          {/* <div className={"col-xl-2"} style={{ margin: "auto 0" }}> */}
-          <FilterBarText>Filter by: </FilterBarText>
-          {/* </div> */}
-
-          {/* <div className={"col-xl"}> */}
-          <FilterForm
-            formName="Offering Type"
-            category_name="OFFERING_TYPE"
-            filters={this.state.filters["OFFERING_TYPE"]}
-            onDataChange={this.handleDataChange}
-          />
-          {/* </div> */}
-
-          {/* <div className={"col-xl"}> */}
-          <FilterForm
-            formName="Maturity Level"
-            category_name="MATURITY_LEVEL"
-            filters={this.state.filters["MATURITY_LEVEL"]}
-            onDataChange={this.handleDataChange}
-          />
-          {/* </div> */}
-
-          {/* <div className={"col-xl"}> */}
-          <FilterForm
-            formName="GSP / Industry Verticals"
-            category_name="GSP_INDUSTRYVERTICALS"
-            filters={this.state.filters["GSP_INDUSTRYVERTICALS"]}
-            onDataChange={this.handleDataChange}
-          />
-          {/* </div> */}
-
-          {/* <div className="col">
-            <DropdownButton as={ButtonGroup} title="Filtering Type">
-              <Dropdown.Item
-                eventKey="Filter by All"
-                onSelect={this.handleChange}
-                active={
-                  this.state.dropdownIsActive === this.eventKey ? true : false
-                }
-              >
-                Filter by All Criteria
-              </Dropdown.Item>
-              <Dropdown.Item
-                eventKey="Filter by Any"
-                onSelect={this.handleChange}
-                active={
-                  this.state.dropdownIsActive === this.eventKey ? true : false
-                }
-              >
-                Filter by Any Criteria
-              </Dropdown.Item>
-            </DropdownButton>
+        <div className={"row justify-content-start"}>
+          <div className={"col-auto m-1 p-0"} >
+            <FilterBarText>Filters: </FilterBarText>
           </div>
 
-          <div className="col">
-            <Button variant="primary"
-              value={"reset filters"}
-              onClick={this.resetFilters}>
-            Reset All Filters</Button>
-          </div> */}
+          <div className={"col-auto m-1 p-0"}>
+            <FilterForm
+              formName={"Offering Type"}
+              category_name={"OFFERING_TYPE"}
+              filters={this.state.filters["OFFERING_TYPE"]}
+              dropdownIsOpen={this.state.dropdownIsOpen["OFFERING_TYPE"]}
+              onDataChange={this.handleDataChange}
+              onFilterDropdown={() => {this.handleFilterDropdown("OFFERING_TYPE")}}
+            />
+          </div>
+
+          <div className={"col-auto m-1 p-0"}>
+            <FilterForm
+              formName={"Maturity Level"}
+              category_name={"MATURITY_LEVEL"}
+              filters={this.state.filters["MATURITY_LEVEL"]}
+              dropdownIsOpen={this.state.dropdownIsOpen["MATURITY_LEVEL"]}
+              onDataChange={this.handleDataChange}
+              onFilterDropdown={() => {this.handleFilterDropdown("MATURITY_LEVEL")}}
+            />
+          </div>
+
+          <div className={"col-auto m-1 p-0"}>
+            <FilterForm
+              formName={"GSP / Industry Verticals"}
+              category_name={"GSP_INDUSTRYVERTICALS"}
+              filters={this.state.filters["GSP_INDUSTRYVERTICALS"]}
+              dropdownIsOpen={this.state.dropdownIsOpen["GSP_INDUSTRYVERTICALS"]}
+              onDataChange={this.handleDataChange}
+              onFilterDropdown={() => {this.handleFilterDropdown("GSP_INDUSTRYVERTICALS")}}
+            />
+          </div>
           
         </div>
       </div>

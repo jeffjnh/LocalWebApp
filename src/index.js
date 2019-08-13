@@ -26,10 +26,10 @@ const routing = (
 			<Route exact path="/" component={App} />
 			<Route path="/login" component={Login} />
 			<Route path="/offerings" component={Offerings} />
-			<Route path="/testing" component={Testing} />
-			<Route path="/template" component={Template} />
 			<Route path="/customer" component={Customer} />
 			<Route path="/editor" component={Editor} />
+			<Route path="/testing" component={Testing} />
+			<Route path="/template" component={Template} />
 			<Route component={Notfound} />
 		</Switch>
 	</Router>

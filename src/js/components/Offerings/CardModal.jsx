@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import Modal from "react-modal";
 import { AWS as AWSCOLORS } from "../../constants/Colors";
 import { getLoadingSpinner_Left } from "../../utility/LoadingSpinner";
@@ -21,10 +22,11 @@ const modalStyle = {
     transform: "translate(-50%, -50%)",
     maxHeight: "80%",
     maxWidth: "80%",
-    borderRadius: "12px",
-    color: AWSCOLORS.DARK_SQUID_INK
+    borderRadius: "12px"
   },
-  overlay: {}
+  overlay: {
+    zIndex: "1000"
+  }
 };
 
 const logoStyle = {
@@ -33,15 +35,69 @@ const logoStyle = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   height: "80%",
-  opacity: "0.10"
+  opacity: "0.10",
+  zIndex: "-1"
 };
+
+const ModalText = styled.div`
+  margin: 0.8rem 1.3rem;
+  color: ${AWSCOLORS.DARK_SQUID_INK};
+  
+  h1 {
+    color: ${AWSCOLORS.SMILE_ORANGE};
+    font-weight: 700;
+  }
+
+  .offering-desc {
+    margin: 20px 0;
+  }
+
+  .capability {
+    margin: 20px 0;
+  }
+
+  .gsp-vertical {
+    margin: 20px 0;
+  }
+
+  .owner {
+    margin: 20px 0;
+  }
+
+  .practice-group {
+    margin: 20px 0;
+  }
+
+  .caf {
+    margin: 20px 0;
+  }
+
+  .dk {
+    margin: 20px 0;
+  }
+
+  .sk {
+    margin: 20px 0;
+  }
+
+  .wiki {
+    margin: 20px 0;
+  }
+`;
+
+const Bold = styled.div`
+  display: inline;
+  margin-right: 5px;
+  font-weight: bold;
+  text-decoration: underline;
+`;
 
 class CardModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        isPageLoading: true,
-        data: []
+      isPageLoading: true,
+      data: []
     };
   }
 
@@ -63,11 +119,9 @@ class CardModal extends React.Component {
 
     if (!this.props.offering) {
       return;
-    }
-
-    else if(this.props.offering !== prevProps.offering && !this.props.fetch){
-        await this.setState({data:this.props.offering});
-        console.log( this.props.offering );
+    } else if (this.props.offering !== prevProps.offering && !this.props.fetch) {
+      await this.setState({ data: this.props.offering });
+      console.log(this.props.offering);
     }
 
     // if a new offering was clicked
@@ -110,7 +164,7 @@ class CardModal extends React.Component {
       .then(response => {
         // console.log("storing response to state");
         // take first one, there will only be one
-        console.log( response);
+        console.log(response);
 
         this.setState({ data: response[0] });
       })
@@ -153,7 +207,14 @@ class CardModal extends React.Component {
         logo = logo_TBD;
     }
 
-    return <img alt="icon-background" src={logo} style={logoStyle} />;
+    return (
+      <img
+        alt="icon-background"
+        src={logo}
+        style={logoStyle}
+        draggable="false"
+      />
+    );
   };
 
   setTextIfNull = data => {
@@ -196,62 +257,67 @@ class CardModal extends React.Component {
 
   getModalContent = () => {
     return (
-      <div style={{ color: AWSCOLORS.DARK_SQUID_INK }}>
+      <div id="modalContent">
         {this.getBackgroundImg(this.state.data.offering_type)}
         <CardTags
           offering_type={this.state.data.offering_type}
           offering_maturity_level={this.state.data.offering_maturity_level}
           place={"bottom"}
         />
-        <h1 style={{ color: AWSCOLORS.SMILE_ORANGE }}>
-          {this.state.data.offering_type} - {this.state.data.offering_name}
-        </h1>
-        <p />
-        <div>{this.state.data.offering_description}</div>
-        <p />
-        <div>Capability: {this.state.data.capability}</div>
-        <p />
-        <div>GSP / Industry Vertical: {this.state.data.gsp_vertical}</div>
-        <p />
-        <div>
-          Owner:&nbsp;
-          {!this.state.data.owner.includes(", ") ? (
-            <a
-              href={`https://phonetool.amazon.com/search?query=${
-                this.state.data.owner
-              }&filter_type=All+fields`}
-              target={"_blank"}
-            >
-              {this.state.data.owner}
-            </a>
-          ) : (
-            this.getMultipleOwners()
-          )}
-        </div>
-        <p />
-        <div>Practice Group: {this.state.data.practice_group}</div>
-        <p />
-        <div>CAF Perspective: {this.state.data.caf_perspective}</div>
-        <p />
-        <div>
-          {/* {ProgressBar} */}
-          (ProgressBar)
-        </div>
-        <p />
-        <div>
-          Delivery Kit:
-          {this.setTextIfNull(this.state.data.delivery_kit)}
-        </div>
-        <p />
-        <div>
-          Sales Kit:
-          {this.setTextIfNull(this.state.data.sales_kit)}
-        </div>
-        <p />
-        <div>
-          Wiki Link:
-          {this.setTextIfNull(this.state.data.wiki_link)}
-        </div>
+
+        <ModalText>
+          <h1>
+            {this.state.data.offering_type} - {this.state.data.offering_name}
+          </h1>
+
+          <div className="offering-desc">
+            {this.state.data.offering_description}
+          </div>
+
+          <div className="capability">
+            <Bold>Capability:</Bold> {this.state.data.capability}
+          </div>
+
+          <div className="gsp-vertical">
+            <Bold>GSP / Industry Vertical:</Bold> {this.state.data.gsp_vertical}
+          </div>
+
+          <div className="owners">
+            <Bold>Owner:</Bold>&nbsp;
+            {!this.state.data.owner.includes(", ") ? (
+              <a
+                href={`https://phonetool.amazon.com/search?query=${
+                  this.state.data.owner
+                }&filter_type=All+fields`}
+                target={"_blank"}
+              >
+                {this.state.data.owner}
+              </a>
+            ) : (
+              this.getMultipleOwners()
+            )}
+          </div>
+
+          <div className="practice-group">
+            <Bold>Practice Group:</Bold> {this.state.data.practice_group}
+          </div>
+
+          <div className="caf">
+            <Bold>CAF Perspective:</Bold> {this.state.data.caf_perspective}
+          </div>
+
+          <div className="dk">
+            <Bold>Delivery Kit:</Bold> {this.setTextIfNull(this.state.data.delivery_kit)}
+          </div>
+
+          <div className="sk">
+            <Bold>Sales Kit:</Bold> {this.setTextIfNull(this.state.data.sales_kit)}
+          </div>
+
+          <div className="wiki">
+            <Bold>Wiki Link:</Bold> {this.setTextIfNull(this.state.data.wiki_link)}
+          </div>
+        </ModalText>
       </div>
     );
   };
