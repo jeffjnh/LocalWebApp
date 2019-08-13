@@ -3,9 +3,9 @@ import React from "react";
 import NavBar from '../utility/NavBar';
 import { firstBy } from "thenby";
 import FilterBar from './FilterBar/FilterBar';
-import { OFFERING_TYPE } from '../constants/Filters';
-import { MATURITY_LEVEL } from '../constants/Filters';
-import { GSP_INDUSTRYVERTICALS } from '../constants/Filters';
+import { OFFERING_TYPE as Filters_OFFERING_TYPE } from '../constants/Filters';
+import { MATURITY_LEVEL as Filters_MATURITY_LEVEL } from '../constants/Filters';
+import { GSP_INDUSTRYVERTICALS as Filters_GSP_INDUSTRYVERTICALS } from '../constants/Filters';
 import { filterOfferings } from '../utility/Filtering';
 import Card from "./Offerings/Card";
 import CardModal from "./Offerings/CardModal";
@@ -26,17 +26,17 @@ class Offerings extends React.Component {
     super(props);
     this.state = {
       isPageLoading: true,
-      isFilterBarExpanded: {
-        "Offering Type": false,
-        "Maturity Level": false,
-        "GSP / Industry Verticals": false,
+      isFilterBarOpen: {
+        OFFERING_TYPE: false,
+        MATURITY_LEVEL: false,
+        GSP_INDUSTRYVERTICALS: false,
       },
       currentOfferingClicked: null,
       data: [],
       filters: {
-        OFFERING_TYPE,
-        MATURITY_LEVEL,
-        GSP_INDUSTRYVERTICALS,
+        OFFERING_TYPE: Filters_OFFERING_TYPE,
+        MATURITY_LEVEL: Filters_MATURITY_LEVEL,
+        GSP_INDUSTRYVERTICALS: Filters_GSP_INDUSTRYVERTICALS,
       },
     };
   }
@@ -89,6 +89,11 @@ class Offerings extends React.Component {
    */
   onHandleFilterChange = (filters) => {
     this.setState({ filters });
+  }
+
+  // TODO: desc
+  onHandleFilterDropdown = (isFilterBarOpen) => {
+    this.setState({ isFilterBarOpen });
   }
 
   /*
@@ -152,17 +157,6 @@ class Offerings extends React.Component {
     return cards;
   };
 
-  onHandleFilterClick = (filter_name) => {
-    this.setState(
-      prevState => ({
-        isFilterBarExpanded: {
-          ...prevState.isFilterBarExpanded,
-          [filter_name]: !prevState.isFilterBarExpanded[filter_name]
-        }
-      })
-    );
-  };
-
   /* 
    * CardModal isOpen={this.props.offering ? true : false},
    *   if a card was clicked, the offering of that card is stored to state: currentOfferingClicked,
@@ -181,9 +175,9 @@ class Offerings extends React.Component {
       return getLoadingSpinner_Left();
     }
 
-    let blurStyle = (this.state.isFilterBarExpanded["Offering Type"]
-      || this.state.isFilterBarExpanded["Maturity Level"]
-      || this.state.isFilterBarExpanded["GSP / Industry Verticals"])
+    let blurStyle = (this.state.isFilterBarOpen["OFFERING_TYPE"]
+      || this.state.isFilterBarOpen["MATURITY_LEVEL"]
+      || this.state.isFilterBarOpen["GSP_INDUSTRYVERTICALS"])
       ?
       blurEffect : {} ;
 
@@ -204,7 +198,8 @@ class Offerings extends React.Component {
         <FilterBar
           filters={this.state.filters}
           onHandleFilterChange={this.onHandleFilterChange}
-          onFilterButtonClick={this.onHandleFilterClick}
+          dropdownIsOpen={this.state.isFilterBarOpen}
+          onFilterDropdown={this.onHandleFilterDropdown}
         />
 
         <div id="root-offerings" style={blurStyle}>

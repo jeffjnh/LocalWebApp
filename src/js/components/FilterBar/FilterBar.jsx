@@ -2,10 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { AWS as AWSCOLORS } from "../../constants/Colors";
 import FilterForm from "./FilterForm";
-// import Button from "react-bootstrap/Button";
-// import ButtonGroup from "react-bootstrap/ButtonGroup";
-// import Dropdown from "react-bootstrap/Dropdown";
-// import DropdownButton from "react-bootstrap/DropdownButton";
 
 const FilterBarText = styled.div`
   margin: auto 0;
@@ -23,6 +19,11 @@ class FilterBar extends React.Component {
         OFFERING_TYPE: this.props.filters["OFFERING_TYPE"],
         MATURITY_LEVEL: this.props.filters["MATURITY_LEVEL"],
         GSP_INDUSTRYVERTICALS: this.props.filters["GSP_INDUSTRYVERTICALS"]
+      },
+      dropdownIsOpen: {
+        OFFERING_TYPE: this.props.dropdownIsOpen["OFFERING_TYPE"],
+        MATURITY_LEVEL: this.props.dropdownIsOpen["MATURITY_LEVEL"],
+        GSP_INDUSTRYVERTICALS: this.props.dropdownIsOpen["GSP_INDUSTRYVERTICALS"],
       }
     };
   }
@@ -41,17 +42,13 @@ class FilterBar extends React.Component {
     });
   };
 
-  handleFilterBarDropdown = (name) => {
-    this.setState(
-      prevState => ({
-        dropdownIsOpen: {
-          ...prevState.dropdownIsOpen,
-          [name]: !prevState.dropdownIsOpen[name]
-        }
-      }), () => {
-        console.log(this.state.dropdownIsOpen[name]);
-      }
-    );
+  handleFilterDropdown = (category_name) => {
+    let currentDrops = this.state.dropdownIsOpen;
+    currentDrops[category_name] = !this.state.dropdownIsOpen[category_name];
+    // force parent state update
+    this.setState({ dropdownIsOpen: currentDrops }, () => {
+      this.props.onFilterDropdown(this.state.dropdownIsOpen);
+    });
   };
 
   render() {
@@ -70,8 +67,9 @@ class FilterBar extends React.Component {
               formName={"Offering Type"}
               category_name={"OFFERING_TYPE"}
               filters={this.state.filters["OFFERING_TYPE"]}
+              dropdownIsOpen={this.state.dropdownIsOpen["OFFERING_TYPE"]}
               onDataChange={this.handleDataChange}
-              onFilterButtonClick={() => {this.props.onFilterButtonClick("Offering Type")}}
+              onFilterDropdown={() => {this.handleFilterDropdown("OFFERING_TYPE")}}
             />
           </div>
 
@@ -80,8 +78,9 @@ class FilterBar extends React.Component {
               formName={"Maturity Level"}
               category_name={"MATURITY_LEVEL"}
               filters={this.state.filters["MATURITY_LEVEL"]}
+              dropdownIsOpen={this.state.dropdownIsOpen["MATURITY_LEVEL"]}
               onDataChange={this.handleDataChange}
-              onFilterButtonClick={() => {this.props.onFilterButtonClick("Maturity Level")}}
+              onFilterDropdown={() => {this.handleFilterDropdown("MATURITY_LEVEL")}}
             />
           </div>
 
@@ -90,8 +89,9 @@ class FilterBar extends React.Component {
               formName={"GSP / Industry Verticals"}
               category_name={"GSP_INDUSTRYVERTICALS"}
               filters={this.state.filters["GSP_INDUSTRYVERTICALS"]}
+              dropdownIsOpen={this.state.dropdownIsOpen["GSP_INDUSTRYVERTICALS"]}
               onDataChange={this.handleDataChange}
-              onFilterButtonClick={() => {this.props.onFilterButtonClick("GSP / Industry Verticals")}}
+              onFilterDropdown={() => {this.handleFilterDropdown("GSP_INDUSTRYVERTICALS")}}
             />
           </div>
           

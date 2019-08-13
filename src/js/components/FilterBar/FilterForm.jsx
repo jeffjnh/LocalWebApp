@@ -45,6 +45,7 @@ class FilterForm extends Component {
     super(props);
     this.state = {
       checkboxes: this.props.filters,
+      dropdownIsOpen: this.props.dropdownIsOpen,
     };
   }
 
@@ -173,7 +174,7 @@ class FilterForm extends Component {
 
   applyClicked = () => {
     this.props.onDataChange(this.props.category_name, this.state.checkboxes);
-    this.props.onFilterButtonClick();
+    this.props.onFilterDropdown(this.props.category_name);
   };
 
   render() {
@@ -185,7 +186,7 @@ class FilterForm extends Component {
             eventKey={this.props.formName}
             style={cardHeaderStyle}
           >
-            <CardTitle onClick={this.props.onFilterButtonClick}>
+            <CardTitle onClick={() => {this.props.onFilterDropdown(this.props.category_name)}}>
               {this.props.formName}
             </CardTitle>
           </Accordion.Toggle>
