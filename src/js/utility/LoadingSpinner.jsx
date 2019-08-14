@@ -4,7 +4,7 @@ import Spinner from "react-bootstrap/Spinner";
 
 export function getLoadingSpinner_Left() {
   return (
-    <div style={{ padding: "3rem" }}>
+    <div style={{ padding: "3rem", color: "black" }}>
       <Spinner
         animation="border"
         role="status"
@@ -25,6 +25,7 @@ export function getLoadingSpinner_Left() {
 
 const CenteredWrapper = styled.div`
   position: relative;
+  color: black;
 
   .center {
     margin: 0;

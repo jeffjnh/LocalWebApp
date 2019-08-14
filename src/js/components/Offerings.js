@@ -206,7 +206,7 @@ class Offerings extends React.Component {
 
         <div id="root-offerings" style={blurStyle}>
           <div className="offerings-card-container" style={{ display: "absolute", height: "100%", overflowY: "scroll" }}>
-            <spam id="back-to-top" />
+            <span id="back-to-top" />
             {this.appendDataToCard()}
           </div>
           {scrollToTop()}
