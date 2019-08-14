@@ -139,7 +139,7 @@ class Customer extends Component {
 			} else {
 				if (
 					typeof this.state.matches[rowInfo.index] !== "undefined" &&
-					typeof this.state.matches[rowInfo.index] !== null &&
+					this.state.matches[rowInfo.index] !== null &&
 					Object.keys(this.state.matches[rowInfo.index]).length !== 0
 				) {
 					rowStyle = "white";
