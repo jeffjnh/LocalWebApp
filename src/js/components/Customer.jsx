@@ -40,8 +40,8 @@ class Customer extends Component {
 			method: "GET",
 			mode: "cors",
 			headers: {
-				"Access-Control-Allow-Origin": "*",
-				"access-control-allow-headers": "*",
+				// "Access-Control-Allow-Origin": "*",
+				// "access-control-allow-headers": "*",
 				"Content-Type": "application/json",
 				sales: JSON.stringify(sales)
 			}

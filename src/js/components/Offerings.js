@@ -61,7 +61,9 @@ class Offerings extends React.Component {
       method: 'GET',
       mode: 'cors',
       headers: {
-        'Access-Control-Allow-Origin': '*',
+        // 'Access-Control-Allow-Origin': '*',
+        // 'Access-Control-Allow-Headers':'*',
+        // 'Access-Control-Expose-Headers':"*",
         'Content-Type': 'application/json',
         'table_name': 'Offerings',
         'index_name': 'short-index',

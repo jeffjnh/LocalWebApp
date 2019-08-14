@@ -24,8 +24,8 @@ class Editor extends Component {
       method: "GET",
       mode: "cors",
       headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "*",
+        // "Access-Control-Allow-Origin": "*",
+        // "Access-Control-Allow-Headers": "*",
         "Content-Type": "application/json",
         "predictor_name_type": this.state.predictor,
         "predictee_name_type": this.state.predictee,

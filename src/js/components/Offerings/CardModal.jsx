@@ -145,7 +145,7 @@ class CardModal extends React.Component {
       method: "GET",
       mode: "cors",
       headers: {
-        "Access-Control-Allow-Origin": "*",
+        // "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
         table_name: "Offerings",
         offering_type: offering.offering_type,

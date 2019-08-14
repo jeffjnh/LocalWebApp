@@ -69,7 +69,7 @@ class AutoField extends React.Component{
                 method: 'GET',
                 mode: 'cors',
                 headers: {
-                    'Access-Control-Allow-Origin':'*',
+                    // 'Access-Control-Allow-Origin':'*',
                     'Content-Type':'application/json',
                     'table_name':this.props.table,
                     "index_name":this.props.index
@@ -134,7 +134,7 @@ class AutoField extends React.Component{
                 method: 'GET',
                 mode: 'cors',
                 headers: {
-                    'Access-Control-Allow-Origin':'*',
+                    // 'Access-Control-Allow-Origin':'*',
                     'Content-Type':'application/json',
                     'table_name':this.props.table,
                     // "index_name":"customer_name-index"
