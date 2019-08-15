@@ -9,11 +9,11 @@ import Checkbox from "./Checkbox";
 
 const cardStyle = {
   margin: "0.3rem auto",
-  border: "none",
+  border: `1px solid ${AWSCOLORS.SQUID_INK}`,
+  borderRadius: "12px",
   backgroundColor: AWSCOLORS.SMILE_ORANGE,
   color: AWSCOLORS.WHITE,
-  fontFamily: "AmazonEmberMono_Rg",
-  fontSize: "15px"
+  fontSize: "15px",
 };
 
 const cardHeaderStyle = {
@@ -34,7 +34,7 @@ const CardTitle = styled.div`
 `;
 
 const cardBodyStyle = {
-  backgroundColor: AWSCOLORS.WHITE,
+  backgroundColor: "rgb(245, 245, 245)",
   color: AWSCOLORS.SQUID_INK,
   maxHeight: "70vh",
   overflowY: "scroll"
@@ -78,9 +78,10 @@ class FilterForm extends Component {
           type="button"
           className="btn-sm mr-2 py-1"
           style={{
-            fontSize: "13px",
             backgroundColor: AWSCOLORS.SMILE_ORANGE,
-            color: AWSCOLORS.WHITE
+            color: AWSCOLORS.WHITE,
+            borderRadius: "6px",
+            fontSize: "13px"
           }}
           onClick={this.selectAll}
         >
@@ -90,9 +91,10 @@ class FilterForm extends Component {
           type="button"
           className="btn-sm mr-2 py-1"
           style={{
-            fontSize: "13px",
             backgroundColor: AWSCOLORS.SMILE_ORANGE,
-            color: AWSCOLORS.WHITE
+            color: AWSCOLORS.WHITE,
+            borderRadius: "6px",
+            fontSize: "13px"
           }}
           onClick={this.unselectAll}
         >
@@ -101,9 +103,10 @@ class FilterForm extends Component {
         <Accordion.Toggle
           className="btn-sm mr-2 py-1"
           style={{
-            fontSize: "13px",
             backgroundColor: AWSCOLORS.SMILE_ORANGE,
-            color: AWSCOLORS.WHITE
+            color: AWSCOLORS.WHITE,
+            borderRadius: "6px",
+            fontSize: "13px"
           }}
           onClick={this.applyClicked}
           eventKey={this.props.formName}

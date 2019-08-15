@@ -18,7 +18,7 @@ const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/
 
 const blurEffect = {
   backgroundColor: `rgba(${AWSCOLORS.DARK_SQUID_INK}, 0.5)`,
-  filter: "blur(4px)"
+  // filter: "blur(4px)"
 }
 
 class Offerings extends React.Component {
