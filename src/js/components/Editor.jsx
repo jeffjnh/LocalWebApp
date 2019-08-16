@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import NavBar from "../utility/NavBar";
+import Toast from "react-bootstrap/Toast";
 import AutoField from "./AutoField";
 import { AWS as AWSCOLORS } from "../constants/Colors";
 import NavBar from "../utility/NavBar";
