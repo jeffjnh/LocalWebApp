@@ -184,11 +184,12 @@ class Editor extends Component {
 						<div
 							style={{
 								width: "50%",
+								flexBasis: "100%",
 								padding: "0 auto",
 								margin: "0 auto",
 								marginTop: "20px",
-								textAlign: "center",
-								display: "flex"
+								textAlign: "center"
+								// display: "flex"
 							}}
 						>
 							<Button
@@ -196,7 +197,7 @@ class Editor extends Component {
 								disabled={this.state.showSubmit}
 								size="lg"
 								style={{
-									width: "100%",
+									width: "50%",
 									maxWidth: "1000px",
 									alignItems: "center"
 								}}
