@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import NavBar from "../utility/NavBar";
-// import Table from "react-bootstrap/Table";
+
 import { AWS as AWSCOLORS } from "../constants/Colors";
 // import Toggles from "./Toggles";
 import AutoField from "./AutoField";
@@ -227,7 +227,12 @@ class Customer extends Component {
 				<ToastContainer draggable={false} autoClose={5000} />
 
 				{/*AutoField Search bar for Customer Data*/}
-				<div style={{ color: AWSCOLORS.DARK_SQUID_INK }}>
+				<div
+					style={{
+						marginLeft: "20px",
+						color: AWSCOLORS.DARK_SQUID_INK
+					}}
+				>
 					<AutoField
 						stateSetter={this.customerStateUpdate}
 						table={"OfferingSales"}
