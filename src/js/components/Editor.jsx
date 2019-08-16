@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import NavBar from "../utility/NavBar";
+import Toast from "react-bootstrap/Toast";
 import AutoField from "./AutoField";
 import { AWS as AWSCOLORS } from "../constants/Colors";
-import NavBar from "../utility/NavBar";
 
 const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/predict";
 
@@ -10,7 +11,8 @@ class Editor extends Component {
     super(props);
     this.state = {
       predictor: "",
-      predictee: ""
+      predictee: "",
+      showSubmitToast: false
     };
 
     this.onChangePredictor = this.onChangePredictor.bind(this);
@@ -44,6 +46,8 @@ class Editor extends Component {
         console.log("Error: API fetch error");
         console.log(err.message);
       });
+
+    this.setState({ showSubmitToast: true });
   };
 
   async onChangePredictor(response_object, name) {
@@ -60,10 +64,20 @@ class Editor extends Component {
     return (
       <div>
         <NavBar />
-        <form style={{ display: "flex" }} onSubmit={this.handleSubmit}>
+        <form style={{ marginTop: "3rem" }} onSubmit={this.handleSubmit}>
+          <h3 style={{ display: "flex", marginLeft: "3rem" }}>
+            <div style={{ paddingRight: "7rem" }}>Offering (Predictor) </div>
+            Offering (Predictee)
+          </h3>
           <br />
-          (Offering 1)
-          <div style={{ color: AWSCOLORS.DARK_SQUID_INK }}>
+
+          <div
+            style={{
+              display: "flex",
+              marginTop: "-2.5rem",
+              color: AWSCOLORS.DARK_SQUID_INK
+            }}
+          >
             <AutoField
               table={"Offerings"}
               index={"offering_name-index"}
@@ -73,9 +87,7 @@ class Editor extends Component {
               jointData={true}
               stateSetter={this.onChangePredictor}
             />
-          </div>
-          <br /> &nbsp;&nbsp;&nbsp;&nbsp; should map to (Offering 2)
-          <div style={{ color: AWSCOLORS.DARK_SQUID_INK }}>
+
             <AutoField
               table={"Offerings"}
               index={"offering_name-index"}
@@ -85,20 +97,44 @@ class Editor extends Component {
               jointData={true}
               stateSetter={this.onChangePredictee}
             />
+
+            <div style={{ marginTop: "-1.4rem", marginLeft: "2rem" }}>
+              <button
+                onClick={this.writeSuggestion}
+                style={{
+                  margin: "1em",
+                  marginTop: "3rem",
+                  height: "3rem",
+                  borderRadius: "5px",
+                  verticalAlign: "center"
+                }}
+              >
+                Submit
+              </button>
+            </div>
           </div>
-          <button
-            onClick={this.writeSuggestion}
+
+          <br />
+
+          <Toast
+            show={this.state.showSubmitToast}
             style={{
-              margin: "1em",
-              borderRadius: "5px",
-              verticalAlign: "center"
+              display: "flex",
+              flexDirection: "row",
+              marginLeft: "2.5rem",
+              padding: "1rem",
+              maxWidth: "fit-content",
+              backgroundColor: AWSCOLORS.GREEN_G2,
+              fontFamily: "AmazonEmber_Rg",
+              fontWeight: "bold"
             }}
+            onClose={() => this.setState({ showSubmitToast: false })}
+            delay={2000}
+            autohide
           >
-            Submit
-          </button>
+            <h4>Relationship successfully logged!!</h4>
+          </Toast>
         </form>
-        <br /> <br /> <br /> <br />
-        (show update success / failure message)
       </div>
     );
   }
