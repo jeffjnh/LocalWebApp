@@ -136,13 +136,13 @@ class Editor extends Component {
 							display: "flex",
 							flexWrap: "wrap",
 							// alignItems: "stretch",
-							margin: "auto",
+							margin: "0 auto",
 							padding: "20px"
 						}}
 					>
 						<div
 							style={{
-								margin: " auto",
+								margin: "10px auto",
 								// padding: "20px",
 								color: AWSCOLORS.DARK_SQUID_INK
 							}}
@@ -181,19 +181,36 @@ class Editor extends Component {
 								stateSetter={this.onChangePredictee}
 							/>
 						</div>
-						<Button
-							onClick={this.handleSubmit}
-							disabled={this.state.showSubmit}
-							size="lg"
-							block
-							variant={
-								this.state.showSubmit ? "success" : "primary"
-							}
+						<div
+							style={{
+								width: "50%",
+								padding: "0 auto",
+								margin: "0 auto",
+								marginTop: "20px",
+								textAlign: "center",
+								display: "flex"
+							}}
 						>
-							{this.state.showSubmit
-								? "Submitting prediction!"
-								: "Submit"}
-						</Button>
+							<Button
+								onClick={this.handleSubmit}
+								disabled={this.state.showSubmit}
+								size="lg"
+								style={{
+									width: "100%",
+									maxWidth: "1000px",
+									alignItems: "center"
+								}}
+								variant={
+									this.state.showSubmit
+										? "success"
+										: "success"
+								}
+							>
+								{this.state.showSubmit
+									? "Submitting prediction!"
+									: "Submit"}
+							</Button>
+						</div>
 					</div>
 				</form>
 				<CardModal
@@ -208,7 +225,7 @@ class Editor extends Component {
 				/>
 				<div
 					style={{
-						maxWidth: "800px",
+						maxWidth: "1000px",
 						margin: "20px auto",
 						color: AWSCOLORS.BLACK,
 						backgroundColor: AWSCOLORS.WHITE,
