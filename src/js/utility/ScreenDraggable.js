@@ -1,3 +1,9 @@
+/* 
+ * Enable an object to be draggable
+ * Written for the /customer page originally
+ * But not used as we changed directions in our design
+ */
+
 let wX;
 let wY;
 let dragging = false;

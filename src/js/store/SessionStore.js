@@ -1,3 +1,8 @@
+/*
+ * NOT USED
+ * Any state data regarding SSO or authentication should go here
+ */
+
 // if using mobx
 
 /*

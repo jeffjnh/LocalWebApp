@@ -1,10 +1,12 @@
 import React from "react";
 
-// props received:
-// label: coming from OPTIONS array, string value of the checkbox
-// key: same as label
-// isSelected: boolean that tells Checkbox whether it should render as selected or unselected
-// onCheckboxChange: callback function. Ref to this.handleCheckboxChange function, passes a change event back to parent when user interacts with input
+/* 
+ * props received:
+ * label: coming from OPTIONS array, string value of the checkbox
+ * key: same as label
+ * isSelected: boolean that tells Checkbox whether it should render as selected or unselected
+ * onCheckboxChange: callback function. Ref to this.handleCheckboxChange function, passes a change event back to parent when user interacts with input
+ */
 const Checkbox = ({ label, isSelected, onCheckboxChange }) => (
   <div className="form-check">
     <label>
@@ -16,7 +18,7 @@ const Checkbox = ({ label, isSelected, onCheckboxChange }) => (
         onChange={onCheckboxChange}
         className="form-check-input"
       />
-      <div style={{fontSize: "14px"}}>{label}</div>
+      <div style={{ fontSize: "14px" }}>{label}</div>
     </label>
   </div>
 );

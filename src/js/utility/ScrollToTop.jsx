@@ -1,6 +1,10 @@
 import React from "react";
 import styled from 'styled-components';
 
+/* 
+ * Used in /offerings page to go back to top of page
+ */
+
 const ScrollToTop = styled.div`
   position: fixed;
   display: inline-block;

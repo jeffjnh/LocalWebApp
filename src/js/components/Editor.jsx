@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import NavBar from "../utility/NavBar";
-import AutoField from "./AutoField";
-import { AWS as AWSCOLORS } from "../constants/Colors";
 import Button from "react-bootstrap/Button";
 import ReactTable from "react-table";
+import AutoField from "./AutoField";
 import CardModal from "./Offerings/CardModal";
+import { AWS as AWSCOLORS } from "../constants/Colors";
 
-const url =
-	"https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/predict";
-const url2 =
-	"https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
+const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/predict";
+const url2 = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
+
 class Editor extends Component {
 	constructor(props) {
 		super(props);

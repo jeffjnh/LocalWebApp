@@ -1,3 +1,9 @@
+/*
+ * Dummy data extracted from DynamoDB
+ * For offline testing use
+ * Last updated: 2019/07/01
+ */
+
 export const OFFERINGSDATA = 
 [
     {

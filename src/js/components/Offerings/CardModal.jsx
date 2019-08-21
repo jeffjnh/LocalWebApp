@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import Modal from "react-modal";
-import { AWS as AWSCOLORS } from "../../constants/Colors";
 import { getLoadingSpinner_Left } from "../../utility/LoadingSpinner";
 import CardTags from "./CardTags";
+import { AWS as AWSCOLORS } from "../../constants/Colors";
 import logo_1_align from "../../../assets/img/logo/proserve/1_align_gray.png";
 import logo_2_launch from "../../../assets/img/logo/proserve/2_launch_gray.png";
 import logo_3_scale from "../../../assets/img/logo/proserve/3_scale_gray.png";
@@ -101,22 +101,11 @@ class CardModal extends React.Component {
     };
   }
 
-  // async componentWillMount() {
-  //   let response = await fetch('https://jsonplaceholder.typicode.com/todos/');
-  //   let json = await response.json();
-  // }
-
-  // async componentWillMount() {
-  //   await this.fetchAPI();
-  //   this.setState({ isPageLoading: false });
-  // }
-
   // when parent component 'Offerings' updates which offering
   // has been clicked on in its state
   async componentDidUpdate(prevProps) {
     // if no offering has been clicked (null in parent state),
     // or if offering clicked is the same as previously clicked
-
     if (!this.props.offering) {
       return;
     } else if (this.props.offering !== prevProps.offering && !this.props.fetch) {

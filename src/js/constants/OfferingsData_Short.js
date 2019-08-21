@@ -1,4 +1,9 @@
-// https://stackoverflow.com/questions/51618226/visual-studio-code-removing-lines-containing-criteria
+/*
+ * Dummy data extracted from DynamoDB
+ * For offline testing use
+ * Last updated: 2019/07/01
+ */
+
 export const OFFERINGSDATA_SHORT = 
 [
     {

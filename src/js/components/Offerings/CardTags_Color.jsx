@@ -17,6 +17,11 @@ const Text = styled.div`
   border-radius: 25px;
 `;
 
+/* 
+ * NOT IN USE
+ * because it looks bad visually...
+ */
+
 class CardTags_Color extends React.Component {
 
   getOfferingTypeColor = () => {

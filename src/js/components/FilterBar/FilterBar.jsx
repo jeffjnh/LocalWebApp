@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { AWS as AWSCOLORS } from "../../constants/Colors";
 import FilterForm from "./FilterForm";
+import { AWS as AWSCOLORS } from "../../constants/Colors";
 
 const FilterBarText = styled.div`
   margin: auto 0;
@@ -23,7 +23,7 @@ class FilterBar extends React.Component {
       dropdownIsOpen: {
         OFFERING_TYPE: this.props.dropdownIsOpen["OFFERING_TYPE"],
         MATURITY_LEVEL: this.props.dropdownIsOpen["MATURITY_LEVEL"],
-        GSP_INDUSTRYVERTICALS: this.props.dropdownIsOpen["GSP_INDUSTRYVERTICALS"],
+        GSP_INDUSTRYVERTICALS: this.props.dropdownIsOpen["GSP_INDUSTRYVERTICALS"]
       }
     };
   }
@@ -42,7 +42,7 @@ class FilterBar extends React.Component {
     });
   };
 
-  handleFilterDropdown = (category_name) => {
+  handleFilterDropdown = category_name => {
     let currentDrops = this.state.dropdownIsOpen;
     currentDrops[category_name] = !this.state.dropdownIsOpen[category_name];
     // force parent state update
@@ -55,10 +55,14 @@ class FilterBar extends React.Component {
     return (
       <div
         className={"container-fluid no-gutters"}
-        style={{ position: "fixed", zIndex: "1", margin: "1.5rem 0rem 3rem 5rem"}}
+        style={{
+          position: "fixed",
+          zIndex: "1",
+          margin: "1.5rem 0rem 3rem 5rem"
+        }}
       >
         <div className={"row justify-content-start"}>
-          <div className={"col-auto m-1 p-0"} >
+          <div className={"col-auto m-1 p-0"}>
             <FilterBarText>Filters: </FilterBarText>
           </div>
 
@@ -94,7 +98,6 @@ class FilterBar extends React.Component {
               onFilterDropdown={() => {this.handleFilterDropdown("GSP_INDUSTRYVERTICALS")}}
             />
           </div>
-          
         </div>
       </div>
     );

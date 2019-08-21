@@ -1,3 +1,8 @@
+/* 
+ * Filters for data on /offerings page
+ * This is hard coded in as this info is unlikely to be updated.
+ */
+
 export const OFFERING_TYPE = {
   "Align Offering": true,
   "Launch Offering": true,

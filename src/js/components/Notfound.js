@@ -2,7 +2,10 @@ import React from 'react'
 import NavBar from '../utility/NavBar';
 import pecisage_sad_tiny from '../../assets/img/notfound/peciSage.sad.png';
 
-// modeled after: https://answers.amazon.com/
+/*
+ * For every bad url, user will be re-directed here
+ * Modeled after: https://answers.amazon.com/
+ */
 
 const textArr = [
   "Forbidden",
@@ -11,6 +14,7 @@ const textArr = [
   "Uh oh!",
   "You shall not pass!"
 ];
+
 let rand = Math.floor(Math.random() * textArr.length);
 
 function Notfound() {

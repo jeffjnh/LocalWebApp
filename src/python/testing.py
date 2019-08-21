@@ -1,3 +1,12 @@
+"""
+
+Adaptation of the Levenshtein Algorithm to be used for 
+comparing differences between 2 Strings.
+
+@Author: Miffy Chen (miffyche@)
+
+"""
+
 import levenshtein as lev
 
 # seq1 = "test"

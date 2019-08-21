@@ -1,7 +1,6 @@
 import React from 'react';
 import NavBar from './js/utility/NavBar';
 import logo from './assets/img/logo/AWS_logo_RGB_REV.svg';
-// import { Route } from 'react-router-dom';
 
 function App() {
 	return (
@@ -22,14 +21,6 @@ function App() {
             <a className="App-link" href="/testing" style={{marginRight: "20px"}}>Testing</a>
             <a className="App-link" href="/404">(404)</a>
           </div>
-
-          {/* <Route render={({ history }) => (
-            <button type='button' onClick={() => { history.push('/testing') }}>Test Page</button>
-          )} />
-
-          <Route render={({ history }) => (
-            <button type='button' onClick={() => { history.push('/login') }}>Login Page</button>
-          )} /> */}
         </header>
       </div>
     </div>

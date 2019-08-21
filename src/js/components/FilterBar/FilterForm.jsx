@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import styled from "styled-components";
-import { AWS as AWSCOLORS } from "../../constants/Colors";
 import Accordion from "react-bootstrap/Accordion";
+import styled from "styled-components";
 import Card from "react-bootstrap/Card";
 import Checkbox from "./Checkbox";
-
-// https://react-bootstrap.github.io/components/accordion/
+import { AWS as AWSCOLORS } from "../../constants/Colors";
 
 const cardStyle = {
   margin: "0.3rem auto",
@@ -13,7 +11,7 @@ const cardStyle = {
   borderRadius: "12px",
   backgroundColor: AWSCOLORS.SMILE_ORANGE,
   color: AWSCOLORS.WHITE,
-  fontSize: "15px",
+  fontSize: "15px"
 };
 
 const cardHeaderStyle = {
@@ -40,12 +38,19 @@ const cardBodyStyle = {
   overflowY: "scroll"
 };
 
+const buttonStyle = {
+  backgroundColor: AWSCOLORS.SMILE_ORANGE,
+  color: AWSCOLORS.WHITE,
+  borderRadius: "6px",
+  fontSize: "13px"
+};
+
 class FilterForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       checkboxes: this.props.filters,
-      dropdownIsOpen: this.props.dropdownIsOpen,
+      dropdownIsOpen: this.props.dropdownIsOpen
     };
   }
 
@@ -77,12 +82,7 @@ class FilterForm extends Component {
         <button
           type="button"
           className="btn-sm mr-2 py-1"
-          style={{
-            backgroundColor: AWSCOLORS.SMILE_ORANGE,
-            color: AWSCOLORS.WHITE,
-            borderRadius: "6px",
-            fontSize: "13px"
-          }}
+          style={{ buttonStyle }}
           onClick={this.selectAll}
         >
           Select All
@@ -90,24 +90,14 @@ class FilterForm extends Component {
         <button
           type="button"
           className="btn-sm mr-2 py-1"
-          style={{
-            backgroundColor: AWSCOLORS.SMILE_ORANGE,
-            color: AWSCOLORS.WHITE,
-            borderRadius: "6px",
-            fontSize: "13px"
-          }}
+          style={{ buttonStyle }}
           onClick={this.unselectAll}
         >
           Unselect All
         </button>
         <Accordion.Toggle
           className="btn-sm mr-2 py-1"
-          style={{
-            backgroundColor: AWSCOLORS.SMILE_ORANGE,
-            color: AWSCOLORS.WHITE,
-            borderRadius: "6px",
-            fontSize: "13px"
-          }}
+          style={{ buttonStyle }}
           onClick={this.applyClicked}
           eventKey={this.props.formName}
         >
@@ -133,7 +123,8 @@ class FilterForm extends Component {
           // if name matches checkbox that was toggled, set it to the opposite value
           [name]: !prevState.checkboxes[name]
         }
-      }), () => {
+      }),
+      () => {
         // console.log('in handleCheckboxChange');
       }
     );
@@ -175,6 +166,7 @@ class FilterForm extends Component {
       });
   };
 
+  // when 'apply' button is clicked
   applyClicked = () => {
     this.props.onDataChange(this.props.category_name, this.state.checkboxes);
     this.props.onFilterDropdown(this.props.category_name);

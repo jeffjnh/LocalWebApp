@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { AWS as AWSCOLORS } from "../../constants/Colors";
 import CardTags from "./CardTags";
+import { AWS as AWSCOLORS } from "../../constants/Colors";
 import logo_1_align from "../../../assets/img/logo/proserve/1_align_gray.png";
 import logo_2_launch from "../../../assets/img/logo/proserve/2_launch_gray.png";
 import logo_3_scale from "../../../assets/img/logo/proserve/3_scale_gray.png";
@@ -92,8 +92,7 @@ class Card extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: {},
-      // color: "white",
+      data: {}
     };
   }
 
@@ -141,15 +140,8 @@ class Card extends React.Component {
     return str.substr(0, str.lastIndexOf(separator, maxLen)) + " (...)";
   }
 
-  // changeColor = () => {
-  //   var newColor = this.state.color === "white" ? "black" : "white";
-  //   this.setState({ color: newColor });
-  // };
-
   render() {
-
     return (
-      // <CardStyle style={{background: this.state.color}} onClick={this.changeColor}>
       <CardStyle onClick={this.props.onClick}>
         <div className="card-wrapper">
           {this.getBackgroundImg()}

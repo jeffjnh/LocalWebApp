@@ -44,6 +44,7 @@ class NavBar extends React.Component {
             <Nav.Link href="/offerings">Offerings</Nav.Link>
             <Nav.Link href="/customer">Customer</Nav.Link>
             <Nav.Link href="/editor">Relations Editor</Nav.Link>
+            <Nav.Link href="/404">(404)</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

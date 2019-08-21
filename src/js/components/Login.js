@@ -2,6 +2,10 @@ import React from 'react'
 import NavBar from '../utility/NavBar';
 import logo from '../../assets/img/logo/AWS_logo_RGB_REV.svg';
 
+/* 
+ * NO backend is hooked up to this, just the UI
+ */
+
 function Login() {
   return (
     <div>

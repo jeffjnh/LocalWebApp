@@ -4,7 +4,7 @@ Lambda function that handles API requests from the Relationship Editor page,
 which manually adds a relationship between 2 existing offerings,
 (logs entry into DynamoDB) and is used to help improve the predictions model.
 
-@Authors: Miffy Chen (miffyche@)
+@Author: Miffy Chen (miffyche@)
 
 # https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#logStream:group=/aws/lambda/proserveportfolio_log_predictions
 # https://console.aws.amazon.com/dynamodb/home?region=us-east-1#tables:selected=OfferingPredictions;tab=items
