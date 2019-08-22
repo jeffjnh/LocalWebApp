@@ -13,7 +13,7 @@ import { getLoadingSpinner_Left } from "../utility/LoadingSpinner";
 import { scrollToTop } from "../utility/ScrollToTop";
 import { AWS as AWSCOLORS } from "../constants/Colors";
 
-const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
+const url = "https://avqdv9au27.execute-api.us-east-1.amazonaws.com/PROD/api/db/query";
 // import { OFFERINGSDATA_SHORT } from "../constants/OfferingsData_Short";
 
 const blurEffect = {

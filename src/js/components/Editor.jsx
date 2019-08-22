@@ -6,8 +6,8 @@ import AutoField from "./AutoField";
 import CardModal from "./Offerings/CardModal";
 import { AWS as AWSCOLORS } from "../constants/Colors";
 
-const url = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/predict";
-const url2 = "https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query";
+const url = "https://avqdv9au27.execute-api.us-east-1.amazonaws.com/PROD/api/db/predict";
+const url2 = "https://avqdv9au27.execute-api.us-east-1.amazonaws.com/PROD/api/db/query";
 
 class Editor extends Component {
 	constructor(props) {
@@ -220,7 +220,7 @@ class Editor extends Component {
 					}}
 					fetch={false}
 					url={
-						"https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query"
+						"https://avqdv9au27.execute-api.us-east-1.amazonaws.com/PROD/api/db/query"
 					}
 				/>
 				<div

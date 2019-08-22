@@ -13,7 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const match_predict_url =
-	"https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/customer/match";
+	"https://avqdv9au27.execute-api.us-east-1.amazonaws.com/PROD/api/customer/match";
 
 class Customer extends Component {
 	state = {
@@ -36,6 +36,7 @@ class Customer extends Component {
 	};
 
 	findPredictions = sales => {
+		console.log(JSON.stringify(sales));
 		fetch(match_predict_url, {
 			method: "GET",
 			mode: "cors",
@@ -43,8 +44,8 @@ class Customer extends Component {
 				// "Access-Control-Allow-Origin": "*",
 				// "access-control-allow-headers": "*",
 				"Content-Type": "application/json",
-				sales: JSON.stringify(sales)
-			}
+				sales: JSON.stringify(sales.map(elem => elem.product_name))
+			},
 		})
 			.then(response => {
 				if (!response.ok) {
@@ -74,6 +75,7 @@ class Customer extends Component {
 			})
 			.catch(err => {
 				console.log("Error: API fetch error");
+				console.log(err);
 				console.log(err.message);
 				console.log(this.state.err_api_fetch);
 			});
@@ -220,7 +222,7 @@ class Customer extends Component {
 					}}
 					fetch={false}
 					url={
-						"https://vdci4imfbh.execute-api.us-east-1.amazonaws.com/Prod/api/db/query"
+						"https://avqdv9au27.execute-api.us-east-1.amazonaws.com/PROD/api/db/query"
 					}
 				/>
 
