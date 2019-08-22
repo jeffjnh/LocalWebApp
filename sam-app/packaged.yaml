@@ -1,0 +1,49 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'sam-app
+
+  ProservePortfolio SAM Template for sam-app
+
+  '
+Globals:
+  Function:
+    Timeout: 3
+Metadata:
+  AWS::ServerlessRepo::Application:
+    Name: proserveportfolio
+    Description: proserveportfolio db access layer
+    Author: JeffJohansen
+    SpdxLicenseId: Apache-2.0
+    Labels:
+    - tests
+    SemanticVersion: 0.0.1
+Resources:
+  DBAllFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://sam-proserveportfolio/eac0b883cc194ec871a8175c756e5c70
+      Handler: app.lambda_handler
+      Runtime: python3.6
+      Events:
+        ProservePortfolioAPI:
+          Type: Api
+          Properties:
+            Path: /api/db/all
+            Method: get
+Outputs:
+  ProservePortfolioAPI:
+    Description: API Gateway endpoint URL for Dev stage for ProservePortfolio Functions
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ProservePortfolio/
+  DBAllFunction:
+    Description: Retrieve all data Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - DBAllFunction
+      - Arn
+  DBAllFunctionIamRole:
+    Description: Implicit IAM Role created for DBAllFunction
+    Value:
+      Fn::GetAtt:
+      - DBAllFunctionRole
+      - Arn

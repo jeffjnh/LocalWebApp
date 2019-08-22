@@ -1,0 +1,51 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  sam-app
+
+  ProservePortfolio SAM Template for sam-app
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+
+
+Metadata:
+  AWS::ServerlessRepo::Application:
+    Name: proserveportfolio
+    Description: proserveportfolio db access layer
+    Author: JeffJohansen
+    SpdxLicenseId: Apache-2.0
+    Labels: ['tests']
+    SemanticVersion: 0.0.1
+
+
+Resources:
+  DBAllFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: lambda_functions/
+      Handler: app.lambda_handler
+      Runtime: python3.6
+      Events:
+        ProservePortfolioAPI:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /api/db/all
+            Method: get
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  ProservePortfolioAPI:
+    Description: "API Gateway endpoint URL for Dev stage for ProservePortfolio Functions"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ProservePortfolio/"
+  DBAllFunction:
+    Description: "Retrieve all data Lambda Function ARN"
+    Value: !GetAtt DBAllFunction.Arn
+  DBAllFunctionIamRole:
+    Description: "Implicit IAM Role created for DBAllFunction"
+    Value: !GetAtt DBAllFunctionRole.Arn

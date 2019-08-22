@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing your function.
+Resources:
+  samappDBQueryFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.7
+      CodeUri: .
+      Description: ''
+      MemorySize: 128
+      Timeout: 25
+      Role: 'arn:aws:iam::370837309407:role/sam-app-DBAllFunctionRole-3CJOCJWCGPE9'
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: /api/db/query
+            Method: GET
